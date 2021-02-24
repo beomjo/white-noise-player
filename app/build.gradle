@@ -65,6 +65,9 @@ dependencies {
     implementation deps.library.jsoup
     implementation deps.library.lottie
 
+    implementation deps.dagger2.android
+    kapt deps.dagger2.compiler
+
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
 
     testImplementation deps.test.junit
