@@ -1,0 +1,3 @@
+[submodule "android-compilation"]
+	path = android-compilation
+	url = git@github.com-personal:beomjo/android-compilation.git

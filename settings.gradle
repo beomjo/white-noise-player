@@ -1,2 +1,3 @@
 include ':app'
+include ':android-compilation'
 rootProject.name = "White Noise Player"

@@ -38,39 +38,10 @@ android {
 }
 
 dependencies {
-    implementation deps.kotlin.sdk
-    implementation deps.kotlin.coroutines_core
-    implementation deps.kotlin.coroutines_android
-
-    implementation deps.androidx.core_ktx
-    implementation deps.androidx.material
-    implementation deps.androidx.constraint_layout
-    implementation deps.androidx.app_compat
-    implementation deps.androidx.lifecycle_extensions
-    implementation deps.androidx.lifecycle_viewmodel_ktx
-    implementation deps.androidx.lifecycle_livedata_ktx
-    implementation deps.androidx.activity_ktx
-    implementation deps.androidx.fragment_ktx
-
-    implementation deps.library.okhttp
-    implementation deps.library.okhttp_logging_interceptor
-    implementation deps.library.retrofit2
-    implementation deps.library.converter_gson
-
-    implementation deps.library.material
-    implementation deps.library.gson
-
-    implementation deps.library.rxbinding_kotlin
-    implementation deps.library.glide
-    implementation deps.library.jsoup
-    implementation deps.library.lottie
+    implementation project(":android-compilation")
 
     implementation deps.dagger2.android
     kapt deps.dagger2.compiler
 
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
-
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.runner
-    androidTestImplementation deps.test.espresso_core
 }
