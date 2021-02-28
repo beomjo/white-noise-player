@@ -1,5 +1,5 @@
 package com.beomjo.whitenoise.base
 
-import com.beomjo.compilation.binding.BindViewModel
+import com.skydoves.bindables.BindingViewModel
 
-abstract class BaseViewModel : BindViewModel()
+abstract class BaseViewModel : BindingViewModel()

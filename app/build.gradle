@@ -44,4 +44,6 @@ dependencies {
     kapt deps.dagger2.compiler
 
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
+
+    implementation "com.github.skydoves:bindables:1.0.5"
 }
