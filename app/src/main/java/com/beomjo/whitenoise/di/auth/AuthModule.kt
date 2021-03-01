@@ -1,6 +1,7 @@
 package com.beomjo.whitenoise.di.auth
 
 import android.content.Context
+import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.auth.AuthRepositoryImpl
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,8 +20,9 @@ class AuthModule {
     }
 
     @Provides
-    fun provideGoogleSignInOption(): GoogleSignInOptions {
+    fun provideGoogleSignInOption(context: Context): GoogleSignInOptions {
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
     }

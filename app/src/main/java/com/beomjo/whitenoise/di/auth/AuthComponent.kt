@@ -1,5 +1,6 @@
 package com.beomjo.whitenoise.di.auth
 
+import com.beomjo.whitenoise.ui.auth.LoginActivity
 import com.beomjo.whitenoise.ui.splash.SplashActivity
 import dagger.Subcomponent
 
@@ -12,4 +13,7 @@ interface AuthComponent {
     }
 
     fun inject(activity: SplashActivity)
+
+    fun inject(activity: LoginActivity)
+
 }

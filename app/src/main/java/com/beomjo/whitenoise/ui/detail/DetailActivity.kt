@@ -1,7 +1,7 @@
 package com.beomjo.whitenoise.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.beomjo.whitenoise.R
 
 class DetailActivity : AppCompatActivity() {

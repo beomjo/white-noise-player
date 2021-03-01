@@ -14,5 +14,12 @@ abstract class BaseActivity<T : ViewDataBinding> constructor(
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bindingLifeCycleOwner()
+    }
+
+    private fun bindingLifeCycleOwner() {
+        binding {
+            lifecycleOwner = this@BaseActivity
+        }
     }
 }

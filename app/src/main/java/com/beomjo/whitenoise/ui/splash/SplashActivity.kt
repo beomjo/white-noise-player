@@ -27,7 +27,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun bindingViewModel() {
         binding {
-            lifecycleOwner = this@SplashActivity
             vm = splashViewModel
             vm?.loginState?.observe(this@SplashActivity) { loginState ->
                 when (loginState) {
