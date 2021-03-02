@@ -1,22 +1,17 @@
 package com.beomjo.whitenoise.viewmodel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.beomjo.whitenoise.MockitoTest
 import com.beomjo.compilation.util.getOrAwaitValue
+import com.beomjo.whitenoise.BaseTest
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.ui.splash.LoginBefore
 import com.beomjo.whitenoise.ui.splash.LoginSuccess
 import com.beomjo.whitenoise.ui.splash.SplashViewModel
 import junit.framework.Assert.assertEquals
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.spy
+import org.mockito.Mockito.*
 
-class SplashViewModelTest : MockitoTest(){
-    @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class SplashViewModelTest : BaseTest(){
 
     @Mock
     lateinit var authRepository: AuthRepository
@@ -37,6 +32,7 @@ class SplashViewModelTest : MockitoTest(){
 
         //then
         assertEquals(viewModel.loginState.getOrAwaitValue(), LoginBefore)
+        verify(authRepository).isLoggedIn()
     }
 
     @Test
@@ -49,5 +45,6 @@ class SplashViewModelTest : MockitoTest(){
 
         //then
         assertEquals(viewModel.loginState.getOrAwaitValue(), LoginSuccess)
+        verify(authRepository).isLoggedIn()
     }
 }
