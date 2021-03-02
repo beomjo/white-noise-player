@@ -1,4 +1,4 @@
-package com.beomjo.compilation
+package com.beomjo.whitenoise
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

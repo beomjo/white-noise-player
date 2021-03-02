@@ -1,4 +1,4 @@
-package com.beomjo.compilation
+package com.beomjo.whitenoise
 
 import android.content.Context
 import org.junit.After

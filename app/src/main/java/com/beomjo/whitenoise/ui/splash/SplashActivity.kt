@@ -19,6 +19,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         super.onCreate(savedInstanceState)
         inject()
         bindingViewModel()
+        splashViewModel.check()
     }
 
     private fun inject() {
