@@ -12,28 +12,22 @@ import com.beomjo.whitenoise.ui.main.MainActivity
 import com.beomjo.whitenoise.utilities.ext.getComponent
 import javax.inject.Inject
 
-class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    lateinit var splashViewModel: SplashViewModel
+class SplashActivity :
+    BaseActivity<ActivitySplashBinding, SplashViewModel>(R.layout.activity_splash) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inject()
-        splashViewModel = ViewModelProvider(this, viewModelFactory).get(SplashViewModel::class.java)
         bindingViewModel()
-        splashViewModel.check()
+        viewModel.check()
     }
 
-    private fun inject() {
+    override fun inject() {
         application.getComponent().authComponent().create().inject(this)
     }
 
     private fun bindingViewModel() {
         binding {
-            vm = splashViewModel
+            vm = viewModel
             vm?.loginState?.observe(this@SplashActivity) { loginState ->
                 when (loginState) {
                     is LoginBefore -> moveToLoginActivity()

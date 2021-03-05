@@ -14,33 +14,26 @@ import com.beomjo.whitenoise.utilities.ext.getComponent
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+@FlowPreview
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layout.activity_login) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    lateinit var loginViewModel: LoginViewModel
-
-    @FlowPreview
     private val requestGoogleLogin: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            activityResult.data?.let(loginViewModel::processGoogleLogin)
+            activityResult.data?.let(viewModel::processGoogleLogin)
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inject()
-        loginViewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
         bindingViewModel()
     }
 
-    private fun inject() {
+    override fun inject() {
         application.getComponent().authComponent().create().inject(this@LoginActivity)
     }
 
     private fun bindingViewModel() {
         binding {
-            vm = loginViewModel.apply {
+            vm = viewModel.apply {
                 googleLoginIntent.observe(this@LoginActivity, requestGoogleLogin::launch)
                 loginSuccess.observe(this@LoginActivity) { moveToMainActivity() }
             }
