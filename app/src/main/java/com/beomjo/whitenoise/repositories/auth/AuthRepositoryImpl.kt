@@ -55,7 +55,7 @@ class AuthRepositoryImpl @Inject constructor(
                     result.user?.let { _ -> offer(result) }
                         ?: close(cause = FirebaseAccountNotFoundException())
                 }
-                .addOnFailureListener { close(it) }
+                .addOnFailureListener(::close)
             awaitClose()
         }
     }

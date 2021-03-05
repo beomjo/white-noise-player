@@ -1,9 +1,7 @@
-package com.beomjo.whitenoise.di.auth
+package com.beomjo.whitenoise.di
 
 import android.content.Context
 import com.beomjo.whitenoise.R
-import com.beomjo.whitenoise.repositories.auth.AuthRepository
-import com.beomjo.whitenoise.repositories.auth.AuthRepositoryImpl
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -12,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AuthModule {
+object FirebaseModule {
 
     @Provides
     fun provideFirebaseAuth(): FirebaseAuth {
@@ -30,13 +28,5 @@ class AuthModule {
     @Provides
     fun provideGoogleSignInClient(context: Context, gso: GoogleSignInOptions): GoogleSignInClient {
         return GoogleSignIn.getClient(context, gso)
-    }
-
-    @Provides
-    fun provideAuthRepository(
-        firebaseAuth: FirebaseAuth,
-        googleSignInClient: GoogleSignInClient
-    ): AuthRepository {
-        return AuthRepositoryImpl(firebaseAuth, googleSignInClient)
     }
 }

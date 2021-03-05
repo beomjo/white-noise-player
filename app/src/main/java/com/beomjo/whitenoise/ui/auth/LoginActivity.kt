@@ -9,6 +9,7 @@ import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
 import com.beomjo.whitenoise.ui.main.MainActivity
 import com.beomjo.whitenoise.utilities.ext.getComponent
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -16,6 +17,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     @Inject
     lateinit var loginViewModel: LoginViewModel
 
+    @FlowPreview
     private val requestGoogleLogin: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             activityResult.data?.let(loginViewModel::processGoogleLogin)
@@ -43,9 +45,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun moveToMainActivity() {
         finish()
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-    }
-
-    companion object {
-        const val GOOGLE_LOGIN_RESULT_CODE = 3333
     }
 }

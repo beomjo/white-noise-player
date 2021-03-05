@@ -4,7 +4,7 @@ import com.beomjo.whitenoise.ui.auth.LoginActivity
 import com.beomjo.whitenoise.ui.splash.SplashActivity
 import dagger.Subcomponent
 
-@Subcomponent(modules = [AuthModule::class])
+@Subcomponent()
 interface AuthComponent {
 
     @Subcomponent.Factory
@@ -15,5 +15,4 @@ interface AuthComponent {
     fun inject(activity: SplashActivity)
 
     fun inject(activity: LoginActivity)
-
 }
