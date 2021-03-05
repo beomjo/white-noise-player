@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) :
+open class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) :
     BaseViewModel() {
 
     private val _googleLoginIntent = MutableLiveData<Intent>()

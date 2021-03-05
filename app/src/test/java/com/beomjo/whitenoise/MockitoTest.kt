@@ -37,4 +37,9 @@ abstract class MockitoTest {
     protected fun getString(resId: Int): String {
         return context.getString(resId)
     }
+
+    protected inline fun <T> any(): T {
+        Mockito.any<T>()
+        return null as T
+    }
 }
