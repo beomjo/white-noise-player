@@ -13,7 +13,6 @@ import com.beomjo.whitenoise.utilities.ext.getComponent
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
     R.layout.activity_splash,
     SplashViewModel::class,
-    LoginViewModel::class,
 ) {
 
     private val viewModel: SplashViewModel by getViewModel()
