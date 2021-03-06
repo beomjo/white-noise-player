@@ -2,6 +2,7 @@ package com.beomjo.whitenoise.base
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
@@ -20,11 +21,11 @@ abstract class BaseActivity<T : ViewDataBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
+    val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
 
     protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            `access$viewModelImpl`.find { it is T }?.let { it as T }
+            viewModelImpl.find { it is T }?.let { it as T }
                 ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
         }
     }
@@ -35,7 +36,11 @@ abstract class BaseActivity<T : ViewDataBinding>(
         inject()
         createViewModels()
         bindingLifeCycleOwner()
+        bindingToast()
     }
+
+
+    abstract fun inject()
 
     private fun createViewModels() {
         for (vm in viewModels) {
@@ -43,16 +48,17 @@ abstract class BaseActivity<T : ViewDataBinding>(
         }
     }
 
-    abstract fun inject()
-
     private fun bindingLifeCycleOwner() {
         binding {
             lifecycleOwner = this@BaseActivity
         }
     }
 
-    @PublishedApi
-    internal val `access$viewModelImpl`: MutableList<BaseViewModel>
-        get() = viewModelImpl
-
+    private fun bindingToast() {
+        for (vm in viewModelImpl) {
+            vm.toast.observe(this) { msg ->
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }
