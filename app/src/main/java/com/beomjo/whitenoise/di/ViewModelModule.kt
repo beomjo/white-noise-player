@@ -2,6 +2,7 @@ package com.beomjo.whitenoise.di
 
 import androidx.lifecycle.ViewModel
 import com.beomjo.whitenoise.ui.auth.LoginViewModel
+import com.beomjo.whitenoise.ui.common.ProgressDialogViewModel
 import com.beomjo.whitenoise.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -19,4 +20,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun provideLoginViewModel(mainViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProgressDialogViewModel::class)
+    abstract fun provideProgressDialogViewModel(progressDialogViewModel: ProgressDialogViewModel): ViewModel
 }

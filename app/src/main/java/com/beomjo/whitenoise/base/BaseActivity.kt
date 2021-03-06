@@ -1,6 +1,7 @@
 package com.beomjo.whitenoise.base
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -8,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
+import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
 import java.lang.IllegalStateException
 import javax.inject.Inject
@@ -30,13 +32,15 @@ abstract class BaseActivity<T : ViewDataBinding>(
         }
     }
 
+    protected var progressDialog: ProgressDialogFragment? = null
+
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
         createViewModels()
         bindingLifeCycleOwner()
-        bindingToast()
+        observeViewModel()
     }
 
 
@@ -54,11 +58,31 @@ abstract class BaseActivity<T : ViewDataBinding>(
         }
     }
 
-    private fun bindingToast() {
+    private fun observeViewModel() {
         for (vm in viewModelImpl) {
-            vm.toast.observe(this) { msg ->
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            observeToast(vm)
+            observeProgress(vm)
+        }
+    }
+
+    private fun observeToast(vm: BaseViewModel) {
+        vm.toast.observe(this) { msg ->
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun observeProgress(vm: BaseViewModel) {
+        vm.progress.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { isShow ->
+                if (isShow) {
+                    ProgressDialogFragment.newInstance()
+                        .apply { progressDialog = this }
+                        .showSafely(supportFragmentManager)
+                } else {
+                    progressDialog?.dismiss()
+                }
             }
         }
     }
+
 }
