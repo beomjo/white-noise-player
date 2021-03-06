@@ -4,18 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.main.MainActivity
 import com.beomjo.whitenoise.utilities.ext.getComponent
 import kotlinx.coroutines.FlowPreview
-import javax.inject.Inject
 
 @FlowPreview
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layout.activity_login) {
+class LoginActivity :
+    BaseActivity<ActivityLoginBinding>(R.layout.activity_login, LoginViewModel::class) {
+
+    private val viewModel: LoginViewModel by getViewModel()
 
     private val requestGoogleLogin: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->

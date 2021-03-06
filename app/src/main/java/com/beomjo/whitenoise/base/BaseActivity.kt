@@ -7,33 +7,40 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
-import com.beomjo.whitenoise.ui.splash.SplashViewModel
 import com.skydoves.bindables.BindingActivity
-import java.lang.reflect.ParameterizedType
+import java.lang.IllegalStateException
 import javax.inject.Inject
+import kotlin.reflect.KClass
 
-abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor(
-    @LayoutRes private val contentLayoutId: Int
+abstract class BaseActivity<T : ViewDataBinding>(
+    @LayoutRes private val contentLayoutId: Int,
+    private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    lateinit var viewModel: VM
+    private val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
+
+    protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
+        return lazy {
+            `access$viewModelImpl`.find { it is T }?.let { it as T }
+                ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
+        }
+    }
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
-        createViewModel()
+        createViewModels()
         bindingLifeCycleOwner()
     }
 
-    private fun createViewModel() {
-        val clazz = ((javaClass.genericSuperclass as ParameterizedType?)
-            ?.actualTypeArguments
-            ?.get(1) as Class<VM>)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(clazz)
+    private fun createViewModels() {
+        for (vm in viewModels) {
+            viewModelImpl.add(ViewModelProvider(this, viewModelFactory).get(vm.javaObjectType))
+        }
     }
 
     abstract fun inject()
@@ -43,4 +50,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor
             lifecycleOwner = this@BaseActivity
         }
     }
+
+    @PublishedApi
+    internal val `access$viewModelImpl`: MutableList<BaseViewModel>
+        get() = viewModelImpl
+
 }

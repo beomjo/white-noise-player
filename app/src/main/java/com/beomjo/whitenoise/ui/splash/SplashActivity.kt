@@ -2,18 +2,21 @@ package com.beomjo.whitenoise.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivitySplashBinding
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.auth.LoginActivity
+import com.beomjo.whitenoise.ui.auth.LoginViewModel
 import com.beomjo.whitenoise.ui.main.MainActivity
 import com.beomjo.whitenoise.utilities.ext.getComponent
-import javax.inject.Inject
 
-class SplashActivity :
-    BaseActivity<ActivitySplashBinding, SplashViewModel>(R.layout.activity_splash) {
+class SplashActivity : BaseActivity<ActivitySplashBinding>(
+    R.layout.activity_splash,
+    SplashViewModel::class,
+    LoginViewModel::class,
+) {
+
+    private val viewModel: SplashViewModel by getViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
