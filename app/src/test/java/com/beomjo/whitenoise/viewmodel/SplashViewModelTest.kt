@@ -6,45 +6,47 @@ import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.ui.splash.LoginBefore
 import com.beomjo.whitenoise.ui.splash.LoginSuccess
 import com.beomjo.whitenoise.ui.splash.SplashViewModel
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.spyk
+import io.mockk.verify
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.*
 
-class SplashViewModelTest : BaseTest(){
+class SplashViewModelTest : BaseTest() {
 
-    @Mock
+    @MockK
     lateinit var authRepository: AuthRepository
 
     lateinit var viewModel: SplashViewModel
 
     override fun onBefore() {
-        viewModel = spy(SplashViewModel(authRepository))
+        viewModel = spyk(SplashViewModel(authRepository))
     }
 
     @Test
     fun `로그인여부 체크, 로그인되지않음`() {
         //given
-        `when`(authRepository.isLoggedIn()).thenReturn(false)
+        every { authRepository.isLoggedIn() } returns false
 
         //when
         viewModel.check()
 
         //then
         assertEquals(viewModel.loginState.getOrAwaitValue(), LoginBefore)
-        verify(authRepository).isLoggedIn()
+        verify { authRepository.isLoggedIn() }
     }
 
     @Test
     fun `로그인여부 체크, 로그인됨`() {
         //given
-        `when`(authRepository.isLoggedIn()).thenReturn(true)
+        every { authRepository.isLoggedIn() } returns true
 
         //when
         viewModel.check()
 
         //then
         assertEquals(viewModel.loginState.getOrAwaitValue(), LoginSuccess)
-        verify(authRepository).isLoggedIn()
+        verify { authRepository.isLoggedIn() }
     }
 }
