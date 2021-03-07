@@ -13,6 +13,7 @@ import io.mockk.verify
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
+@Suppress("NonAsciiCharacters")
 class SplashViewModelTest : BaseTest() {
 
     @MockK

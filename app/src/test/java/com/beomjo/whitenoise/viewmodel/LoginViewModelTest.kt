@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
+@Suppress("NonAsciiCharacters")
 @ExperimentalCoroutinesApi
 @FlowPreview
 class LoginViewModelTest : BaseTest() {
