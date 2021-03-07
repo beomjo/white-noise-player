@@ -52,4 +52,5 @@ dependencies {
     testImplementation deps.test.arch.core
     testImplementation deps.test.androidx_test_core
     testImplementation deps.test.coroutine_test
+    testImplementation deps.test.mockk
 }

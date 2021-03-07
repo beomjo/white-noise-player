@@ -8,22 +8,18 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 import androidx.test.core.app.ApplicationProvider
+import io.mockk.MockKAnnotations
 import org.mockito.junit.MockitoRule
 
 abstract class MockitoTest {
-    @get:Rule
-    var rule: MockitoRule = MockitoJUnit.rule()
-
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
-
+        MockKAnnotations.init(this)
         onBefore()
     }
 
     @After
     fun tearDown() {
-        Mockito.validateMockitoUsage()
         onAfter()
     }
 
@@ -38,7 +34,7 @@ abstract class MockitoTest {
         return context.getString(resId)
     }
 
-    protected inline fun <T> any(): T {
+    protected inline fun <reified T> any(): T {
         Mockito.any<T>()
         return null as T
     }
