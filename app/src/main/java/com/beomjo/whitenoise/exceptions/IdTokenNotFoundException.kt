@@ -4,9 +4,7 @@ import java.lang.Exception
 
 class IdTokenNotFoundException : Exception {
 
-    constructor()
-
-    constructor(message: String) : super(message)
+    constructor(message: String = "ID Token Not Found") : super(message)
 
     constructor(message: String, cause: Throwable) : super(message, cause)
 

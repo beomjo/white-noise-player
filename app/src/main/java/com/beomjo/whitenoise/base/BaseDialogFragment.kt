@@ -62,8 +62,10 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
 
     private fun bindingToast() {
         for (vm in viewModelImpl) {
-            vm.toast.observe(this) { msg ->
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            vm.toast.observe(this) { event ->
+                event.getContentIfNotHandled()?.let { msg ->
+                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

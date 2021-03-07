@@ -41,7 +41,7 @@ open class LoginViewModel @Inject constructor(private val authRepository: AuthRe
                 progress.value = Event(false)
             }
             .catch { e ->
-                toast.value = e.message
+                toast.value = Event(e.cause?.message ?: "Fail")
                 progress.value = Event(false)
             }
             .launchIn(viewModelScope)

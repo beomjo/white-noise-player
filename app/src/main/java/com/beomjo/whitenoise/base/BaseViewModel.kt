@@ -5,7 +5,7 @@ import com.beomjo.compilation.util.Event
 import com.skydoves.bindables.BindingViewModel
 
 abstract class BaseViewModel : BindingViewModel() {
-    val toast = MutableLiveData<String>()
+    val toast = MutableLiveData<Event<String>>()
 
     val progress = MutableLiveData<Event<Boolean>>()
 }

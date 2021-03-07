@@ -1,13 +1,13 @@
 package com.beomjo.whitenoise.base
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import com.beomjo.compilation.util.getContent
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
@@ -66,8 +66,10 @@ abstract class BaseActivity<T : ViewDataBinding>(
     }
 
     private fun observeToast(vm: BaseViewModel) {
-        vm.toast.observe(this) { msg ->
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        vm.toast.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { msg ->
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

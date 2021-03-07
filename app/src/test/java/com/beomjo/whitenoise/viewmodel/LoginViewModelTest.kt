@@ -1,7 +1,8 @@
 package com.beomjo.whitenoise.viewmodel
 
 import android.content.Intent
-import com.beomjo.compilation.util.getOrAwaitValue
+import androidx.lifecycle.Observer
+import com.beomjo.compilation.util.Event
 import com.beomjo.whitenoise.BaseTest
 import com.beomjo.whitenoise.exceptions.FirebaseAccountNotFoundException
 import com.beomjo.whitenoise.exceptions.IdTokenNotFoundException
@@ -9,39 +10,40 @@ import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.ui.auth.LoginViewModel
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
-import junit.framework.Assert.assertEquals
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.*
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class LoginViewModelTest : BaseTest() {
 
-    @Mock
+    @MockK
     lateinit var authRepository: AuthRepository
 
-    lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: LoginViewModel
 
     override fun onBefore() {
-        viewModel = spy(LoginViewModel(authRepository))
+        viewModel = spyk(LoginViewModel(authRepository))
     }
 
     @Test
     fun `구글로그인 버튼 클릭하였을때 인텐트를 전달한다`() {
         //given
-        val mockIntent = mock(Intent::class.java)
-        `when`(authRepository.getGoogleSinInIntent()).thenReturn(mockIntent)
+        val mockIntent = mockk<Intent>()
+        every { authRepository.getGoogleSinInIntent() } returns mockIntent
+        val observer = mockk<Observer<Intent>> { every { onChanged(mockIntent) } just Runs }
+        viewModel.googleLoginIntent.observeForever(observer)
 
         //when
         viewModel.onClickGoogleLogin()
 
         //then
-        assertEquals(mockIntent, viewModel.googleLoginIntent.getOrAwaitValue())
+        verify { observer.onChanged(eq(mockIntent)) }
     }
 
     @Test
@@ -49,24 +51,36 @@ class LoginViewModelTest : BaseTest() {
         coroutineScope.runBlockingTest {
             //given
             val idToken = "falkland"
-            val mockIntent = mock(Intent::class.java)
-            val mockCredential = mock(AuthCredential::class.java)
-            val mockAuthResult = mock(AuthResult::class.java)
-            `when`(authRepository.getIdTokenFromIntent(mockIntent))
-                .thenReturn(flow { emit(idToken) })
-            `when`(authRepository.getGoogleCredential(idToken))
-                .thenReturn(flow { emit(mockCredential) })
-            `when`(authRepository.loginWithCredential(mockCredential))
-                .thenReturn(flow { emit(mockAuthResult) })
+            val mockIntent = mockk<Intent>()
+            val mockCredential = mockk<AuthCredential>()
+            val mockAuthResult = mockk<AuthResult>()
+            val isLoginSuccess = true
+            every { authRepository.getIdTokenFromIntent(mockIntent) } returns flow { emit(idToken) }
+            every { authRepository.getGoogleCredential(idToken) } returns flow { emit(mockCredential) }
+            every { authRepository.loginWithCredential(mockCredential) } returns
+                    flow { emit(mockAuthResult) }
+            val loginSuccessObserver = mockk<Observer<Boolean>> {
+                every { onChanged(isLoginSuccess) } just Runs
+            }
+            val progressObserver = mockk<Observer<Event<Boolean>>> {
+                every { onChanged(Event(true)) } just Runs
+                every { onChanged(Event(false)) } just Runs
+            }
+            viewModel.loginSuccess.observeForever(loginSuccessObserver)
+            viewModel.progress.observeForever(progressObserver)
 
             //when
             viewModel.processGoogleLogin(mockIntent)
 
             //then
-            assertEquals(true, viewModel.loginSuccess.getOrAwaitValue())
-            verify(authRepository).getIdTokenFromIntent(mockIntent)
-            verify(authRepository).getGoogleCredential(idToken)
-            verify(authRepository).loginWithCredential(mockCredential)
+            verifyOrder {
+                progressObserver.onChanged(eq(Event(true)))
+                authRepository.getIdTokenFromIntent(mockIntent)
+                authRepository.getGoogleCredential(idToken)
+                authRepository.loginWithCredential(mockCredential)
+                loginSuccessObserver.onChanged(eq(isLoginSuccess))
+                progressObserver.onChanged(eq(Event(false)))
+            }
         }
     }
 
@@ -74,41 +88,70 @@ class LoginViewModelTest : BaseTest() {
     fun `intent에 idToken데이터가 없다면 구글로그인에 실패해야한다`() {
         coroutineScope.runBlockingTest {
             //given
-            val mockIntent = mock(Intent::class.java)
-            `when`(authRepository.getIdTokenFromIntent(mockIntent))
-                .thenReturn(flow { error(IdTokenNotFoundException()) })
+            val exception = IdTokenNotFoundException()
+            val errorMsg = exception.cause?.message ?: "Fail"
+            val mockIntent = mockk<Intent>()
+            every { authRepository.getIdTokenFromIntent(mockIntent) } returns
+                    flow { error(exception) }
+            val toastObserver = mockk<Observer<Event<String>>> {
+                every { onChanged(Event(errorMsg)) } just Runs
+            }
+            val progressObserver = mockk<Observer<Event<Boolean>>> {
+                every { onChanged(Event(true)) } just Runs
+                every { onChanged(Event(false)) } just Runs
+            }
+            viewModel.toast.observeForever(toastObserver)
+            viewModel.progress.observeForever(progressObserver)
 
             //when
             viewModel.processGoogleLogin(mockIntent)
 
             //then
-            verify(authRepository).getIdTokenFromIntent(mockIntent)
-            verify(authRepository, never()).getGoogleCredential(anyString())
-            verify(authRepository, never()).loginWithCredential(any())
+            verifyOrder {
+                progressObserver.onChanged(eq(Event(true)))
+                authRepository.getIdTokenFromIntent(mockIntent)
+                authRepository.getGoogleCredential(any()) wasNot Called
+                authRepository.loginWithCredential(any()) wasNot Called
+                toastObserver.onChanged(eq(Event(errorMsg)))
+                progressObserver.onChanged(eq(Event(false)))
+            }
         }
     }
 
     @Test
     fun `Credential을 전달하여 구글 로그인 요청, 에러발생하여 실패해야한다`() {
         //given
+        val exception = IdTokenNotFoundException()
+        val errorMsg = exception.cause?.message ?: "Fail"
         val idToken = "falkland"
-        val mockIntent = mock(Intent::class.java)
-        val mockCredential = mock(AuthCredential::class.java)
-        val mockAuthResult = mock(AuthResult::class.java)
-        `when`(authRepository.getIdTokenFromIntent(mockIntent))
-            .thenReturn(flow { emit(idToken) })
-        `when`(authRepository.getGoogleCredential(idToken))
-            .thenReturn(flow { emit(mockCredential) })
-        `when`(authRepository.loginWithCredential(mockCredential))
-            .thenReturn(flow { error(FirebaseAccountNotFoundException()) })
+        val mockIntent = mockk<Intent>()
+        val mockCredential = mockk<AuthCredential>()
+        every { authRepository.getIdTokenFromIntent(mockIntent) } returns flow { emit(idToken) }
+        every { authRepository.getGoogleCredential(idToken) } returns flow { emit(mockCredential) }
+        every { authRepository.loginWithCredential(mockCredential) } returns
+                flow { error(FirebaseAccountNotFoundException()) }
+        val toastObserver = mockk<Observer<Event<String>>> {
+            every { onChanged(Event(errorMsg)) } just Runs
+        }
+        val progressObserver = mockk<Observer<Event<Boolean>>> {
+            every { onChanged(Event(true)) } just Runs
+            every { onChanged(Event(false)) } just Runs
+        }
+        viewModel.toast.observeForever(toastObserver)
+        viewModel.progress.observeForever(progressObserver)
 
         //when
         viewModel.processGoogleLogin(mockIntent)
 
         //then
-        verify(authRepository).getIdTokenFromIntent(mockIntent)
-        verify(authRepository).getGoogleCredential(idToken)
-        verify(authRepository).loginWithCredential(mockCredential)
+        verifyOrder {
+            progressObserver.onChanged(eq(Event(true)))
+            authRepository.getIdTokenFromIntent(mockIntent)
+            authRepository.getGoogleCredential(idToken)
+            authRepository.loginWithCredential(mockCredential)
+            toastObserver.onChanged(eq(Event(errorMsg)))
+            progressObserver.onChanged(eq(Event(false)))
+        }
     }
 }
 
