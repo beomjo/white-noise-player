@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">White Noise Player</string>
+
+    <string name="error_firebase_auth_fail">구글 로그인에 실패하였습니다.</string>
 </resources>

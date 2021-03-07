@@ -10,6 +10,7 @@ import com.beomjo.whitenoise.ui.auth.LoginViewModel
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
@@ -17,6 +18,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.*
 
+@ExperimentalCoroutinesApi
 @FlowPreview
 class LoginViewModelTest : BaseTest() {
 
@@ -39,7 +41,7 @@ class LoginViewModelTest : BaseTest() {
         viewModel.onClickGoogleLogin()
 
         //then
-        assertEquals(viewModel.googleLoginIntent.getOrAwaitValue(), mockIntent)
+        assertEquals(mockIntent, viewModel.googleLoginIntent.getOrAwaitValue())
     }
 
     @Test
@@ -61,7 +63,7 @@ class LoginViewModelTest : BaseTest() {
             viewModel.processGoogleLogin(mockIntent)
 
             //then
-            assertEquals(viewModel.loginSuccess.getOrAwaitValue(), true)
+            assertEquals(true, viewModel.loginSuccess.getOrAwaitValue())
             verify(authRepository).getIdTokenFromIntent(mockIntent)
             verify(authRepository).getGoogleCredential(idToken)
             verify(authRepository).loginWithCredential(mockCredential)

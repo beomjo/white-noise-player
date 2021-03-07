@@ -1,6 +1,8 @@
 package com.beomjo.whitenoise.repositories.auth
 
+import android.content.Context
 import android.content.Intent
+import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.exceptions.FirebaseAccountNotFoundException
 import com.beomjo.whitenoise.exceptions.IdTokenNotFoundException
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -17,6 +19,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
+    private val context: Context,
     private val firebaseAuth: FirebaseAuth,
     private val googleSignInClient: GoogleSignInClient
 ) : AuthRepository {
@@ -53,7 +56,7 @@ class AuthRepositoryImpl @Inject constructor(
             firebaseAuth.signInWithCredential(credential)
                 .addOnSuccessListener { result ->
                     result.user?.let { _ -> offer(result) }
-                        ?: close(cause = FirebaseAccountNotFoundException())
+                        ?: close(cause = FirebaseAccountNotFoundException(context.getString(R.string.error_firebase_auth_fail)))
                 }
                 .addOnFailureListener(::close)
             awaitClose()

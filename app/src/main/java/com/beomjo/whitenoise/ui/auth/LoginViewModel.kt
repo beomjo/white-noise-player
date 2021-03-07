@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.beomjo.compilation.util.Event
 import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import kotlinx.coroutines.FlowPreview
@@ -31,13 +32,18 @@ open class LoginViewModel @Inject constructor(private val authRepository: AuthRe
 
     @FlowPreview
     fun processGoogleLogin(data: Intent) {
+        progress.value = Event(true)
         authRepository.getIdTokenFromIntent(data)
             .flatMapConcat { idToken -> authRepository.getGoogleCredential(idToken) }
             .flatMapConcat { credential -> authRepository.loginWithCredential(credential) }
             .onEach {
                 _loginSuccess.value = true
+                progress.value = Event(false)
             }
-            .catch { e -> Log.e(this::class.simpleName, e.message.toString()) }
+            .catch { e ->
+                toast.value = e.message
+                progress.value = Event(false)
+            }
             .launchIn(viewModelScope)
     }
 }
