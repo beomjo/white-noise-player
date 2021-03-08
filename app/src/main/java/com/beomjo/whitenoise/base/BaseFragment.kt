@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingFragment
@@ -27,6 +28,8 @@ abstract class BaseFragment<T : ViewDataBinding>(
     val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
 
     protected var progressDialog: ProgressDialogFragment? = null
+
+    abstract val viewModelProvideOwner: ViewModelStoreOwner
 
     protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
@@ -52,7 +55,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     private fun createViewModels() {
         for (vm in viewModels) {
-            viewModelImpl.add(ViewModelProvider(this, viewModelFactory).get(vm.javaObjectType))
+            viewModelImpl.add(ViewModelProvider(viewModelProvideOwner, viewModelFactory).get(vm.javaObjectType))
         }
     }
 
