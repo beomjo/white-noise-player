@@ -7,24 +7,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
-import com.skydoves.bindables.BindingDialogFragment
+import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
+import com.skydoves.bindables.BindingFragment
 import java.lang.IllegalStateException
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-abstract class BaseDialogFragment<B : ViewDataBinding>(
-    @LayoutRes private val contentLayoutId: Int,
+abstract class BaseFragment<T : ViewDataBinding>(
+    @LayoutRes contentLayoutId: Int,
     private vararg var viewModels: KClass<out BaseViewModel>,
-) : BindingDialogFragment<B>(contentLayoutId), LifecycleOwner {
+) : BindingFragment<T>(contentLayoutId), LifecycleOwner {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
+
+    protected var progressDialog: ProgressDialogFragment? = null
 
     protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
@@ -42,7 +44,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
             inject()
             createViewModels()
             bindingLifeCycleOwner()
-            bindingToast()
+            observeViewModel()
         }
     }
 
@@ -60,22 +62,33 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
         }
     }
 
-    private fun bindingToast() {
+    private fun observeViewModel() {
         for (vm in viewModelImpl) {
-            vm.toast.observe(this) { event ->
-                event.getContentIfNotHandled()?.let { msg ->
-                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                }
+            observeToast(vm)
+            observeProgress(vm)
+        }
+    }
+
+    private fun observeToast(vm: BaseViewModel) {
+        vm.toast.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { msg ->
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun showSafely(manager: FragmentManager): Boolean {
-        return if (!manager.isStateSaved) {
-            super.show(manager, null)
-            true
-        } else {
-            false
+    private fun observeProgress(vm: BaseViewModel) {
+        vm.progress.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { isShow ->
+                if (isShow) {
+                    ProgressDialogFragment.newInstance()
+                        .apply { progressDialog = this }
+                        .showSafely(parentFragmentManager)
+                } else {
+                    progressDialog?.dismiss()
+                }
+            }
         }
     }
 }
+

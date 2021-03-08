@@ -7,7 +7,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.beomjo.compilation.util.getContent
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
@@ -16,7 +15,7 @@ import javax.inject.Inject
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<T : ViewDataBinding>(
-    @LayoutRes private val contentLayoutId: Int,
+    @LayoutRes contentLayoutId: Int,
     private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
 
@@ -25,14 +24,14 @@ abstract class BaseActivity<T : ViewDataBinding>(
 
     val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
 
+    protected var progressDialog: ProgressDialogFragment? = null
+
     protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
             viewModelImpl.find { it is T }?.let { it as T }
                 ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
         }
     }
-
-    protected var progressDialog: ProgressDialogFragment? = null
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
