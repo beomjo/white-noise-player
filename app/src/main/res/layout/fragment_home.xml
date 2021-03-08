@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -7,17 +8,24 @@
         <variable
             name="vm"
             type="com.beomjo.whitenoise.ui.main.home.HomeViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.beomjo.whitenoise.ui.adapters.HomeAdapter" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.home.HomeFragment">
+        android:layout_height="match_parent">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Home Fragment" />
+            app:adapter="@{adapter}"
+            app:adapterHomeItemList="@{vm.homeItems}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_home" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
