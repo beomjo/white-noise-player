@@ -1,12 +1,23 @@
 package com.beomjo.whitenoise.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.beomjo.whitenoise.R
+import com.beomjo.whitenoise.ui.splash.SplashActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//        Log.e("bsjo", FirebaseAuth.getInstance().currentUser!!.email.toString())
+//        findViewById<TextView>(R.id.hello).setOnClickListener {
+//            FirebaseAuth.getInstance().signOut()
+//            finish()
+//            startActivity(Intent(this, SplashActivity::class.java))
+//        }
     }
 }

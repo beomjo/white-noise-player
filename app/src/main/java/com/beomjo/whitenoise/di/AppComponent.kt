@@ -3,6 +3,7 @@ package com.beomjo.whitenoise.di
 import android.content.Context
 import com.beomjo.whitenoise.di.auth.AuthComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
+import com.beomjo.whitenoise.di.main.HomeComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -16,8 +17,10 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    fun commonComponent() : CommonComponent.Factory
+    fun commonComponent(): CommonComponent.Factory
 
     fun authComponent(): AuthComponent.Factory
+
+    fun homeComponent(): HomeComponent.Factory
 
 }
