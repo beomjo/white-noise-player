@@ -2,8 +2,10 @@ package com.beomjo.whitenoise.di
 
 import android.content.Context
 import com.beomjo.whitenoise.di.auth.AuthComponent
+import com.beomjo.whitenoise.di.category.CategoryComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
 import com.beomjo.whitenoise.di.main.HomeComponent
+import com.beomjo.whitenoise.ui.player.PlayerManager
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -23,4 +25,7 @@ interface AppComponent {
 
     fun homeComponent(): HomeComponent.Factory
 
+    fun categoryComponent(): CategoryComponent.Factory
+
+    fun playerManager(): PlayerManager
 }
