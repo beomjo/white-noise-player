@@ -1,5 +1,6 @@
 package com.beomjo.whitenoise.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,20 @@ import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
 import com.beomjo.whitenoise.model.HomeItem
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
+import com.beomjo.whitenoise.ui.category.CategoryActivity
+import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import javax.inject.Inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,
-    HomeViewModel::class
+    HomeViewModel::class,
 ) {
 
-    private val viewModel: HomeViewModel by getViewModel()
+    @Inject
+    lateinit var playerManager: PlayerManager
+
+    private val homeViewModel: HomeViewModel by getViewModel()
 
     override val viewModelProvideOwner: ViewModelStoreOwner
         get() = this  //    activity as viewModelProvideOwner
@@ -33,9 +40,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
-            vm = viewModel
+            homeVM = homeViewModel
+            manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
                 override fun onItemClick(item: HomeItem) {
+                    startActivity(Intent(context, CategoryActivity::class.java))
                 }
             })
         }.root

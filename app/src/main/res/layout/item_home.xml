@@ -21,6 +21,9 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:background="@android:color/holo_blue_light"
+            android:gravity="center"
+            android:onClick="@{()->clickListener.onItemClick(item)}"
             android:text="@{item.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

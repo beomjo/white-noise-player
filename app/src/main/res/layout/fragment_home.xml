@@ -6,8 +6,12 @@
     <data>
 
         <variable
-            name="vm"
+            name="homeVM"
             type="com.beomjo.whitenoise.ui.main.home.HomeViewModel" />
+
+        <variable
+            name="manager"
+            type="com.beomjo.whitenoise.ui.player.PlayerManager" />
 
         <variable
             name="adapter"
@@ -19,13 +23,21 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:adapter="@{adapter}"
-            app:adapterHomeItemList="@{vm.homeItems}"
+            app:adapterHomeItemList="@{homeVM.homeItems}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_home" />
+
+        <include
+            layout="@layout/layout_player"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:manager="@{manager}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
