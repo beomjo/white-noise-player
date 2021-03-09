@@ -6,6 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 
@@ -28,5 +29,10 @@ object FirebaseModule {
     @Provides
     fun provideGoogleSignInClient(context: Context, gso: GoogleSignInOptions): GoogleSignInClient {
         return GoogleSignIn.getClient(context, gso)
+    }
+
+    @Provides
+    fun provideFireStore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }
