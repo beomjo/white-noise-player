@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private val homeViewModel: HomeViewModel by getViewModel()
 
     override val viewModelProvideOwner: ViewModelStoreOwner
-        get() = this  //    activity as viewModelProvideOwner
+        get() = activity as ViewModelStoreOwner
 
     override fun inject() {
         getApplicationComponent().homeComponent().create().inject(this)
