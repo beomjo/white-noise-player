@@ -31,6 +31,18 @@ class HomeViewModel @Inject constructor(
             HomeItem(
                 title = "2",
                 iconUrl = ""
+            ),
+            HomeItem(
+                title = "3",
+                iconUrl = ""
+            ),
+            HomeItem(
+                title = "4",
+                iconUrl = ""
+            ),
+            HomeItem(
+                title = "5",
+                iconUrl = ""
             )
         )
     }
