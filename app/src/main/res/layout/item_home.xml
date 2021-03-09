@@ -18,15 +18,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@android:color/holo_blue_light"
-            android:gravity="center"
-            android:onClick="@{()->clickListener.onItemClick(item)}"
-            android:text="@{item.title}"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="afaf" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/holo_blue_light"
+                android:gravity="center"
+                android:onClick="@{()->clickListener.onItemClick(item)}"
+                android:text="@{item.title}"
+
+                tools:text="afaf" />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
