@@ -11,6 +11,7 @@ import com.skydoves.bindables.BindingActivity
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
+@Deprecated(message = "Use BaseActivity")
 abstract class BaseSingleBindActivity<T : ViewDataBinding, VM : BaseViewModel> constructor(
     @LayoutRes private val contentLayoutId: Int
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
