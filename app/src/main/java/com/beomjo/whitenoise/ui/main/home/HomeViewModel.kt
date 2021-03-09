@@ -6,12 +6,15 @@ import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.model.HomeItem
 import com.beomjo.whitenoise.model.User
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
+import com.beomjo.whitenoise.repositories.home.HomeRepository
 import com.skydoves.bindables.bindingProperty
+import java.util.*
 import javax.inject.Inject
 
 
 class HomeViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val homeRepository: HomeRepository,
 ) : BaseViewModel() {
 
     private val _homeItems = MutableLiveData<List<HomeItem>>()
