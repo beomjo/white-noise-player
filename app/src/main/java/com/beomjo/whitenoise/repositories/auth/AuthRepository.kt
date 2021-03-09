@@ -1,6 +1,7 @@
 package com.beomjo.whitenoise.repositories.auth
 
 import android.content.Intent
+import com.beomjo.whitenoise.model.User
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
@@ -16,4 +17,6 @@ interface AuthRepository {
     fun getGoogleCredential(idToken: String?): Flow<AuthCredential>
 
     fun loginWithCredential(credential: AuthCredential): Flow<AuthResult>
+
+    fun getUserInfo(): User
 }

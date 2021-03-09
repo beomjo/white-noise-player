@@ -5,6 +5,7 @@ import android.content.Intent
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.exceptions.FirebaseAccountNotFoundException
 import com.beomjo.whitenoise.exceptions.IdTokenNotFoundException
+import com.beomjo.whitenoise.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.AuthCredential
@@ -61,5 +62,13 @@ class AuthRepositoryImpl @Inject constructor(
                 .addOnFailureListener(::close)
             awaitClose()
         }
+    }
+
+    override fun getUserInfo(): User {
+        val user = firebaseAuth.currentUser
+        return User(
+            nickname = user?.displayName ?: context.getString(R.string.user_anonymous),
+            photoUri = user?.photoUrl
+        )
     }
 }

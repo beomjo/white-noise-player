@@ -1,18 +1,29 @@
 package com.beomjo.whitenoise.ui.main.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.model.HomeItem
+import com.beomjo.whitenoise.model.User
+import com.beomjo.whitenoise.repositories.auth.AuthRepository
+import com.skydoves.bindables.bindingProperty
 import javax.inject.Inject
 
 
-class HomeViewModel @Inject constructor() : BaseViewModel() {
+class HomeViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : BaseViewModel() {
 
-    val homeItems = MutableLiveData<List<HomeItem>>()
+    private val _homeItems = MutableLiveData<List<HomeItem>>()
+    val homeItems: LiveData<List<HomeItem>>
+        get() = _homeItems
 
+    private val _user = MutableLiveData<User>().apply { value = authRepository.getUserInfo() }
+    val user: LiveData<User>
+        get() = _user
 
     init {
-        homeItems.value = listOf(
+        _homeItems.value = listOf(
             HomeItem(
                 title = "1",
                 iconUrl = ""

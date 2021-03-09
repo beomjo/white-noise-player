@@ -1,9 +1,9 @@
-package com.beomjo.whitenoise.ui.adapters
+package com.beomjo.whitenoise.binding
 
 import androidx.databinding.BindingAdapter
 import com.google.android.gms.common.SignInButton
 
-object BindingAdapter {
+object AndroidBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:onClick")
     fun bindSignInClick(button: SignInButton, method: () -> Unit) {

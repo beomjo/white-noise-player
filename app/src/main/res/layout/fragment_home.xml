@@ -22,13 +22,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_info_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="30dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@id/recyclerview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/user_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@{homeVM.user.getDisplayNickname()}"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/user_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="nickname" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/user_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_nickname"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    app:loadImage="@{homeVM.user.photoUri}"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    tools:src="@tools:sample/avatars" />
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:adapter="@{adapter}"
             app:adapterHomeItemList="@{homeVM.homeItems}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_info_header"
             app:spanCount="2"
             tools:listitem="@layout/item_home" />
 
