@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.beomjo.whitenoise.databinding.ItemHomeBinding
-import com.beomjo.whitenoise.model.HomeItem
+import com.beomjo.whitenoise.model.HomeCategory
 import com.skydoves.bindables.BindingRecyclerViewAdapter
 
 class HomeAdapter(
     private val clickListener: HomeItemViewHolder.OnClickListener
 ) : BindingRecyclerViewAdapter<HomeAdapter.HomeItemViewHolder>() {
 
-    private val items = mutableListOf<HomeItem>()
+    private val items = mutableListOf<HomeCategory>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeItemViewHolder {
         val binding = ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,7 +25,7 @@ class HomeAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    fun addItems(items: List<HomeItem>) {
+    fun addItems(items: List<HomeCategory>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
@@ -34,10 +34,10 @@ class HomeAdapter(
     class HomeItemViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         interface OnClickListener {
-            fun onItemClick(item: HomeItem)
+            fun onItemClick(item: HomeCategory)
         }
 
-        fun bind(item: HomeItem, clickListener: OnClickListener) {
+        fun bind(item: HomeCategory, clickListener: OnClickListener) {
             binding.item = item
             binding.clickListener = clickListener
         }

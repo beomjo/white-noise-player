@@ -72,7 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:adapter="@{adapter}"
-            app:adapterHomeItemList="@{homeVM.homeItems}"
+            app:adapterHomeCategories="@{homeVM.homeCategories}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

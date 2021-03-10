@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
-import com.beomjo.whitenoise.model.HomeItem
+import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.category.CategoryActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             homeVM = homeViewModel
             manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
-                override fun onItemClick(item: HomeItem) {
+                override fun onItemClick(item: HomeCategory) {
                     startActivity(Intent(context, CategoryActivity::class.java))
                 }
             })

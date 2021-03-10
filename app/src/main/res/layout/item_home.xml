@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.beomjo.whitenoise.model.HomeItem" />
+            type="com.beomjo.whitenoise.model.HomeCategory" />
 
         <variable
             name="clickListener"
@@ -32,7 +32,7 @@
                 android:background="@android:color/holo_blue_light"
                 android:gravity="center"
                 android:onClick="@{()->clickListener.onItemClick(item)}"
-                android:text="@{item.title}"
+                android:text="@{item.name}"
 
                 tools:text="afaf" />
         </androidx.cardview.widget.CardView>
