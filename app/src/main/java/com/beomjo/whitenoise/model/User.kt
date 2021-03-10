@@ -7,6 +7,6 @@ data class User(
     val photoUri: Uri?,
 ) {
     fun getDisplayNickname(): String {
-        return "${nickname}님 반갑습니다!"
+        return "${nickname}님\n반갑습니다!"
     }
 }

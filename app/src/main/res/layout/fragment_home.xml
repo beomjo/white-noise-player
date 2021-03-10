@@ -38,11 +38,12 @@
             <TextView
                 android:id="@+id/user_nickname"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:text="@{homeVM.user.getDisplayNickname()}"
                 android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/user_photo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="nickname" />
@@ -55,7 +56,6 @@
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/user_nickname"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -80,7 +80,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_info_header"
             app:spanCount="2"
-            tools:listitem="@layout/item_home" />
+            tools:listitem="@layout/item_home_category" />
 
         <include
             layout="@layout/layout_player"

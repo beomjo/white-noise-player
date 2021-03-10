@@ -3,7 +3,7 @@ package com.beomjo.whitenoise.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.beomjo.whitenoise.databinding.ItemHomeBinding
+import com.beomjo.whitenoise.databinding.ItemHomeCategoryBinding
 import com.beomjo.whitenoise.model.HomeCategory
 import com.skydoves.bindables.BindingRecyclerViewAdapter
 
@@ -14,7 +14,7 @@ class HomeAdapter(
     private val items = mutableListOf<HomeCategory>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeItemViewHolder {
-        val binding = ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemHomeCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeItemViewHolder(binding)
     }
 
@@ -31,7 +31,7 @@ class HomeAdapter(
         notifyDataSetChanged()
     }
 
-    class HomeItemViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
+    class HomeItemViewHolder(val binding: ItemHomeCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         interface OnClickListener {
             fun onItemClick(item: HomeCategory)

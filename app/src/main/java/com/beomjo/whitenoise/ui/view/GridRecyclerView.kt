@@ -18,7 +18,7 @@ class GridRecyclerView @JvmOverloads constructor(
 
     class SpacingItemDecoration(
         private val spanCount: Int = 2,
-        private val spacing: Int = 40,
+        private val spacing: Int = 50,
     ) : RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
