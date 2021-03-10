@@ -26,6 +26,10 @@ class HomeViewModel @Inject constructor(
     val user: LiveData<User>
         get() = _user
 
+    private val _isRefreshing = MutableLiveData<Boolean>()
+    val isRefreshing: LiveData<Boolean>
+        get() = _isRefreshing
+
     init {
         getItemList()
     }
@@ -35,8 +39,14 @@ class HomeViewModel @Inject constructor(
             try {
                 LogUtil.d(homeRepository.getHomeCategoryList())
                 _homeCategories.value = homeRepository.getHomeCategoryList()
+                _isRefreshing.value = false
             } catch (e: Exception) {
             }
         }
+    }
+
+    fun onRefresh() {
+        getItemList()
+        _isRefreshing.value = true
     }
 }

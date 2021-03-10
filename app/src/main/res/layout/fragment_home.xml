@@ -81,10 +81,13 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:onRefreshListener="@{() -> homeVM.onRefresh()}"
+            app:refreshing="@{homeVM.isRefreshing}">
 
             <com.beomjo.whitenoise.ui.view.GridRecyclerView
                 android:id="@+id/recyclerview"
@@ -100,7 +103,7 @@
                 app:spanCount="2"
                 tools:listitem="@layout/item_home_category" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
