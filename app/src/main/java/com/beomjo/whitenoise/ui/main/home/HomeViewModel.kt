@@ -37,7 +37,6 @@ class HomeViewModel @Inject constructor(
     private fun getItemList() {
         viewModelScope.launch {
             try {
-                LogUtil.d(homeRepository.getHomeCategoryList())
                 _homeCategories.value = homeRepository.getHomeCategoryList()
                 _isRefreshing.value = false
             } catch (e: Exception) {
