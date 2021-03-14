@@ -17,6 +17,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:transitionName="@{String.valueOf(item.id)}"
         app:cardCornerRadius="24dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:background="@{item.getPrimaryColor()}"
-            android:onClick="@{()->clickListener.onItemClick(item)}"
+            android:onClick="@{(v)->clickListener.onItemClick(v,item)}"
             android:padding="30dp"
             tools:background="@android:color/holo_blue_bright">
 

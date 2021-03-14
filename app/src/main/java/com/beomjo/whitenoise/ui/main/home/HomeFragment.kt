@@ -1,6 +1,5 @@
 package com.beomjo.whitenoise.ui.main.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,8 +42,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             homeVM = homeViewModel
             manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
-                override fun onItemClick(item: HomeCategory) {
-                    startActivity(Intent(context, CategoryListActivity::class.java))
+                override fun onItemClick(view: View, item: HomeCategory) {
+                    CategoryListActivity.startActivity(
+                        context = requireActivity(),
+                        startView = view,
+                        playerView = (this@HomeFragment.view?.findViewById(R.id.player_layout))!!,
+                        homeCategory = item
+                    )
                 }
             })
         }.root

@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">#ffffff</item>
         <item name="android:windowBackground">#ffffff</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">

@@ -111,6 +111,7 @@
             android:layout_gravity="bottom|center">
 
             <include
+                android:id="@+id/player_layout"
                 layout="@layout/layout_player"
                 app:manager="@{manager}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
