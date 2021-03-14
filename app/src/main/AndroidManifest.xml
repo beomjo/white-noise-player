@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".ui.auth.LoginActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.category.CategoryActivity"/>
+        <activity android:name=".ui.category.CategoryListActivity"/>
         <activity android:name=".ui.detail.DetailActivity" />
     </application>
 

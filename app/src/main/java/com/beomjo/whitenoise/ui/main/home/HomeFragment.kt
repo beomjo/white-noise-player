@@ -11,7 +11,7 @@ import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
 import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
-import com.beomjo.whitenoise.ui.category.CategoryActivity
+import com.beomjo.whitenoise.ui.category.CategoryListActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 import javax.inject.Inject
@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
                 override fun onItemClick(item: HomeCategory) {
-                    startActivity(Intent(context, CategoryActivity::class.java))
+                    startActivity(Intent(context, CategoryListActivity::class.java))
                 }
             })
         }.root
