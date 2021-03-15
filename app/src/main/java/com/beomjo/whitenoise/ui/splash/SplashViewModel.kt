@@ -6,7 +6,7 @@ import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import javax.inject.Inject
 
-open class SplashViewModel @Inject constructor(private val authRepository: AuthRepository) :
+class SplashViewModel @Inject constructor(private val authRepository: AuthRepository) :
     BaseViewModel() {
     private val _loginState = MutableLiveData<LoginState>()
     val loginState: LiveData<LoginState>
