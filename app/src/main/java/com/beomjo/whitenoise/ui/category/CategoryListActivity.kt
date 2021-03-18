@@ -55,7 +55,7 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
                 }
             })
             homeCategory = homeCategoryMeta
-            viewmodel = categoryListViewModel
+            viewmodel = categoryListViewModel.apply { loadCategoryList(homeCategoryMeta.path) }
         }
     }
 
