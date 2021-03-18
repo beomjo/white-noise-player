@@ -6,12 +6,18 @@ import com.airbnb.lottie.LottieAnimationView
 
 object LottieBindingAdapter {
     @JvmStatic
-    @BindingAdapter("loadJson")
-    fun bindLottieAnimationFromJson(lottieView: LottieAnimationView, jsonString: String?) {
+    @BindingAdapter(value = ["loadJson", "isPlay"], requireAll = false)
+    fun bindLottieAnimationFromJson(
+        lottieView: LottieAnimationView,
+        jsonString: String?,
+        isPlay: Boolean = true,
+    ) {
         jsonString?.let {
             with(lottieView) {
                 setAnimationFromJson(jsonString, null)
-                Handler().postDelayed({ playAnimation() }, 500)
+                if (isPlay) {
+                    Handler().postDelayed({ playAnimation() }, 500)
+                }
             }
         }
     }

@@ -38,7 +38,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:loadJson="@{item.backgroundAnimationJson}"
-                app:lottie_loop="true" />
+                app:isPlay="@{false}" />
 
             <TextView
                 android:layout_width="wrap_content"
