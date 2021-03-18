@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Pair
 import android.view.View
@@ -15,8 +17,8 @@ import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.CategoryListAdapter
 import com.beomjo.whitenoise.ui.player.PlayerManager
-import com.beomjo.whitenoise.utilities.ext.getComponent
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
+import com.beomjo.whitenoise.utilities.ext.getComponent
 import javax.inject.Inject
 
 class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
@@ -38,6 +40,15 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
         applyMaterialTransform(binding.root, homeCategoryMeta.id.toString())
         super.onCreate(savedInstanceState)
         bindingViewModel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setStatusBarColor(homeCategoryMeta.getPrimaryColor())
+        } else {
+            setStatusBarColor(Color.WHITE)
+        }
     }
 
     override fun inject() {

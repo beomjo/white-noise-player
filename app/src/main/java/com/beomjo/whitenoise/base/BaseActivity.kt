@@ -2,6 +2,7 @@ package com.beomjo.whitenoise.base
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
@@ -10,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
-import java.lang.IllegalStateException
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -30,6 +30,16 @@ abstract class BaseActivity<T : ViewDataBinding>(
         return lazy {
             viewModelImpl.find { it is T }?.let { it as T }
                 ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
+        }
+    }
+
+
+    protected fun setStatusBarColor(color: Int) {
+        if (!isFinishing) {
+            val window = window
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = color
         }
     }
 
