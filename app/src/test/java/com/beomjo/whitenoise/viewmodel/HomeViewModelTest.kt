@@ -21,7 +21,6 @@ class HomeViewModelTest : BaseTest() {
     @MockK
     lateinit var homeRepository: HomeRepository
 
-
     private lateinit var viewModel: HomeViewModel
 
     override fun onBefore() {
