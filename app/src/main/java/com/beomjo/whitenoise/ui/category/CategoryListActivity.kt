@@ -21,6 +21,7 @@ import javax.inject.Inject
 
 class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
     R.layout.activity_category_list,
+    CategoryListViewModel::class
 ) {
 
     @Inject
@@ -29,6 +30,8 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
     private val homeCategoryMeta: HomeCategory by lazy {
         intent.getParcelableExtra(EXTRA_HOME_CATEGORY)!!
     }
+
+    private val categoryListViewModel: CategoryListViewModel by getViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
@@ -52,6 +55,7 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
                 }
             })
             homeCategory = homeCategoryMeta
+            viewmodel = categoryListViewModel
         }
     }
 

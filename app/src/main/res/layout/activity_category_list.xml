@@ -22,6 +22,10 @@
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
 
+        <variable
+            name="viewmodel"
+            type="com.beomjo.whitenoise.ui.category.CategoryListViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

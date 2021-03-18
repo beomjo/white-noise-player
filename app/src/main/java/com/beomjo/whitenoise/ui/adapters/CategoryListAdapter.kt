@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.beomjo.whitenoise.databinding.ItemCategoryBinding
 import com.beomjo.whitenoise.model.Category
-import com.beomjo.whitenoise.model.HomeCategory
 import com.skydoves.bindables.BindingRecyclerViewAdapter
 
 class CategoryListAdapter(

@@ -2,6 +2,7 @@ package com.beomjo.whitenoise.di
 
 import androidx.lifecycle.ViewModel
 import com.beomjo.whitenoise.ui.auth.LoginViewModel
+import com.beomjo.whitenoise.ui.category.CategoryListViewModel
 import com.beomjo.whitenoise.ui.common.ProgressDialogViewModel
 import com.beomjo.whitenoise.ui.main.home.HomeViewModel
 import com.beomjo.whitenoise.ui.splash.SplashViewModel
@@ -27,6 +28,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun provideHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoryListViewModel::class)
+    abstract fun provideCategoryListViewModel(homeViewModel: CategoryListViewModel): ViewModel
 
     @Binds
     @IntoMap
