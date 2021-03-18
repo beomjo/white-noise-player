@@ -31,12 +31,14 @@
             android:padding="30dp"
             tools:background="@android:color/holo_blue_bright">
 
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{item.iconUrl}" />
+                app:loadJson="@{item.backgroundAnimationJson}"
+                app:lottie_loop="true" />
 
             <TextView
                 android:layout_width="wrap_content"
