@@ -12,6 +12,7 @@ data class HomeCategory(
     val colorPrimary: String = "",
     val colorSecondary: String = "",
     val backgroundAnimationJson: String = "",
+    val path: String = "",
 ) : Parcelable {
 
     fun getPrimaryColor(): Int {
