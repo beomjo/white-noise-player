@@ -16,7 +16,7 @@ object LottieBindingAdapter {
             with(lottieView) {
                 setAnimationFromJson(jsonString, null)
                 if (isPlay) {
-                    Handler().postDelayed({ playAnimation() }, 500)
+                    Handler().postDelayed({ playAnimation() }, 700)
                 }
             }
         }
