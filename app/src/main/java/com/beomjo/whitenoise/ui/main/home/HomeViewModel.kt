@@ -2,14 +2,11 @@ package com.beomjo.whitenoise.ui.main.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.beomjo.compilation.util.Event
 import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.model.User
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.home.HomeRepository
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -28,14 +25,14 @@ class HomeViewModel @Inject constructor(
 
     fun init() {
         loadUserInfo()
-        loadItemList()
+        loadHomeCategoryList()
     }
 
     private fun loadUserInfo() {
         launch { _user.value = authRepository.getUserInfo() }
     }
 
-    private fun loadItemList() {
+    private fun loadHomeCategoryList() {
         launch { _homeCategories.value = homeRepository.getHomeCategoryList() }
         _isRefreshing.value = false
     }

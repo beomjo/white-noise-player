@@ -35,14 +35,14 @@ class HomeViewModelTest : BaseTest() {
     fun `init() 호출`() {
         //given
         justRun { viewModel invokeNoArgs "loadUserInfo" }
-        justRun { viewModel invokeNoArgs "loadItemList" }
+        justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
 
         //when
         viewModel.init()
 
         //then
         verify { viewModel invokeNoArgs "loadUserInfo" }
-        verify { viewModel invokeNoArgs "loadItemList" }
+        verify { viewModel invokeNoArgs "loadHomeCategoryList" }
     }
 
     @Test
@@ -98,7 +98,7 @@ class HomeViewModelTest : BaseTest() {
         viewModel.isRefreshing.observeForever(refreshObserver)
 
         //when
-        viewModel invokeNoArgs "loadItemList"
+        viewModel invokeNoArgs "loadHomeCategoryList"
 
         //then
         coVerify { homeRepository.getHomeCategoryList() }
@@ -122,7 +122,7 @@ class HomeViewModelTest : BaseTest() {
         viewModel.toast.observeForever(toastObserver)
 
         //when
-        viewModel invokeNoArgs "loadItemList"
+        viewModel invokeNoArgs "loadHomeCategoryList"
 
         //then
         coVerifyOrder { homeRepository.getHomeCategoryList() }
