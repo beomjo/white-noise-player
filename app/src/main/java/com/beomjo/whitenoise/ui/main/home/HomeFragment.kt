@@ -46,7 +46,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     CategoryListActivity.startActivity(
                         context = requireActivity(),
                         startView = view,
-                        playerView = (this@HomeFragment.view?.findViewById(R.id.player_layout))!!,
                         homeCategory = item
                     )
                 }
