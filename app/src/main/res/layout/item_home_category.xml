@@ -28,28 +28,31 @@
             android:layout_height="180dp"
             android:background="@{item.getPrimaryColor()}"
             android:onClick="@{(v)->clickListener.onItemClick(v,item)}"
-            android:padding="30dp"
             tools:background="@android:color/holo_blue_bright">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="@{item.name}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="afaf" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:loadJson="@{item.backgroundAnimationJson}"
-                app:isPlay="@{false}" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{item.name}"
-                android:textColor="@color/white"
-                android:textSize="24sp"
+                android:paddingTop="50dp"
+                app:isPlay="@{false}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="afaf" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:loadJson="@{item.backgroundAnimationJson}" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

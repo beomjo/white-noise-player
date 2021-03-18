@@ -61,22 +61,6 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="nickname" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/user_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            app:loadImage="@{homeVM.user.photoUri}"
-                            tools:src="@tools:sample/avatars" />
-                    </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
