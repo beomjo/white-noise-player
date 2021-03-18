@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
-            homeVM = homeViewModel
+            homeVM = homeViewModel.apply { init() }
             manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: HomeCategory) {
