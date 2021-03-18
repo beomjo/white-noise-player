@@ -15,6 +15,10 @@
             type="com.beomjo.whitenoise.ui.category.CategoryListActivity" />
 
         <variable
+            name="adapter"
+            type="com.beomjo.whitenoise.ui.adapters.CategoryListAdapter" />
+
+        <variable
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
 
@@ -85,6 +89,13 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_list_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:adapter="@{adapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_category" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -11,7 +11,9 @@ import android.view.Window
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityCategoryListBinding
+import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.HomeCategory
+import com.beomjo.whitenoise.ui.adapters.CategoryListAdapter
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.getComponent
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
@@ -43,6 +45,12 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
         binding {
             manager = playerManager
             activity = this@CategoryListActivity
+            adapter = CategoryListAdapter(object :
+                CategoryListAdapter.CategoryItemViewHolder.OnClickListener {
+                override fun onItemClick(view: View, item: Category) {
+
+                }
+            })
             homeCategory = homeCategoryMeta
         }
     }
