@@ -1,6 +1,7 @@
 package com.beomjo.whitenoise.binding
 
 import android.net.Uri
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -24,5 +25,11 @@ object ViewBindingAdapter {
                 .load(it.toString())
                 .into(view)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("isSelected")
+    fun bindSetSelect(view: View, isSelected: Boolean) {
+        view.isSelected = isSelected
     }
 }
