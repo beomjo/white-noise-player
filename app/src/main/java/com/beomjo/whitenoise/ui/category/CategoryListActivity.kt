@@ -29,11 +29,11 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>(
     @Inject
     lateinit var playerManager: PlayerManager
 
+    private val categoryListViewModel: CategoryListViewModel by getViewModel()
+
     private val homeCategoryMeta: HomeCategory by lazy {
         intent.getParcelableExtra(EXTRA_HOME_CATEGORY)!!
     }
-
-    private val categoryListViewModel: CategoryListViewModel by getViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)

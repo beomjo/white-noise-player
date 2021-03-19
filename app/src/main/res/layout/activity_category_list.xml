@@ -53,7 +53,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp">
 
-
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/animation"
                         android:layout_width="match_parent"
@@ -91,12 +90,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/gray_01"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_list_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="10dp"
                 app:adapter="@{adapter}"
                 app:adapterCategories="@{viewmodel.categories}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
