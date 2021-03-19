@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,35 +14,64 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/transparent_black"
+        android:padding="15dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/skip_previous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_skip_previous"
-            app:layout_constraintEnd_toStartOf="@id/play"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/player_status_layout"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/sound_description_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/play_and_stop_button"
+            app:layout_constraintStart_toEndOf="@id/player_status_layout"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="fire-장작불이 타는 소리들들들들들" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_play_arrow"
+            android:id="@+id/play_and_stop_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
             android:onClick="@{()->manager.onPerformPlay()}"
-            app:layout_constraintEnd_toStartOf="@id/skip_next"
-            app:layout_constraintStart_toEndOf="@id/skip_previous"
+            android:src="@drawable/ic_play_arrow_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/expand_button"
+            app:layout_constraintStart_toEndOf="@id/sound_description_text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/skip_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_skip_next"
-            android:visibility="@{manager.expand ? View.VISIBLE : View.INVISIBLE}"
+            android:id="@+id/expand_button"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:onClick="@{()->manager.onPerformPlay()}"
+            android:src="@drawable/ic_arrow_up_white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/play"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

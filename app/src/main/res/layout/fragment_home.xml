@@ -90,13 +90,15 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center">
+            android:layout_gravity="bottom">
 
             <include
                 android:id="@+id/player_layout"
                 layout="@layout/layout_player"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:manager="@{manager}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
