@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.beomjo.whitenoise.databinding.ItemHomeCategoryBinding
 import com.beomjo.whitenoise.model.HomeCategory
@@ -29,9 +30,11 @@ class HomeAdapter(
     override fun getItemCount(): Int = items.size
 
     fun addItems(items: List<HomeCategory>) {
+        val diffCallback = HomeCategoryDiffUtilCallback(this.items, items)
+        val result = DiffUtil.calculateDiff(diffCallback)
         this.items.clear()
         this.items.addAll(items)
-        notifyDataSetChanged()
+        result.dispatchUpdatesTo(this)
     }
 
     class HomeItemViewHolder(val binding: ItemHomeCategoryBinding) :
@@ -47,6 +50,28 @@ class HomeAdapter(
                 clickListener = listener
                 ViewCompat.setTransitionName(homeContainer, homeCategory.id.toString())
             }
+        }
+    }
+
+    class HomeCategoryDiffUtilCallback(
+        private val old: List<HomeCategory>,
+        private val new: List<HomeCategory>
+    ) : DiffUtil.Callback() {
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return old[oldItemPosition] == new[newItemPosition]
+        }
+
+        override fun getOldListSize(): Int {
+            return old.size
+        }
+
+        override fun getNewListSize(): Int {
+            return new.size
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return old[oldItemPosition].id == new[newItemPosition].id
         }
     }
 }
