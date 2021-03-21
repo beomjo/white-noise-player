@@ -42,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     parentFragmentManager.beginTransaction()
                         .setReorderingAllowed(true)
                         .addSharedElement(view, item.id.toString())
-                        .replace(R.id.fragment_container_view, categoryListFragment)
+                        .replace(R.id.fragment_container_layout, categoryListFragment)
                         .addToBackStack(null)
                         .commit()
                 }
