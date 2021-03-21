@@ -5,7 +5,6 @@ import android.transition.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
@@ -15,8 +14,8 @@ import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.CategoryListAdapter
 import com.beomjo.whitenoise.ui.category.CategoryListViewModel
 import com.beomjo.whitenoise.ui.player.PlayerManager
+import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
-import com.beomjo.whitenoise.utilities.ext.getContentTransformWithFragment
 import javax.inject.Inject
 
 class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
@@ -59,20 +58,7 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.transitionName = homeCategoryMeta.id.toString()
-        sharedElementEnterTransition = TransitionSet().apply {
-            addTransition(ChangeImageTransform())
-            addTransition(ChangeBounds())
-            addTransition(ChangeTransform())
-            addTransition(getContentTransformWithFragment())
-        }
-
-        sharedElementReturnTransition = TransitionSet().apply {
-            addTransition(ChangeImageTransform())
-            addTransition(ChangeBounds())
-            addTransition(ChangeTransform())
-            addTransition(getContentTransformWithFragment())
-        }
+        applyMaterialTransform(view, homeCategoryMeta.id.toString())
     }
 
     fun onBackPressed() {
