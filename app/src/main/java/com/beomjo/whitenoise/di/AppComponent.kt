@@ -5,6 +5,7 @@ import com.beomjo.whitenoise.di.auth.AuthComponent
 import com.beomjo.whitenoise.di.category.CategoryComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
 import com.beomjo.whitenoise.di.main.HomeComponent
+import com.beomjo.whitenoise.di.main.MainComponent
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import dagger.BindsInstance
 import dagger.Component
@@ -22,6 +23,8 @@ interface AppComponent {
     fun commonComponent(): CommonComponent.Factory
 
     fun authComponent(): AuthComponent.Factory
+
+    fun mainComponent(): MainComponent.Factory
 
     fun homeComponent(): HomeComponent.Factory
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.beomjo.whitenoise.ui.auth.LoginViewModel
 import com.beomjo.whitenoise.ui.category.CategoryListViewModel
 import com.beomjo.whitenoise.ui.common.ProgressDialogViewModel
+import com.beomjo.whitenoise.ui.main.MainViewModel
 import com.beomjo.whitenoise.ui.main.home.HomeViewModel
 import com.beomjo.whitenoise.ui.splash.SplashViewModel
 import dagger.Binds
@@ -21,8 +22,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    abstract fun provideLoginViewModel(mainViewModel: LoginViewModel): ViewModel
+    abstract fun provideLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun provideMainViewModel(mainViewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap
