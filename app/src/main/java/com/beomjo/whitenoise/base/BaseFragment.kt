@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
@@ -13,7 +14,6 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingFragment
-import java.lang.IllegalStateException
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -38,6 +38,19 @@ abstract class BaseFragment<T : ViewDataBinding>(
         }
     }
 
+    protected fun setStatusBarColor(color: Int): Int {
+        var previousColor = 0
+        return activity?.let {
+            val window = requireActivity().window
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            previousColor = window.statusBarColor
+            window.statusBarColor = color
+            return previousColor
+        } ?: kotlin.run { previousColor }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,7 +68,12 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     private fun createViewModels() {
         for (vm in viewModels) {
-            viewModelImpl.add(ViewModelProvider(viewModelProvideOwner, viewModelFactory).get(vm.javaObjectType))
+            viewModelImpl.add(
+                ViewModelProvider(
+                    viewModelProvideOwner,
+                    viewModelFactory
+                ).get(vm.javaObjectType)
+            )
         }
     }
 

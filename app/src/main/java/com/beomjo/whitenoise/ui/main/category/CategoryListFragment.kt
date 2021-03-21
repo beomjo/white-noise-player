@@ -1,5 +1,7 @@
 package com.beomjo.whitenoise.ui.main.category
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.transition.*
 import android.view.LayoutInflater
@@ -36,6 +38,15 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
         getApplicationComponent().categoryComponent().create().inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setStatusBarColor(homeCategoryMeta.getPrimaryColor())
+        } else {
+            setStatusBarColor(Color.WHITE)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,6 +74,7 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
 
     fun onBackPressed() {
         parentFragmentManager.popBackStack()
+        setStatusBarColor(Color.WHITE)
         parentFragment?.startPostponedEnterTransition()
     }
 

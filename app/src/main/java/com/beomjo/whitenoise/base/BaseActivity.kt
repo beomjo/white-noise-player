@@ -33,7 +33,6 @@ abstract class BaseActivity<T : ViewDataBinding>(
         }
     }
 
-
     protected fun setStatusBarColor(color: Int) {
         if (!isFinishing) {
             val window = window
