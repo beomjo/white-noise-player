@@ -15,7 +15,6 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
@@ -24,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_container"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:background="@{item.getPrimaryColor()}"
@@ -44,7 +44,7 @@
                 tools:text="afaf" />
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animation"
+                android:id="@+id/home_animation_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="50dp"

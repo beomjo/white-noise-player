@@ -45,7 +45,7 @@ class HomeAdapter(
             with(binding) {
                 item = homeCategory
                 clickListener = listener
-                ViewCompat.setTransitionName(root, homeCategory.id.toString())
+                ViewCompat.setTransitionName(homeContainer, homeCategory.id.toString())
             }
         }
     }

@@ -1,9 +1,11 @@
 package com.beomjo.whitenoise.ui.main.home
 
 import android.os.Bundle
+import android.transition.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
@@ -12,8 +14,8 @@ import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.category.CategoryListFragment
 import com.beomjo.whitenoise.ui.player.PlayerManager
-import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import com.beomjo.whitenoise.utilities.ext.getContentTransformWithFragment
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -44,13 +46,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: HomeCategory) {
+                    val categoryListFragment = CategoryListFragment.newInstance(item)
                     parentFragmentManager.beginTransaction()
                         .setReorderingAllowed(true)
                         .addSharedElement(view, item.id.toString())
-                        .replace(
-                            R.id.fragment_container_view,
-                            CategoryListFragment.newInstance(item)
-                        )
+                        .replace(R.id.fragment_container_view, categoryListFragment)
                         .addToBackStack(null)
                         .commit()
                 }
@@ -59,5 +59,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 }
