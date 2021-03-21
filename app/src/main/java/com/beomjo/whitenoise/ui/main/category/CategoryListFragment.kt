@@ -15,18 +15,13 @@ import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.CategoryListAdapter
 import com.beomjo.whitenoise.ui.category.CategoryListViewModel
-import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
-import javax.inject.Inject
 
 class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
     R.layout.fragment_category_list,
     CategoryListViewModel::class
 ) {
-
-    @Inject
-    lateinit var playerManager: PlayerManager
 
     override val viewModelProvideOwner: ViewModelStoreOwner get() = this
 
@@ -54,7 +49,6 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
-            manager = playerManager
             fragment = this@CategoryListFragment
             adapter = CategoryListAdapter(object :
                 CategoryListAdapter.CategoryItemViewHolder.OnClickListener {

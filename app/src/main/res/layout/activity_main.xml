@@ -4,6 +4,10 @@
     <data>
 
         <variable
+            name="viewmodel"
+            type="com.beomjo.whitenoise.ui.main.MainViewModel" />
+
+        <variable
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
     </data>

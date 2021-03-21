@@ -12,17 +12,12 @@ import com.beomjo.whitenoise.databinding.FragmentHomeBinding
 import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.category.CategoryListFragment
-import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
-import javax.inject.Inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,
     HomeViewModel::class,
 ) {
-
-    @Inject
-    lateinit var playerManager: PlayerManager
 
     private val homeViewModel: HomeViewModel by getViewModel()
 
@@ -41,7 +36,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
             homeVM = homeViewModel.apply { init() }
-            manager = playerManager
             adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: HomeCategory) {
                     val categoryListFragment = CategoryListFragment.newInstance(item)

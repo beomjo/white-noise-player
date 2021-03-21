@@ -18,10 +18,6 @@
             type="com.beomjo.whitenoise.ui.adapters.CategoryListAdapter" />
 
         <variable
-            name="manager"
-            type="com.beomjo.whitenoise.ui.player.PlayerManager" />
-
-        <variable
             name="viewmodel"
             type="com.beomjo.whitenoise.ui.category.CategoryListViewModel" />
 
@@ -103,18 +99,5 @@
                 tools:listitem="@layout/item_category" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
-
-            <include
-                android:id="@+id/player_layout"
-                layout="@layout/layout_player"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:manager="@{manager}" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
