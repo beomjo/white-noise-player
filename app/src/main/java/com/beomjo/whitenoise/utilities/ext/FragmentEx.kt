@@ -1,5 +1,6 @@
 package com.beomjo.whitenoise.utilities.ext
 
+import android.graphics.Color
 import android.transition.ChangeBounds
 import android.transition.ChangeImageTransform
 import android.transition.ChangeTransform
@@ -31,6 +32,7 @@ private fun getContentTransform(): MaterialContainerTransform {
         isElevationShadowEnabled = true
         startElevation = 9f
         endElevation = 9f
+        scrimColor = Color.TRANSPARENT
     }
 }
 
