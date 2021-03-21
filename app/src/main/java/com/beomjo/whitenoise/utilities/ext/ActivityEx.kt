@@ -2,7 +2,10 @@ package com.beomjo.whitenoise.utilities.ext
 
 import android.view.View
 import android.view.Window
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.SharedElementCallback
+import androidx.fragment.app.Fragment
 import com.beomjo.whitenoise.R
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.transition.platform.MaterialArcMotion
@@ -24,7 +27,6 @@ fun AppCompatActivity.applyMaterialTransform(rootView: View, transitionName: Str
     window.sharedElementEnterTransition = getContentTransform(rootView)
     window.sharedElementReturnTransition = getContentTransform(rootView)
 }
-
 
 private fun getContentTransform(rootView: View): MaterialContainerTransform {
     return MaterialContainerTransform().apply {

@@ -1,6 +1,6 @@
 package com.beomjo.whitenoise.di.category
 
-import com.beomjo.whitenoise.ui.category.CategoryListActivity
+import com.beomjo.whitenoise.ui.main.category.CategoryListFragment
 import dagger.Subcomponent
 
 @Subcomponent
@@ -11,5 +11,5 @@ interface CategoryComponent {
         fun create(): CategoryComponent
     }
 
-    fun inject(activity: CategoryListActivity)
+    fun inject(fragment: CategoryListFragment)
 }

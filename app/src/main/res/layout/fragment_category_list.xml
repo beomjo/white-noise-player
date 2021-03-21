@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.category.CategoryListActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,8 +10,8 @@
             type="com.beomjo.whitenoise.model.HomeCategory" />
 
         <variable
-            name="activity"
-            type="com.beomjo.whitenoise.ui.category.CategoryListActivity" />
+            name="fragment"
+            type="com.beomjo.whitenoise.ui.main.category.CategoryListFragment" />
 
         <variable
             name="adapter"
@@ -75,7 +74,7 @@
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:layout_margin="20dp"
-                            android:onClick="@{()->activity.onBackPressed()}"
+                            android:onClick="@{()->fragment.onBackPressed()}"
                             android:src="@drawable/ic_arrow_back_white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

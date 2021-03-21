@@ -14,10 +14,10 @@
             type="com.beomjo.whitenoise.ui.adapters.HomeAdapter.HomeItemViewHolder.OnClickListener" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:transitionName="@{String.valueOf(item.id)}"
         app:cardCornerRadius="24dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,5 +54,5 @@
                 app:loadJson="@{item.backgroundAnimationJson}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

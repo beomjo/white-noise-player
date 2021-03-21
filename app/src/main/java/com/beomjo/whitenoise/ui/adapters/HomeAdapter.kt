@@ -3,6 +3,7 @@ package com.beomjo.whitenoise.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.beomjo.whitenoise.databinding.ItemHomeCategoryBinding
 import com.beomjo.whitenoise.model.HomeCategory
@@ -40,9 +41,12 @@ class HomeAdapter(
             fun onItemClick(view: View, item: HomeCategory)
         }
 
-        fun bind(item: HomeCategory, clickListener: OnClickListener) {
-            binding.item = item
-            binding.clickListener = clickListener
+        fun bind(homeCategory: HomeCategory, listener: OnClickListener) {
+            with(binding) {
+                item = homeCategory
+                clickListener = listener
+                ViewCompat.setTransitionName(root, homeCategory.id.toString())
+            }
         }
     }
 }
