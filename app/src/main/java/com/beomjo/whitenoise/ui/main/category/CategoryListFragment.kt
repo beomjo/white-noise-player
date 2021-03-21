@@ -75,7 +75,6 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
     fun onBackPressed() {
         parentFragmentManager.popBackStack()
         setStatusBarColor(Color.WHITE)
-        parentFragment?.startPostponedEnterTransition()
     }
 
     companion object {
