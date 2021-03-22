@@ -2,6 +2,8 @@ package com.beomjo.whitenoise.ui.player
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
@@ -21,6 +23,15 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
 
     override fun inject() {
         application.getComponent().playerComponent().create().inject(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setStatusBarColor(sound.getBackgroundColor())
+        } else {
+            setStatusBarColor(Color.WHITE)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

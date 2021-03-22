@@ -1,7 +1,7 @@
 package com.beomjo.whitenoise.model
 
-import android.graphics.Color
 import android.os.Parcelable
+import com.beomjo.whitenoise.utilities.ext.parseColor
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -21,9 +21,5 @@ data class Category(
 
     fun getSecondaryColor(): Int {
         return colorSecondary.parseColor()
-    }
-
-    private fun String.parseColor(): Int {
-        return Color.parseColor(this)
     }
 }

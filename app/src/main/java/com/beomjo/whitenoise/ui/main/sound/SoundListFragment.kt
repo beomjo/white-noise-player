@@ -52,8 +52,8 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
             fragment = this@SoundListFragment
             adapter = SoundListAdapter(object :
                 SoundListAdapter.SoundItemViewHolder.OnClickListener {
-                override fun onItemClick(view: View, sound: Sound) {
-                    PlayerActivity.startActivity(view.context, sound)
+                override fun onItemClick(view: View, item: Sound) {
+                    PlayerActivity.startActivity(view.context, item)
                 }
             })
             homeCategory = category

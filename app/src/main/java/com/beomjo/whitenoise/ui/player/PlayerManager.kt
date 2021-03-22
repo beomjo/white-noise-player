@@ -26,7 +26,6 @@ class PlayerManager @Inject constructor() : BaseObservable() {
         _sound.value = sound
     }
 
-
     fun onPlay() {
 
     }
