@@ -41,14 +41,6 @@ class PlayerManager @Inject constructor() : BaseObservable() {
     fun onExpand() {
         _moveToPlayerActivity.value = sound.value
     }
-
-//    @get:Bindable
-//    var isExpand: Boolean = false
-//        set(value) {
-//            field = value
-//            notifyPropertyChanged(BR.expand)
-//        }
-
 }
 
 sealed class SoundState
