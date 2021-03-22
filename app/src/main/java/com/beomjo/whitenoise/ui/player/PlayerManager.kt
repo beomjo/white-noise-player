@@ -1,9 +1,10 @@
 package com.beomjo.whitenoise.ui.player
 
-import android.content.Intent
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.beomjo.whitenoise.model.Sound
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,11 +14,17 @@ class PlayerManager @Inject constructor() : BaseObservable() {
     private val _state = MutableLiveData<SoundState>()
     val state: LiveData<SoundState> get() = _state
 
-    private val _hasData = MutableLiveData<Boolean>().apply { value = false }
-    val hasData: LiveData<Boolean> get() = _hasData
+    private val _sound = MutableLiveData<Sound>()
+    val sound: LiveData<Sound> get() = _sound
 
-    private val _moveToPlayerActivity = MutableLiveData<Intent>()
-    val moveToPlayerActivity: LiveData<Intent> get() = _moveToPlayerActivity
+    val hasData: LiveData<Boolean> get() = Transformations.map(_sound) { it != null }
+
+    private val _moveToPlayerActivity = MutableLiveData<Sound>()
+    val moveToPlayerActivity: LiveData<Sound> get() = _moveToPlayerActivity
+
+    fun setSound(sound: Sound) {
+        _sound.value = sound
+    }
 
 
     fun onPlay() {
@@ -33,6 +40,7 @@ class PlayerManager @Inject constructor() : BaseObservable() {
     }
 
     fun onExpand() {
+        _moveToPlayerActivity.value = sound.value
     }
 
 //    @get:Bindable

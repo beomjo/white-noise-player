@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:background="@color/transparent_black"
         android:onClick="@{(v)->manager.onExpand()}"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:visibility="@{manager.hasData ? View.VISIBLE : View.GONE}">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/player_status_layout"

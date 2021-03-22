@@ -43,8 +43,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     private fun observePlayer() {
         with(playerManager) {
-            moveToPlayerActivity.observe(this@MainActivity) { intent ->
-                PlayerActivity.startActivity(this@MainActivity, intent)
+            moveToPlayerActivity.observe(this@MainActivity) { sound ->
+                PlayerActivity.startActivity(this@MainActivity, sound)
             }
         }
     }

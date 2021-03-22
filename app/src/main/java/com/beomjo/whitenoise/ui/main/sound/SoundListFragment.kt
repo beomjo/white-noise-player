@@ -14,6 +14,7 @@ import com.beomjo.whitenoise.databinding.FragmentSoundListBinding
 import com.beomjo.whitenoise.model.Sound
 import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.SoundListAdapter
+import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 
@@ -26,7 +27,7 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
 
     private val categoryListViewModel: SoundListViewModel by getViewModel()
 
-    private val category : Category by lazy { arguments?.getParcelable(KEY_HOME_CATEGORY)!! }
+    private val category: Category by lazy { arguments?.getParcelable(KEY_HOME_CATEGORY)!! }
 
     override fun inject() {
         getApplicationComponent().soundListComponent().create().inject(this)
@@ -51,7 +52,8 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
             fragment = this@SoundListFragment
             adapter = SoundListAdapter(object :
                 SoundListAdapter.SoundItemViewHolder.OnClickListener {
-                override fun onItemClick(view: View, item: Sound) {
+                override fun onItemClick(view: View, sound: Sound) {
+                    PlayerActivity.startActivity(view.context, sound)
                 }
             })
             homeCategory = category
