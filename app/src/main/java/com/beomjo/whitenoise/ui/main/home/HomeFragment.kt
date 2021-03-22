@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
-import com.beomjo.whitenoise.model.HomeCategory
+import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
-import com.beomjo.whitenoise.ui.main.category.CategoryListFragment
+import com.beomjo.whitenoise.ui.main.sound.SoundListFragment
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -36,13 +36,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
             homeVM = homeViewModel.apply { init() }
-            adapter = HomeAdapter(object : HomeAdapter.HomeItemViewHolder.OnClickListener {
-                override fun onItemClick(view: View, item: HomeCategory) {
-                    val categoryListFragment = CategoryListFragment.newInstance(item)
+            adapter = HomeAdapter(object : HomeAdapter.HomeCategoryItemViewHolder.OnClickListener {
+                override fun onItemClick(view: View, item: Category) {
+                    val soundListFragment = SoundListFragment.newInstance(item)
                     parentFragmentManager.beginTransaction()
                         .setReorderingAllowed(true)
                         .addSharedElement(view, item.id.toString())
-                        .replace(R.id.fragment_container_layout, categoryListFragment)
+                        .replace(R.id.fragment_container_layout, soundListFragment)
                         .addToBackStack(null)
                         .commit()
                 }

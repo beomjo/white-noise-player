@@ -1,9 +1,9 @@
 package com.beomjo.whitenoise.repositories.home
 
-import com.beomjo.whitenoise.model.HomeCategory
+import com.beomjo.whitenoise.model.Category
 
 interface HomeRepository {
 
-    suspend fun getHomeCategoryList(): List<HomeCategory>
+    suspend fun getHomeCategoryList(): List<Category>
 
 }

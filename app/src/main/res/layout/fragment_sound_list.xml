@@ -7,19 +7,19 @@
 
         <variable
             name="homeCategory"
-            type="com.beomjo.whitenoise.model.HomeCategory" />
+            type="com.beomjo.whitenoise.model.Category" />
 
         <variable
             name="fragment"
-            type="com.beomjo.whitenoise.ui.main.category.CategoryListFragment" />
+            type="com.beomjo.whitenoise.ui.main.sound.SoundListFragment" />
 
         <variable
             name="adapter"
-            type="com.beomjo.whitenoise.ui.adapters.CategoryListAdapter" />
+            type="com.beomjo.whitenoise.ui.adapters.SoundListAdapter" />
 
         <variable
             name="viewmodel"
-            type="com.beomjo.whitenoise.ui.category.CategoryListViewModel" />
+            type="com.beomjo.whitenoise.ui.main.sound.SoundListViewModel" />
 
     </data>
 
@@ -94,9 +94,9 @@
                 android:layout_height="match_parent"
                 android:paddingTop="10dp"
                 app:adapter="@{adapter}"
-                app:adapterCategories="@{viewmodel.categories}"
+                app:adapterSoundList="@{viewmodel.sounds}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_category" />
+                tools:listitem="@layout/item_sound" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,8 +12,10 @@ import com.beomjo.whitenoise.utilities.ext.getComponent
 import kotlinx.coroutines.FlowPreview
 
 @FlowPreview
-class LoginActivity :
-    BaseActivity<ActivityLoginBinding>(R.layout.activity_login, LoginViewModel::class) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(
+    R.layout.activity_login,
+    LoginViewModel::class
+) {
 
     private val viewModel: LoginViewModel by getViewModel()
 

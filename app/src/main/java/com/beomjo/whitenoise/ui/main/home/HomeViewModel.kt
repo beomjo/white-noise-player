@@ -3,7 +3,7 @@ package com.beomjo.whitenoise.ui.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.beomjo.whitenoise.base.BaseViewModel
-import com.beomjo.whitenoise.model.HomeCategory
+import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.User
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.home.HomeRepository
@@ -14,8 +14,8 @@ class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository,
 ) : BaseViewModel() {
 
-    private val _homeCategories = MutableLiveData<List<HomeCategory>>()
-    val homeCategories: LiveData<List<HomeCategory>> get() = _homeCategories
+    private val _categories = MutableLiveData<List<Category>>()
+    val categories: LiveData<List<Category>> get() = _categories
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> get() = _user
@@ -33,7 +33,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadHomeCategoryList() {
-        launch { _homeCategories.value = homeRepository.getHomeCategoryList() }
+        launch { _categories.value = homeRepository.getHomeCategoryList() }
         _isRefreshing.value = false
     }
 

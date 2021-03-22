@@ -2,7 +2,7 @@ package com.beomjo.whitenoise.di
 
 import androidx.lifecycle.ViewModel
 import com.beomjo.whitenoise.ui.auth.LoginViewModel
-import com.beomjo.whitenoise.ui.category.CategoryListViewModel
+import com.beomjo.whitenoise.ui.main.sound.SoundListViewModel
 import com.beomjo.whitenoise.ui.common.ProgressDialogViewModel
 import com.beomjo.whitenoise.ui.main.MainViewModel
 import com.beomjo.whitenoise.ui.main.home.HomeViewModel
@@ -36,8 +36,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CategoryListViewModel::class)
-    abstract fun provideCategoryListViewModel(homeViewModel: CategoryListViewModel): ViewModel
+    @ViewModelKey(SoundListViewModel::class)
+    abstract fun provideSoundListViewModel(soundViewModel: SoundListViewModel): ViewModel
 
     @Binds
     @IntoMap

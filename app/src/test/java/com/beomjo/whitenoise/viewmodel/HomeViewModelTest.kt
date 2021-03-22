@@ -3,7 +3,7 @@ package com.beomjo.whitenoise.viewmodel
 import androidx.lifecycle.Observer
 import com.beomjo.compilation.util.Event
 import com.beomjo.whitenoise.BaseTest
-import com.beomjo.whitenoise.model.HomeCategory
+import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.User
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.home.HomeRepository
@@ -88,7 +88,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `홈 카테고리 데이터 로드 성공`() {
         //given
-        val homeCategory = mockk<HomeCategory>()
+        val homeCategory = mockk<Category>()
         val homeCategories = listOf(homeCategory)
         coEvery { homeRepository.getHomeCategoryList() } returns homeCategories
         val refreshObserver = mockk<Observer<Boolean>> {

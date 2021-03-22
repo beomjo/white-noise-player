@@ -6,30 +6,30 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.beomjo.whitenoise.databinding.ItemHomeCategoryBinding
-import com.beomjo.whitenoise.model.HomeCategory
+import com.beomjo.whitenoise.databinding.ItemCategoryBinding
+import com.beomjo.whitenoise.model.Category
 import com.skydoves.bindables.BindingRecyclerViewAdapter
 
 class HomeAdapter(
-    private val clickListener: HomeItemViewHolder.OnClickListener
-) : BindingRecyclerViewAdapter<HomeAdapter.HomeItemViewHolder>() {
+    private val clickListener: HomeCategoryItemViewHolder.OnClickListener
+) : BindingRecyclerViewAdapter<HomeAdapter.HomeCategoryItemViewHolder>() {
 
-    private val items = mutableListOf<HomeCategory>()
+    private val items = mutableListOf<Category>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCategoryItemViewHolder {
         val binding =
-            ItemHomeCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeItemViewHolder(binding)
+            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HomeCategoryItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HomeItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeCategoryItemViewHolder, position: Int) {
         holder.bind(items[position], clickListener)
         holder.binding.executePendingBindings()
     }
 
     override fun getItemCount(): Int = items.size
 
-    fun addItems(items: List<HomeCategory>) {
+    fun addItems(items: List<Category>) {
         val diffCallback = HomeCategoryDiffUtilCallback(this.items, items)
         val result = DiffUtil.calculateDiff(diffCallback)
         this.items.clear()
@@ -37,14 +37,14 @@ class HomeAdapter(
         result.dispatchUpdatesTo(this)
     }
 
-    class HomeItemViewHolder(val binding: ItemHomeCategoryBinding) :
+    class HomeCategoryItemViewHolder(val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         interface OnClickListener {
-            fun onItemClick(view: View, item: HomeCategory)
+            fun onItemClick(view: View, item: Category)
         }
 
-        fun bind(homeCategory: HomeCategory, listener: OnClickListener) {
+        fun bind(homeCategory: Category, listener: OnClickListener) {
             with(binding) {
                 item = homeCategory
                 clickListener = listener
@@ -54,8 +54,8 @@ class HomeAdapter(
     }
 
     class HomeCategoryDiffUtilCallback(
-        private val old: List<HomeCategory>,
-        private val new: List<HomeCategory>
+        private val old: List<Category>,
+        private val new: List<Category>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
