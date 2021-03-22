@@ -15,6 +15,7 @@ import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.HomeCategory
 import com.beomjo.whitenoise.ui.adapters.CategoryListAdapter
 import com.beomjo.whitenoise.ui.category.CategoryListViewModel
+import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 
@@ -53,7 +54,7 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
             adapter = CategoryListAdapter(object :
                 CategoryListAdapter.CategoryItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: Category) {
-
+                    PlayerActivity.startActivity(view.context)
                 }
             })
             homeCategory = homeCategoryMeta

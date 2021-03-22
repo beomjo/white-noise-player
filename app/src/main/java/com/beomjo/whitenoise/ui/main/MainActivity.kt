@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityMainBinding
+import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyExitMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getComponent
@@ -33,7 +34,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     private fun bindingViewModel() {
         binding {
             viewmodel = mainViewModel
+            activity = this@MainActivity
             manager = playerManager
         }
+    }
+
+    fun moveToPlayerActivity() {
+        PlayerActivity.startActivity(this)
     }
 }

@@ -21,6 +21,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
+        android:onClick="@{(v)->clickListener.onItemClick(v,item)}"
         app:cardCornerRadius="15dp"
         app:cardElevation="1.5dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,17 +35,17 @@
                 android:id="@+id/play_icon"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
+                android:layout_marginStart="15dp"
                 android:src="@drawable/ic_play_circle_outline_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="15dp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginStart="10dp"
+                android:gravity="center"
                 android:text="@{item.title}"
                 android:textColor="@color/black"
                 android:textSize="20sp"

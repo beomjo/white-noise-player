@@ -6,6 +6,7 @@ import com.beomjo.whitenoise.di.category.CategoryComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
 import com.beomjo.whitenoise.di.main.HomeComponent
 import com.beomjo.whitenoise.di.main.MainComponent
+import com.beomjo.whitenoise.di.player.PlayerComponent
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import dagger.BindsInstance
 import dagger.Component
@@ -29,6 +30,8 @@ interface AppComponent {
     fun homeComponent(): HomeComponent.Factory
 
     fun categoryComponent(): CategoryComponent.Factory
+
+    fun playerComponent(): PlayerComponent.Factory
 
     fun playerManager(): PlayerManager
 }

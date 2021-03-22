@@ -8,6 +8,10 @@
             type="com.beomjo.whitenoise.ui.main.MainViewModel" />
 
         <variable
+            name="activity"
+            type="com.beomjo.whitenoise.ui.main.MainActivity" />
+
+        <variable
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
     </data>
@@ -34,6 +38,7 @@
             android:id="@+id/player_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{(v)->activity.moveToPlayerActivity()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
