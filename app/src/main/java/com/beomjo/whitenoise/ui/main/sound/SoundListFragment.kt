@@ -68,20 +68,13 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
     }
 
     private fun moveToPlayerActivity(item: Sound) {
-        if (isVisiblePlayerManager()) {
-            val activity = requireActivity()
-            PlayerActivity.startActivity(
-                context = activity,
-                startView = activity.findViewById(R.id.player_container_layout),
-                sound = item,
-            )
-        } else {
-            PlayerActivity.startActivity(context = activity, sound = item)
-        }
+        val activity = requireActivity()
+        PlayerActivity.startActivity(
+            context = activity,
+            startView = activity.findViewById(R.id.player_container_layout),
+            sound = item,
+        )
     }
-
-    private fun isVisiblePlayerManager(): Boolean =
-        requireActivity().findViewById<ConstraintLayout>(R.id.player_container_layout).visibility == View.VISIBLE
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

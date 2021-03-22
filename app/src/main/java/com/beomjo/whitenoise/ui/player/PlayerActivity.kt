@@ -74,17 +74,5 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
                 activity.startActivity(intent, options.toBundle())
             }
         }
-
-        fun startActivity(
-            context: Context?,
-            sound: Sound,
-        ) {
-            context?.let {
-                val intent = Intent(context, PlayerActivity::class.java).apply {
-                    putExtra(KEY_PLAYER_SOUND, sound)
-                }
-                it.startActivity(intent)
-            }
-        }
     }
 }
