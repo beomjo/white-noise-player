@@ -15,13 +15,18 @@ import com.beomjo.whitenoise.model.Sound
 import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.SoundListAdapter
 import com.beomjo.whitenoise.ui.player.PlayerActivity
+import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import javax.inject.Inject
 
 class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
     R.layout.fragment_sound_list,
     SoundListViewModel::class
 ) {
+
+    @Inject
+    lateinit var playerManager: PlayerManager
 
     override val viewModelProvideOwner: ViewModelStoreOwner get() = this
 
@@ -53,12 +58,26 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
             adapter = SoundListAdapter(object :
                 SoundListAdapter.SoundItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: Sound) {
-                    PlayerActivity.startActivity(view.context, item)
+                    moveToPlayerActivity(item)
                 }
             })
             homeCategory = category
             viewmodel = categoryListViewModel.apply { loadCategoryList(category.path) }
         }.root
+    }
+
+    private fun moveToPlayerActivity(item: Sound) {
+
+        if (playerManager.hasData.value == true) {
+            val activity = requireActivity()
+            PlayerActivity.startActivity(
+                context = activity,
+                startView = activity.findViewById(R.id.player_container_layout),
+                sound = item,
+            )
+        } else {
+            PlayerActivity.startActivity(context = activity, sound = item)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

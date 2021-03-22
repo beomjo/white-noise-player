@@ -44,7 +44,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     private fun observePlayer() {
         with(playerManager) {
             moveToPlayerActivity.observe(this@MainActivity) { sound ->
-                PlayerActivity.startActivity(this@MainActivity, sound)
+                PlayerActivity.startActivity(
+                    context = this@MainActivity,
+                    startView = binding.root.findViewById(R.id.player_container_layout),
+                    sound = sound,
+                )
             }
         }
     }

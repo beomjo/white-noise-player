@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:transitionName="PLAYER_TRANSITION"
         android:background="@{manager.sound.backgroundColor}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
