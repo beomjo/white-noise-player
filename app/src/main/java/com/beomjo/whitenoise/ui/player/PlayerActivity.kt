@@ -50,6 +50,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     private fun bindingViewModel() {
         binding {
             manager = playerManager.apply { setSound(this@PlayerActivity.sound) }
+            activity = this@PlayerActivity
         }
     }
 

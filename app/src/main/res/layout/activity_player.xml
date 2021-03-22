@@ -9,17 +9,32 @@
         <variable
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
+
+        <variable
+            name="activity"
+            type="com.beomjo.whitenoise.ui.player.PlayerActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{manager.sound.backgroundColor}"
         android:transitionName="PLAYER_TRANSITION"
-        android:background="@{manager.sound.backgroundColor}">
+        tools:background="@android:color/holo_blue_bright">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/shrink_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
+                android:onClick="@{(v)->activity.onBackPressed()}"
+                android:src="@drawable/ic_arrow_down_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="wrap_content"
