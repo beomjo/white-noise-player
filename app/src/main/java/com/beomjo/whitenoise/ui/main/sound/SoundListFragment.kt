@@ -7,6 +7,7 @@ import android.transition.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
@@ -67,8 +68,7 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
     }
 
     private fun moveToPlayerActivity(item: Sound) {
-
-        if (playerManager.hasData.value == true) {
+        if (isVisiblePlayerManager()) {
             val activity = requireActivity()
             PlayerActivity.startActivity(
                 context = activity,
@@ -79,6 +79,9 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
             PlayerActivity.startActivity(context = activity, sound = item)
         }
     }
+
+    private fun isVisiblePlayerManager(): Boolean =
+        requireActivity().findViewById<ConstraintLayout>(R.id.player_container_layout).visibility == View.VISIBLE
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
