@@ -32,8 +32,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     }
 
     companion object {
-        fun startActivity(context: Context) {
-            val intent = Intent(context, PlayerActivity::class.java)
+        fun startActivity(context: Context, intent: Intent) {
             context.startActivity(intent)
         }
     }

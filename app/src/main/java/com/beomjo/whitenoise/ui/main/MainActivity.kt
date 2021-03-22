@@ -28,18 +28,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         applyExitMaterialTransform()
         super.onCreate(savedInstanceState)
         bindingViewModel()
+        observePlayer()
     }
 
 
     private fun bindingViewModel() {
         binding {
+            lifecycleOwner = this@MainActivity
             viewmodel = mainViewModel
             activity = this@MainActivity
             manager = playerManager
         }
     }
 
-    fun moveToPlayerActivity() {
-        PlayerActivity.startActivity(this)
+    private fun observePlayer() {
+        with(playerManager) {
+            moveToPlayerActivity.observe(this@MainActivity) { intent ->
+                PlayerActivity.startActivity(this@MainActivity, intent)
+            }
+        }
     }
 }

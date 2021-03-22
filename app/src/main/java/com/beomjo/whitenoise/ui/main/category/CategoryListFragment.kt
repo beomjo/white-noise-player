@@ -54,7 +54,6 @@ class CategoryListFragment : BaseFragment<FragmentCategoryListBinding>(
             adapter = CategoryListAdapter(object :
                 CategoryListAdapter.CategoryItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: Category) {
-                    PlayerActivity.startActivity(view.context)
                 }
             })
             homeCategory = homeCategoryMeta
