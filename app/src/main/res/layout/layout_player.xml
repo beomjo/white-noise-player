@@ -65,7 +65,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget"
+                android:text="@{manager.hasData ? manager.track.introduce : @string/no_sound_track}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:isSelected="@{manager.hasData &amp;&amp; manager.isPlaying}"
@@ -73,7 +73,8 @@
                 app:layout_constraintEnd_toStartOf="@id/play_and_pause_button"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/player_status_layout"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget" />
 
 
             <com.beomjo.whitenoise.ui.custom.PlayPauseAnimationView

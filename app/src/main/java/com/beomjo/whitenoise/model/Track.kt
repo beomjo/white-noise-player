@@ -19,4 +19,8 @@ data class Track(
     fun getMixedBackgroundColor(): Int {
         return ColorMixer.evaluate(colorPrimary.parseColor(), "#66000000".parseColor())
     }
+
+    fun getIntroduce(): String {
+        return "$title - $desc"
+    }
 }
