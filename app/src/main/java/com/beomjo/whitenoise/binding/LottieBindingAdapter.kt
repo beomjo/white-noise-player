@@ -3,39 +3,48 @@ package com.beomjo.whitenoise.binding
 import android.os.Handler
 import androidx.annotation.RawRes
 import androidx.databinding.BindingAdapter
+import androidx.transition.Transition
 import com.airbnb.lottie.LottieAnimationView
 
 object LottieBindingAdapter {
+
     @JvmStatic
-    @BindingAdapter(value = ["loadJson", "isPlay"], requireAll = false)
+    @BindingAdapter("loadJson")
     fun bindLottieAnimationFromJson(
         lottieView: LottieAnimationView,
         jsonString: String?,
-        isPlay: Boolean = true,
     ) {
         jsonString?.let {
             with(lottieView) {
                 setAnimationFromJson(jsonString, null)
-                if (isPlay) {
-                    Handler().postDelayed({ playAnimation() }, 600)
-                }
             }
         }
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["loadRes", "isPlay"], requireAll = false)
+    @BindingAdapter("isPlay")
+    fun bindLotteAnimationState(
+        lottieView: LottieAnimationView,
+        isPlay: Boolean = true,
+    ) {
+        with(lottieView) {
+            if (isPlay) {
+                Handler().postDelayed({ playAnimation() }, 550L)
+            } else {
+                pauseAnimation()
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("loadRes")
     fun bindLottieAnimationFromRes(
         lottieView: LottieAnimationView,
         @RawRes res: Int?,
-        isPlay: Boolean = true,
     ) {
         res?.let {
             with(lottieView) {
                 setAnimation(res)
-                if (isPlay) {
-                    Handler().postDelayed({ playAnimation() }, 600)
-                }
             }
         }
     }
