@@ -4,46 +4,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.beomjo.whitenoise.databinding.ItemSoundBinding
-import com.beomjo.whitenoise.model.Sound
+import com.beomjo.whitenoise.databinding.ItemTrackBinding
+import com.beomjo.whitenoise.model.Track
 import com.skydoves.bindables.BindingRecyclerViewAdapter
 
-class SoundListAdapter(
-    private val clickListener: SoundItemViewHolder.OnClickListener
-) : BindingRecyclerViewAdapter<SoundListAdapter.SoundItemViewHolder>() {
+class TrackListAdapter(
+    private val clickListener: TrackItemViewHolder.OnClickListener
+) : BindingRecyclerViewAdapter<TrackListAdapter.TrackItemViewHolder>() {
 
-    private val items = mutableListOf<Sound>()
+    private val items = mutableListOf<Track>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackItemViewHolder {
         val binding =
-            ItemSoundBinding.inflate(
+            ItemTrackBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-        return SoundItemViewHolder(binding)
+        return TrackItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SoundItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrackItemViewHolder, position: Int) {
         holder.bind(items[position], clickListener)
         holder.binding.executePendingBindings()
     }
 
     override fun getItemCount(): Int = items.size
 
-    fun addItems(items: List<Sound>) {
+    fun addItems(items: List<Track>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 
-    class SoundItemViewHolder(val binding: ItemSoundBinding) :
+    class TrackItemViewHolder(val binding: ItemTrackBinding) :
         RecyclerView.ViewHolder(binding.root) {
         interface OnClickListener {
-            fun onItemClick(view: View, item: Sound)
+            fun onItemClick(view: View, item: Track)
         }
 
-        fun bind(item: Sound, clickListener: OnClickListener) {
+        fun bind(item: Track, clickListener: OnClickListener) {
             binding.item = item
             binding.clickListener = clickListener
         }

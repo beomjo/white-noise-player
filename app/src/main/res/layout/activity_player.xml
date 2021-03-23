@@ -20,7 +20,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@{manager.sound.mixedBackgroundColor}"
+        android:background="@{manager.track.mixedBackgroundColor}"
         android:transitionName="PLAYER_TRANSITION"
         tools:background="@android:color/holo_blue_bright">
 

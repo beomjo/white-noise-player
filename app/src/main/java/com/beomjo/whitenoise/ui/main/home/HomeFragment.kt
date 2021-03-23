@@ -11,7 +11,7 @@ import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
 import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
-import com.beomjo.whitenoise.ui.main.sound.SoundListFragment
+import com.beomjo.whitenoise.ui.main.track.TrackListFragment
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -38,11 +38,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             homeVM = homeViewModel.apply { init() }
             adapter = HomeAdapter(object : HomeAdapter.HomeCategoryItemViewHolder.OnClickListener {
                 override fun onItemClick(view: View, item: Category) {
-                    val soundListFragment = SoundListFragment.newInstance(item)
                     parentFragmentManager.beginTransaction()
                         .setReorderingAllowed(true)
                         .addSharedElement(view, item.id.toString())
-                        .replace(R.id.fragment_container_layout, soundListFragment)
+                        .replace(
+                            R.id.fragment_container_layout,
+                            TrackListFragment.newInstance(item)
+                        )
                         .addToBackStack(null)
                         .commit()
                 }

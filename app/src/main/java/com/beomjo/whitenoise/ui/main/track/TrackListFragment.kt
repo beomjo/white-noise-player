@@ -1,4 +1,4 @@
-package com.beomjo.whitenoise.ui.main.sound
+package com.beomjo.whitenoise.ui.main.track
 
 import android.graphics.Color
 import android.os.Build
@@ -7,23 +7,22 @@ import android.transition.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
-import com.beomjo.whitenoise.databinding.FragmentSoundListBinding
-import com.beomjo.whitenoise.model.Sound
+import com.beomjo.whitenoise.databinding.FragmentTrackListBinding
+import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.model.Category
-import com.beomjo.whitenoise.ui.adapters.SoundListAdapter
+import com.beomjo.whitenoise.ui.adapters.TrackListAdapter
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 import javax.inject.Inject
 
-class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
-    R.layout.fragment_sound_list,
-    SoundListViewModel::class
+class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
+    R.layout.fragment_track_list,
+    TrackListViewModel::class
 ) {
 
     @Inject
@@ -31,12 +30,12 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
 
     override val viewModelProvideOwner: ViewModelStoreOwner get() = this
 
-    private val categoryListViewModel: SoundListViewModel by getViewModel()
+    private val trackListViewModel: TrackListViewModel by getViewModel()
 
     private val category: Category by lazy { arguments?.getParcelable(KEY_HOME_CATEGORY)!! }
 
     override fun inject() {
-        getApplicationComponent().soundListComponent().create().inject(this)
+        getApplicationComponent().trackListComponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,24 +54,24 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
-            fragment = this@SoundListFragment
-            adapter = SoundListAdapter(object :
-                SoundListAdapter.SoundItemViewHolder.OnClickListener {
-                override fun onItemClick(view: View, item: Sound) {
+            fragment = this@TrackListFragment
+            adapter = TrackListAdapter(object :
+                TrackListAdapter.TrackItemViewHolder.OnClickListener {
+                override fun onItemClick(view: View, item: Track) {
                     moveToPlayerActivity(item)
                 }
             })
             homeCategory = category
-            viewmodel = categoryListViewModel.apply { loadCategoryList(category.path) }
+            viewmodel = trackListViewModel.apply { loadTrackList(category.path) }
         }.root
     }
 
-    private fun moveToPlayerActivity(item: Sound) {
+    private fun moveToPlayerActivity(item: Track) {
         val activity = requireActivity()
         PlayerActivity.startActivity(
             context = activity,
             startView = activity.findViewById(R.id.player_container_layout),
-            sound = item,
+            track = item,
         )
     }
 
@@ -89,8 +88,8 @@ class SoundListFragment : BaseFragment<FragmentSoundListBinding>(
     companion object {
         private const val KEY_HOME_CATEGORY = "HOME_CATEGORY"
 
-        fun newInstance(category: Category): SoundListFragment {
-            return SoundListFragment().apply {
+        fun newInstance(category: Category): TrackListFragment {
+            return TrackListFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(KEY_HOME_CATEGORY, category)
                 }

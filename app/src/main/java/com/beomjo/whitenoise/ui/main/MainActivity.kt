@@ -47,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 PlayerActivity.startActivity(
                     context = this@MainActivity,
                     startView = binding.root.findViewById(R.id.player_container_layout),
-                    sound = sound,
+                    track = sound,
                 )
             }
         }

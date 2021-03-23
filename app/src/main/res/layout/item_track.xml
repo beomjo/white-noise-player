@@ -7,11 +7,11 @@
 
         <variable
             name="item"
-            type="com.beomjo.whitenoise.model.Sound" />
+            type="com.beomjo.whitenoise.model.Track" />
 
         <variable
             name="clickListener"
-            type="com.beomjo.whitenoise.ui.adapters.SoundListAdapter.SoundItemViewHolder.OnClickListener" />
+            type="com.beomjo.whitenoise.ui.adapters.TrackListAdapter.TrackItemViewHolder.OnClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

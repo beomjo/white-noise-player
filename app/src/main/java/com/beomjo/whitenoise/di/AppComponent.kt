@@ -2,7 +2,7 @@ package com.beomjo.whitenoise.di
 
 import android.content.Context
 import com.beomjo.whitenoise.di.auth.AuthComponent
-import com.beomjo.whitenoise.di.sound.SoundListComponent
+import com.beomjo.whitenoise.di.track.TrackListComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
 import com.beomjo.whitenoise.di.main.HomeComponent
 import com.beomjo.whitenoise.di.main.MainComponent
@@ -29,7 +29,7 @@ interface AppComponent {
 
     fun homeComponent(): HomeComponent.Factory
 
-    fun soundListComponent(): SoundListComponent.Factory
+    fun trackListComponent(): TrackListComponent.Factory
 
     fun playerComponent(): PlayerComponent.Factory
 

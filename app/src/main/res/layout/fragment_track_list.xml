@@ -11,15 +11,15 @@
 
         <variable
             name="fragment"
-            type="com.beomjo.whitenoise.ui.main.sound.SoundListFragment" />
+            type="com.beomjo.whitenoise.ui.main.track.TrackListFragment" />
 
         <variable
             name="adapter"
-            type="com.beomjo.whitenoise.ui.adapters.SoundListAdapter" />
+            type="com.beomjo.whitenoise.ui.adapters.TrackListAdapter" />
 
         <variable
             name="viewmodel"
-            type="com.beomjo.whitenoise.ui.main.sound.SoundListViewModel" />
+            type="com.beomjo.whitenoise.ui.main.track.TrackListViewModel" />
 
     </data>
 
@@ -94,9 +94,9 @@
                 android:layout_height="match_parent"
                 android:paddingTop="10dp"
                 app:adapter="@{adapter}"
-                app:adapterSoundList="@{viewmodel.sounds}"
+                app:adapterTrackList="@{viewmodel.tracks}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_sound" />
+                tools:listitem="@layout/item_track" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

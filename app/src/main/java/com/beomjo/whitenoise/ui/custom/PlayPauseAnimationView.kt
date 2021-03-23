@@ -6,9 +6,9 @@ import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.beomjo.whitenoise.R
-import com.beomjo.whitenoise.ui.player.SoundPause
-import com.beomjo.whitenoise.ui.player.SoundPlaying
-import com.beomjo.whitenoise.ui.player.SoundState
+import com.beomjo.whitenoise.ui.player.TrackPause
+import com.beomjo.whitenoise.ui.player.TrackPlaying
+import com.beomjo.whitenoise.ui.player.TrackState
 
 
 class PlayPauseAnimationView : AppCompatImageView {
@@ -36,13 +36,13 @@ class PlayPauseAnimationView : AppCompatImageView {
         pauseToPlay = AnimatedVectorDrawableCompat.create(context, R.drawable.pause_to_play)
     }
 
-    fun setState(state: SoundState) {
+    fun setState(state: TrackState) {
         when (state) {
-            SoundPlaying -> {
+            TrackPlaying -> {
                 this.setImageDrawable(playToPauseAnim)
                 playToPauseAnim?.start()
             }
-            SoundPause -> {
+            TrackPause -> {
                 this.setImageDrawable(pauseToPlay)
                 pauseToPlay?.start()
             }

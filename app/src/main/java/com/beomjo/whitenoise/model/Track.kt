@@ -6,7 +6,7 @@ import com.beomjo.whitenoise.utilities.ext.parseColor
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Sound(
+data class Track(
     val title: String = "",
     val subTitle: String = "",
     val colorPrimary: String = "",

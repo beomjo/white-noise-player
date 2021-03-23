@@ -13,7 +13,7 @@ import android.view.Window
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityPlayerBinding
-import com.beomjo.whitenoise.model.Sound
+import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getComponent
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     @Inject
     lateinit var playerManager: PlayerManager
 
-    private val sound: Sound by lazy { intent.getParcelableExtra(KEY_PLAYER_SOUND)!! }
+    private val track: Track by lazy { intent.getParcelableExtra(KEY_PLAYER_TRACK)!! }
 
     override fun inject() {
         application.getComponent().playerComponent().create().inject(this)
@@ -34,7 +34,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     override fun onStart() {
         super.onStart()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            setStatusBarColor(sound.getMixedBackgroundColor())
+            setStatusBarColor(track.getMixedBackgroundColor())
         } else {
             setStatusBarColor(Color.WHITE)
         }
@@ -49,19 +49,19 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
 
     private fun bindingViewModel() {
         binding {
-            manager = playerManager.apply { setSound(this@PlayerActivity.sound) }
+            manager = playerManager.apply { setTrack(this@PlayerActivity.track) }
             activity = this@PlayerActivity
         }
     }
 
     companion object {
         private const val TRANSITION_NAME = "PLAYER_TRANSITION"
-        private const val KEY_PLAYER_SOUND = "KEY_PLAYER_SOUND"
+        private const val KEY_PLAYER_TRACK = "KEY_PLAYER_TRACK"
 
         fun startActivity(
             context: Context?,
             startView: View,
-            sound: Sound,
+            track: Track,
         ) {
             context?.let {
                 val activity = it as Activity
@@ -70,7 +70,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
                     Pair(startView, TRANSITION_NAME),
                 )
                 val intent = Intent(context, PlayerActivity::class.java).apply {
-                    putExtra(KEY_PLAYER_SOUND, sound)
+                    putExtra(KEY_PLAYER_TRACK, track)
                 }
                 activity.startActivity(intent, options.toBundle())
             }

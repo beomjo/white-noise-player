@@ -45,16 +45,16 @@
                 <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:background="@{manager.sound.backgroundColor}"
+                    app:background="@{manager.track.backgroundColor}"
                     app:hasData="@{manager.hasData &amp;&amp; manager.isPlaying}"
                     app:isPlay="@{manager.hasData &amp;&amp; manager.isPlaying}"
-                    app:loadRes="@{R.raw.sound_playing}"
+                    app:loadRes="@{R.raw.track_playing}"
                     app:lottie_loop="true" />
 
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/sound_description_text"
+                android:id="@+id/track_description_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -85,7 +85,7 @@
                 android:visibility="@{manager.hasData ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/sound_description_text"
+                app:layout_constraintStart_toEndOf="@id/track_description_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setState="@{manager.state}"
                 app:srcCompat="@drawable/play_to_pause" />
