@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="com.beomjo.whitenoise.R" />
+
         <variable
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
@@ -39,25 +41,25 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:isPlay="@{true}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/pulse_effect" />
+                app:loadRes="@{R.raw.pulse_effect}"
+                app:lottie_loop="true" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                app:isPlay="@{true}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/cd" />
+                app:loadRes="@{R.raw.cd}"
+                app:lottie_loop="true" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/play_and_stop_button"
