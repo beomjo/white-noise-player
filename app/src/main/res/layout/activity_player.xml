@@ -26,7 +26,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="25dp"
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/shrink_button"
@@ -61,11 +63,36 @@
                 app:loadRes="@{R.raw.cd}"
                 app:lottie_loop="true" />
 
+            <TextView
+                android:id="@+id/track_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@{manager.track.title}"
+                android:textColor="@color/white"
+                android:textSize="34sp"
+                app:layout_constraintBottom_toTopOf="@id/track_desc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="title" />
+
+            <TextView
+                android:id="@+id/track_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@{manager.track.subTitle}"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@id/play_and_pause_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="desc" />
+
             <com.beomjo.whitenoise.ui.custom.PlayPauseAnimationView
                 android:id="@+id/play_and_pause_button"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="70dp"
                 android:onClick="@{()->manager.onPlayOrPause()}"
                 app:layout_constraintBottom_toBottomOf="parent"
