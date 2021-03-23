@@ -2,8 +2,8 @@ package com.beomjo.whitenoise.di
 
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.auth.AuthRepositoryImpl
-import com.beomjo.whitenoise.repositories.category.TrackListRepository
-import com.beomjo.whitenoise.repositories.category.TrackListRepositoryImpl
+import com.beomjo.whitenoise.repositories.track.TrackListRepository
+import com.beomjo.whitenoise.repositories.track.TrackListRepositoryImpl
 import com.beomjo.whitenoise.repositories.home.HomeRepository
 import com.beomjo.whitenoise.repositories.home.HomeRepositoryImpl
 import dagger.Binds

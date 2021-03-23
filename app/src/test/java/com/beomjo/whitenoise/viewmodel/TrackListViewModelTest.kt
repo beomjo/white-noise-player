@@ -3,7 +3,7 @@ package com.beomjo.whitenoise.viewmodel
 import androidx.lifecycle.Observer
 import com.beomjo.whitenoise.BaseTest
 import com.beomjo.whitenoise.model.Track
-import com.beomjo.whitenoise.repositories.category.TrackListRepository
+import com.beomjo.whitenoise.repositories.track.TrackListRepository
 import com.beomjo.whitenoise.ui.main.track.TrackListViewModel
 import io.mockk.*
 import io.mockk.impl.annotations.MockK

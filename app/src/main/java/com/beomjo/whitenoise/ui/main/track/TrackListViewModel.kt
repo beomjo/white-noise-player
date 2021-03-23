@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.model.Track
-import com.beomjo.whitenoise.repositories.category.TrackListRepository
+import com.beomjo.whitenoise.repositories.track.TrackListRepository
 import javax.inject.Inject
 
 class TrackListViewModel @Inject constructor(

@@ -1,4 +1,4 @@
-package com.beomjo.whitenoise.repositories.category
+package com.beomjo.whitenoise.repositories.track
 
 import com.beomjo.whitenoise.model.Track
 
