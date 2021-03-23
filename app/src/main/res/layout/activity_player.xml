@@ -97,13 +97,13 @@
                 android:id="@+id/repeat_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:onClick="@{(v)->manager.onPerformLoop()}"
                 android:src="@drawable/selector_repeat_button"
                 app:isSelected="@{manager.isLoop}"
                 app:layout_constraintBottom_toBottomOf="@id/play_and_pause_button"
                 app:layout_constraintEnd_toStartOf="@id/play_and_pause_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/play_and_pause_button" />
+                app:layout_constraintTop_toTopOf="@id/play_and_pause_button"
+                app:onClickWithAnimation="@{()->manager.onPerformLoop()}" />
 
             <com.beomjo.whitenoise.ui.custom.PlayPauseAnimationView
                 android:id="@+id/play_and_pause_button"
