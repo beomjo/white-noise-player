@@ -1,6 +1,7 @@
 package com.beomjo.whitenoise.di
 
 import android.content.Context
+import android.media.MediaPlayer
 import com.beomjo.whitenoise.di.auth.AuthComponent
 import com.beomjo.whitenoise.di.track.TrackListComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
@@ -13,7 +14,15 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [FirebaseModule::class, ViewModelFactoryModule::class, ViewModelModule::class, RepositoryModule::class])
+@Component(
+    modules = [
+        FirebaseModule::class,
+        ViewModelFactoryModule::class,
+        ViewModelModule::class,
+        RepositoryModule::class,
+        MediaPlayerModule::class,
+    ]
+)
 interface AppComponent {
 
     @Component.Factory
@@ -34,4 +43,6 @@ interface AppComponent {
     fun playerComponent(): PlayerComponent.Factory
 
     fun playerManager(): PlayerManager
+
+    fun mediaPlayer(): MediaPlayer
 }

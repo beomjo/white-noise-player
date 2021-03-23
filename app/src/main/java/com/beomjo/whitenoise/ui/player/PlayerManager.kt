@@ -1,5 +1,6 @@
 package com.beomjo.whitenoise.ui.player
 
+import android.media.MediaPlayer
 import android.net.Uri
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
@@ -8,12 +9,14 @@ import androidx.lifecycle.Transformations
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import kotlinx.coroutines.*
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PlayerManager @Inject constructor(
-    private val playerRepository: PlayerRepository
+    private val playerRepository: PlayerRepository,
+    private val mediaPlayer: MediaPlayer,
 ) : BaseObservable() {
 
     val playerScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
