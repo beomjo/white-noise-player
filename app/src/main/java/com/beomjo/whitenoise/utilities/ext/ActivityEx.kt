@@ -28,7 +28,7 @@ fun AppCompatActivity.applyMaterialTransform(rootView: View, transitionName: Str
 private fun getContentTransform(rootView: View): MaterialContainerTransform {
     return MaterialContainerTransform().apply {
         addTarget(rootView)
-        duration = 450
+        duration = 400
         pathMotion = MaterialArcMotion()
         isElevationShadowEnabled = true
         startElevation = 9f

@@ -27,7 +27,7 @@ private fun getMaterialTransitionSet(): TransitionSet {
 
 private fun getContentTransform(): MaterialContainerTransform {
     return MaterialContainerTransform().apply {
-        duration = 450
+        duration = 400
         pathMotion = MaterialArcMotion()
         isElevationShadowEnabled = true
         startElevation = 9f
