@@ -29,9 +29,6 @@ class PlayerManager @Inject constructor(
     private val _track = MutableLiveData<Track?>()
     val track: LiveData<Track?> get() = _track
 
-    private val _trackSoundUri = MutableLiveData<Uri>()
-    val trackSoundUri: LiveData<Uri> get() = _trackSoundUri
-
     val hasData: LiveData<Boolean> = Transformations.map(_track) { it != null }
 
     private val _isLoop = MutableLiveData<Boolean>().apply { value = true }
@@ -50,11 +47,18 @@ class PlayerManager @Inject constructor(
         try {
             playerScope.launch {
                 val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
-                _trackSoundUri.value = uri
+                mediaPlayer.reset()
+                setDataSource(uri)
+                mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
+                mediaPlayer.prepareAsync()
             }
         } catch (e: Exception) {
 
         }
+    }
+
+    private suspend fun setDataSource(uri: Uri) = withContext(Dispatchers.IO) {
+        mediaPlayer.setDataSource(uri.toString())
     }
 
     fun onPlayOrPause() {
