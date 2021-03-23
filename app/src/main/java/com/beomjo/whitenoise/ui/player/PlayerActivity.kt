@@ -34,7 +34,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     override fun onStart() {
         super.onStart()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            setStatusBarColor(sound.getBackgroundColor())
+            setStatusBarColor(sound.getMixedBackgroundColor())
         } else {
             setStatusBarColor(Color.WHITE)
         }

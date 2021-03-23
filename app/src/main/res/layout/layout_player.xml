@@ -7,6 +7,10 @@
 
         <import type="android.view.View" />
 
+        <import type="com.beomjo.whitenoise.utilities.ext.StringExKt" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
         <variable
             name="manager"
             type="com.beomjo.whitenoise.ui.player.PlayerManager" />
@@ -41,7 +45,8 @@
                 <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/holo_purple"
+                    app:background="@{manager.sound.backgroundColor}"
+                    app:hasData="@{manager.hasData}"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/sound_playing" />
