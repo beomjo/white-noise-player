@@ -15,6 +15,8 @@ class PlayerManager @Inject constructor() : BaseObservable() {
     private val _state = MutableLiveData<SoundState>().apply { value = SoundPause }
     val state: LiveData<SoundState> get() = _state
 
+    val isPlaying: LiveData<Boolean> = Transformations.map(_state) { it is SoundPlaying }
+
     private val _sound = MutableLiveData<Sound?>()
     val sound: LiveData<Sound?> get() = _sound
 
@@ -30,7 +32,6 @@ class PlayerManager @Inject constructor() : BaseObservable() {
     fun onPlayOrPause() {
         _state.value = if (_state.value is SoundPlaying) SoundPause else SoundPlaying
     }
-
 
     fun onExpand() {
         if (hasData.value == true) {

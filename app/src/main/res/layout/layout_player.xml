@@ -46,8 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:background="@{manager.sound.backgroundColor}"
-                    app:hasData="@{manager.hasData}"
-                    app:isPlay="@{manager.hasData}"
+                    app:hasData="@{manager.hasData &amp;&amp; manager.isPlaying}"
+                    app:isPlay="@{manager.hasData &amp;&amp; manager.isPlaying}"
                     app:loadRes="@{R.raw.sound_playing}"
                     app:lottie_loop="true" />
 
@@ -68,7 +68,7 @@
                 android:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:isSelected="@{manager.hasData}"
+                app:isSelected="@{manager.hasData &amp;&amp; manager.isPlaying}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/play_and_pause_button"
                 app:layout_constraintHorizontal_weight="1"
