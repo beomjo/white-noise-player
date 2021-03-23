@@ -21,6 +21,9 @@ class PlayerManager @Inject constructor() : BaseObservable() {
 
     val hasData: LiveData<Boolean> = Transformations.map(_track) { it != null }
 
+    private val _isLoop = MutableLiveData<Boolean>().apply { value = true }
+    val isLoop: LiveData<Boolean> get() = _isLoop
+
     private val _moveToPlayerActivity = MutableLiveData<Track>()
     val moveToPlayerActivity: LiveData<Track> get() = _moveToPlayerActivity
 
@@ -37,6 +40,10 @@ class PlayerManager @Inject constructor() : BaseObservable() {
         if (hasData.value == true) {
             _moveToPlayerActivity.value = track.value
         }
+    }
+
+    fun onPerformLoop() {
+        _isLoop.value = !(isLoop.value ?: true)
     }
 }
 
