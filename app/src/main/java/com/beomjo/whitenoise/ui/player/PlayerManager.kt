@@ -26,6 +26,7 @@ class PlayerManager @Inject constructor() : BaseObservable() {
 
     fun setTrack(track: Track) {
         _track.value = track
+        _state.value = TrackPlaying
     }
 
     fun onPlayOrPause() {
