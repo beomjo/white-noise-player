@@ -5,11 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.beomjo.whitenoise.model.Track
+import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PlayerManager @Inject constructor() : BaseObservable() {
+class PlayerManager @Inject constructor(
+    private val playerRepository: PlayerRepository
+) : BaseObservable() {
 
     private val _state = MutableLiveData<TrackState>().apply { value = TrackPause }
     val state: LiveData<TrackState> get() = _state
