@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Track(
     val title: String = "",
-    val subTitle: String = "",
+    val desc: String = "",
     val colorPrimary: String = "",
 ) : Parcelable {
 
