@@ -4,6 +4,7 @@ import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import com.beomjo.whitenoise.model.Sound
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -11,16 +12,14 @@ import javax.inject.Singleton
 @Singleton
 class PlayerManager @Inject constructor() : BaseObservable() {
 
-    private val _state = MutableLiveData<SoundState>()
+    private val _state = MutableLiveData<SoundState>().apply { value = SoundPause }
     val state: LiveData<SoundState> get() = _state
 
     private val _sound = MutableLiveData<Sound?>()
     val sound: LiveData<Sound?> get() = _sound
 
-    val hasData: LiveData<Boolean>
-        get() = Transformations.map(sound) {
-            it != null
-        }
+    val hasData: LiveData<Boolean> get() = Transformations.map(sound) { it != null }
+
 
     private val _moveToPlayerActivity = MutableLiveData<Sound>()
     val moveToPlayerActivity: LiveData<Sound> get() = _moveToPlayerActivity
@@ -29,12 +28,8 @@ class PlayerManager @Inject constructor() : BaseObservable() {
         _sound.value = sound
     }
 
-    fun onPlay() {
-
-    }
-
-    fun onStop() {
-
+    fun onPlayOrPause() {
+        _state.value = if (_state.value is SoundPlaying) SoundPause else SoundPlaying
     }
 
     fun onClose() {
@@ -42,7 +37,9 @@ class PlayerManager @Inject constructor() : BaseObservable() {
     }
 
     fun onExpand() {
-        _moveToPlayerActivity.value = sound.value
+        if (hasData.value == true) {
+            _moveToPlayerActivity.value = sound.value
+        }
     }
 }
 
