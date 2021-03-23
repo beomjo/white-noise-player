@@ -24,7 +24,6 @@
             android:onClick="@{(v)->manager.onExpand()}"
             android:padding="15dp"
             android:transitionName="PLAYER_TRANSITION"
-            android:visibility="@{manager.hasData ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
