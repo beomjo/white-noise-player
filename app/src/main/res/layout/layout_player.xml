@@ -83,21 +83,12 @@
                 android:layout_marginEnd="10dp"
                 android:onClick="@{()->manager.onPlayOrPause()}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/expand_button"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/sound_description_text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:setState="@{manager.state}"
                 app:srcCompat="@drawable/play_to_pause" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/expand_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="@{(v)->manager.onClose()}"
-                android:src="@drawable/ic_close_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
