@@ -10,6 +10,7 @@ data class Track(
     val title: String = "",
     val desc: String = "",
     val colorPrimary: String = "",
+    val storagePath: String = "",
 ) : Parcelable {
 
     fun getBackgroundColor(): Int {
