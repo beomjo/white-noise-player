@@ -62,7 +62,13 @@ class PlayerManager @Inject constructor(
     }
 
     fun onPlayOrPause() {
-        _state.value = if (_state.value is TrackPlaying) TrackPause else TrackPlaying
+        if (_state.value is TrackPlaying) {
+            mediaPlayer.pause()
+            _state.value = TrackPause
+        } else {
+            mediaPlayer.start()
+            _state.value = TrackPlaying
+        }
     }
 
     fun onExpand() {
