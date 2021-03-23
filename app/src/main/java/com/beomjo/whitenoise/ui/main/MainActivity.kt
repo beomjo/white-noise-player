@@ -48,6 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                     context = this@MainActivity,
                     startView = binding.root.findViewById(R.id.player_container_layout),
                     track = sound,
+                    isClickBottomPlayer = true,
                 )
             }
         }

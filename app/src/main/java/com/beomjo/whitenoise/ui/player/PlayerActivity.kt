@@ -26,6 +26,8 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     lateinit var playerManager: PlayerManager
 
     private val track: Track by lazy { intent.getParcelableExtra(KEY_PLAYER_TRACK)!! }
+    private val isEnterFromBottomPlayer: Boolean
+            by lazy { intent.getBooleanExtra(KEY_BOTTOM_PLAYER_CLICK, false) }
 
     override fun inject() {
         application.getComponent().playerComponent().create().inject(this)
@@ -45,23 +47,34 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
         applyMaterialTransform(binding.root, TRANSITION_NAME)
         super.onCreate(savedInstanceState)
         bindingViewModel()
+        initPlayer()
     }
 
     private fun bindingViewModel() {
         binding {
-            manager = playerManager.apply { setTrack(this@PlayerActivity.track) }
+            manager = playerManager
             activity = this@PlayerActivity
+        }
+    }
+
+    private fun initPlayer() {
+        with(playerManager) {
+            if (!isEnterFromBottomPlayer) {
+                setTrack(this@PlayerActivity.track)
+            }
         }
     }
 
     companion object {
         private const val TRANSITION_NAME = "PLAYER_TRANSITION"
         private const val KEY_PLAYER_TRACK = "KEY_PLAYER_TRACK"
+        private const val KEY_BOTTOM_PLAYER_CLICK = "KEY_BOTTOM_PLAYER_CLICK"
 
         fun startActivity(
             context: Context?,
             startView: View,
             track: Track,
+            isClickBottomPlayer: Boolean = false,
         ) {
             context?.let {
                 val activity = it as Activity
@@ -71,6 +84,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
                 )
                 val intent = Intent(context, PlayerActivity::class.java).apply {
                     putExtra(KEY_PLAYER_TRACK, track)
+                    putExtra(KEY_BOTTOM_PLAYER_CLICK, isClickBottomPlayer)
                 }
                 activity.startActivity(intent, options.toBundle())
             }
