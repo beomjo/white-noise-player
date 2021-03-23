@@ -61,16 +61,18 @@
                 app:loadRes="@{R.raw.cd}"
                 app:lottie_loop="true" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/play_and_stop_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <com.beomjo.whitenoise.ui.custom.PlayPauseAnimationView
+                android:id="@+id/play_and_pause_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="70dp"
-                android:src="@drawable/ic_pause_white"
+                android:onClick="@{()->manager.onPlayOrPause()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:setState="@{manager.state}"
+                app:srcCompat="@drawable/play_to_pause" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
