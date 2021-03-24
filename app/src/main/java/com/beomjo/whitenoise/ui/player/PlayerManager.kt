@@ -48,8 +48,16 @@ class PlayerManager @Inject constructor(
             playerScope.launch {
                 val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
                 mediaPlayer.reset()
+
                 setDataSource(uri)
                 mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
+                mediaPlayer.setOnCompletionListener {
+                    if (isLoop.value == true) {
+                        mediaPlayer.start()
+                    } else {
+                        _state.value = TrackPause
+                    }
+                }
                 mediaPlayer.prepareAsync()
             }
         } catch (e: Exception) {
