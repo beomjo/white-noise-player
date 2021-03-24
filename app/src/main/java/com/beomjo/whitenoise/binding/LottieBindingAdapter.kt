@@ -29,7 +29,7 @@ object LottieBindingAdapter {
     ) {
         with(lottieView) {
             if (isPlay) {
-                Handler().postDelayed({ playAnimation() }, 550L)
+                Handler().postDelayed({ playAnimation() }, 600L)
             } else {
                 pauseAnimation()
             }
