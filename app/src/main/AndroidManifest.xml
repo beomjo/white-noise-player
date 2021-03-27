@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.beomjo.whitenoise">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".WhiteNoiseApp"
         android:allowBackup="true"
@@ -19,8 +21,9 @@
         </activity>
         <activity android:name=".ui.auth.LoginActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.player.PlayerActivity" />
+
+        <service android:name=".ui.player.PlayerService" />
     </application>
 
 </manifest>

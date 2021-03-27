@@ -9,7 +9,6 @@ import androidx.lifecycle.Transformations
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import kotlinx.coroutines.*
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -48,7 +47,6 @@ class PlayerManager @Inject constructor(
             playerScope.launch {
                 val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
                 mediaPlayer.reset()
-
                 setDataSource(uri)
                 mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
                 mediaPlayer.setOnCompletionListener {

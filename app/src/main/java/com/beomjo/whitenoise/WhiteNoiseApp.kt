@@ -1,6 +1,7 @@
 package com.beomjo.whitenoise
 
 import android.app.Application
+import android.app.NotificationManager
 import com.beomjo.compilation.util.LogUtil
 import com.beomjo.whitenoise.common.WhiteNoseConfig
 import com.beomjo.whitenoise.di.AppComponent
@@ -14,5 +15,6 @@ open class WhiteNoiseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         LogUtil.init(WhiteNoseConfig())
+        com.beomjo.whitenoise.ui.player.NotificationManager.createNotificationChannel(this)
     }
 }

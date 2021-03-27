@@ -53,6 +53,8 @@ dependencies {
 
     implementation "com.github.skydoves:bindables:1.0.5"
 
+    implementation 'androidx.media:media:1.2.1'
+
     testImplementation deps.test.arch.core
     testImplementation deps.test.androidx_test_core
     testImplementation deps.test.coroutine_test
