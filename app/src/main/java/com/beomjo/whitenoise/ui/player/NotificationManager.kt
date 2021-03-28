@@ -2,16 +2,22 @@ package com.beomjo.whitenoise.ui.player
 
 import android.app.Notification
 import android.app.NotificationChannel
-import android.app.NotificationManager as SystemNotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.media.session.MediaSession
+import android.graphics.BitmapFactory
+import android.media.MediaMetadata
 import android.os.Build
+import android.support.v4.media.MediaMetadataCompat
+import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.media.session.MediaButtonReceiver
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.model.PlayerActions
+import android.app.NotificationManager as SystemNotificationManager
+
 
 object NotificationManager {
 
@@ -45,15 +51,37 @@ object NotificationManager {
                 0,
             )
 
-        val mediaSession = MediaSession(context, "White Noise Player")
+        val mediaSession = MediaSessionCompat(context, "White Noise Player").apply {
+            setMetadata(
+                MediaMetadataCompat.Builder()
+                    .putString(MediaMetadata.METADATA_KEY_TITLE, "hello")
+                    .putString(MediaMetadata.METADATA_KEY_ARTIST, "world")
+                    .build()
+            )
+        }
+        val icon =
+            BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher_background)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
+            .setLargeIcon(icon)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .addAction(
                 NotificationCompat.Action(
-                    R.drawable.pause_to_play,
+                    R.drawable.ic_arrow_back_white,
                     "",
                     playPendingInt,
                 )
+            )
+            .setStyle(
+                androidx.media.app.NotificationCompat.MediaStyle()
+                    .setShowActionsInCompactView(0)
+                    .setShowCancelButton(true)
+                    .setMediaSession(mediaSession.sessionToken)
+                    .setCancelButtonIntent(
+                        MediaButtonReceiver.buildMediaButtonPendingIntent(
+                            context, PlaybackStateCompat.ACTION_STOP
+                        )
+                    )
             )
             .setOngoing(true)
             .setContentTitle("White Noise Player")
@@ -74,7 +102,7 @@ object NotificationManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "White Noise Player"
             val descriptionText = "fafafawklfjl"
-            val importance = android.app.NotificationManager.IMPORTANCE_HIGH
+            val importance = android.app.NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
