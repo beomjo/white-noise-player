@@ -43,6 +43,13 @@ class PlayerService : MediaBrowserServiceCompat() {
                     )
                     startForegroundService(createNotification(PlayerAction.PAUSE, track))
                 }
+                mediaPlayer.setOnCompletionListener {
+                    if (isLooping()) {
+                        this@PlayerService.onPlay()
+                    } else {
+                        this@PlayerService.onPause()
+                    }
+                }
                 mediaPlayer.prepareAsync()
             }
         }
@@ -50,6 +57,9 @@ class PlayerService : MediaBrowserServiceCompat() {
         private suspend fun setDataSource(uri: Uri) = withContext(Dispatchers.IO) {
             mediaPlayer.setDataSource(uri.toString())
         }
+
+        private fun isLooping(): Boolean =
+            PlaybackStateCompat.REPEAT_MODE_ONE == mediaSession?.controller?.repeatMode
 
         override fun onPlay() {
             this@PlayerService.onPlay()
@@ -65,7 +75,7 @@ class PlayerService : MediaBrowserServiceCompat() {
 
         override fun onSetRepeatMode(repeatMode: Int) {
             super.onSetRepeatMode(repeatMode)
-            mediaPlayer.isLooping = PlaybackStateCompat.REPEAT_MODE_NONE != repeatMode
+            mediaSession?.setRepeatMode(repeatMode)
         }
     }
 
@@ -102,7 +112,7 @@ class PlayerService : MediaBrowserServiceCompat() {
     private fun updatePlaybackState(state: Int, action: Long) {
         mediaSession?.setPlaybackState(
             PlaybackStateCompat.Builder()
-                .setState(state, mediaPlayer.currentPosition.toLong(), , 0.0f)
+                .setState(state, mediaPlayer.currentPosition.toLong(), 0.0f)
                 .setActions(action).build()
         )
     }

@@ -27,8 +27,7 @@ class PlayerManager @Inject constructor(
 
     val hasData: LiveData<Boolean> = Transformations.map(_track) { it != null }
 
-    private val _isLoop = MutableLiveData<Boolean>().apply { value = true }
-    val isLoop: LiveData<Boolean> get() = _isLoop
+    val isLoop: LiveData<Boolean> = Transformations.map(playerServiceConnection.isLoop) { it }
 
     private val _moveToPlayerActivity = MutableLiveData<Track>()
     val moveToPlayerActivity: LiveData<Track> get() = _moveToPlayerActivity
@@ -68,9 +67,7 @@ class PlayerManager @Inject constructor(
     }
 
     fun onPerformLoop() {
-        val isLoop = !(isLoop.value ?: true)
-        playerServiceConnection.setLoop(isLoop)
-        _isLoop.value = isLoop
+        playerServiceConnection.setLoop(!(isLoop.value ?: true))
     }
 
     // TODO 어디서 호출해야 할지 정해야함

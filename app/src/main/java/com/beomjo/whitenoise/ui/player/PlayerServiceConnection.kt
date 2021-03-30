@@ -8,7 +8,6 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.MutableLiveData
-import com.beomjo.compilation.util.LogUtil
 import com.beomjo.whitenoise.model.Track
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,6 +23,8 @@ class PlayerServiceConnection @Inject constructor(
 
     val playbackState = MutableLiveData<PlaybackStateCompat>()
         .apply { postValue(EMPTY_PLAYBACK_STATE) }
+
+    val isLoop = MutableLiveData<Boolean>().apply { postValue(true) }
 
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
 
@@ -54,6 +55,7 @@ class PlayerServiceConnection @Inject constructor(
                 putParcelable(PlayerService.KEY_PREPARE_TRACK, track)
             }
             mediaController.transportControls.prepareFromUri(trackDownloadUri, extra)
+            setLoop(isLoop.value ?: true)
         }
     }
 
@@ -102,8 +104,12 @@ class PlayerServiceConnection @Inject constructor(
 
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
             super.onPlaybackStateChanged(state)
-            LogUtil.d("onPlaybackStateChanged ${state}")
             playbackState.postValue(state ?: EMPTY_PLAYBACK_STATE)
+        }
+
+        override fun onRepeatModeChanged(repeatMode: Int) {
+            super.onRepeatModeChanged(repeatMode)
+            isLoop.postValue(repeatMode == PlaybackStateCompat.REPEAT_MODE_ONE)
         }
 
         override fun onSessionDestroyed() {
