@@ -1,21 +1,27 @@
 package com.beomjo.whitenoise.ui.player
 
-import android.media.MediaPlayer
-import android.net.Uri
+import android.support.v4.media.MediaBrowserCompat
+import android.support.v4.media.MediaMetadataCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
+import com.beomjo.compilation.util.LogUtil
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PlayerManager @Inject constructor(
     private val playerRepository: PlayerRepository,
-    private val mediaPlayer: MediaPlayer,
+    private val playerServiceConnection: PlayerServiceConnection
 ) : BaseObservable() {
 
     val playerScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -36,6 +42,11 @@ class PlayerManager @Inject constructor(
     private val _moveToPlayerActivity = MutableLiveData<Track>()
     val moveToPlayerActivity: LiveData<Track> get() = _moveToPlayerActivity
 
+    private val playbackStateObserver = Observer<PlaybackStateCompat> {
+        val playbackState = it ?: EMPTY_PLAYBACK_STATE
+        val metadata = playerServiceConnection.nowPlaying.value ?: NOTHING_PLAYING
+    }
+
     fun setTrack(track: Track) {
         _track.value = track
         _state.value = TrackPlaying
@@ -43,36 +54,46 @@ class PlayerManager @Inject constructor(
     }
 
     private fun loadTrack(track: Track) {
-        try {
-            playerScope.launch {
-                val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
-                mediaPlayer.reset()
-                setDataSource(uri)
-                mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
-                mediaPlayer.setOnCompletionListener {
-                    if (isLoop.value == true) {
-                        mediaPlayer.start()
-                    } else {
-                        _state.value = TrackPause
-                    }
+        playerServiceConnection.subscribe(
+            track.title,
+            object : MediaBrowserCompat.SubscriptionCallback() {
+                override fun onChildrenLoaded(
+                    parentId: String,
+                    children: List<MediaBrowserCompat.MediaItem>
+                ) {
+                    LogUtil.d("onChildrenLoaded")
                 }
-                mediaPlayer.prepareAsync()
-            }
-        } catch (e: Exception) {
-
-        }
+            })
+//        try {
+//            playerScope.launch {
+//                val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
+//                mediaPlayer.reset()
+//                setDataSource(uri)
+//                mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
+//                mediaPlayer.setOnCompletionListener {
+//                    if (isLoop.value == true) {
+//                        mediaPlayer.start()
+//                    } else {
+//                        _state.value = TrackPause
+//                    }
+//                }
+//                mediaPlayer.prepareAsync()
+//            }
+//        } catch (e: Exception) {
+//
+//        }
     }
 
-    private suspend fun setDataSource(uri: Uri) = withContext(Dispatchers.IO) {
-        mediaPlayer.setDataSource(uri.toString())
-    }
+//    private suspend fun setDataSource(uri: Uri) = withContext(Dispatchers.IO) {
+//        mediaPlayer.setDataSource(uri.toString())
+//    }
 
     fun onPlayOrPause() {
         if (_state.value is TrackPlaying) {
-            mediaPlayer.pause()
+//            mediaPlayer.pause()
             _state.value = TrackPause
         } else {
-            mediaPlayer.start()
+//            mediaPlayer.start()
             _state.value = TrackPlaying
         }
     }

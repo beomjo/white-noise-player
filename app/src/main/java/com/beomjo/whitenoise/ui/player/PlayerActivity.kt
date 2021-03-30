@@ -50,10 +50,6 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
         super.onCreate(savedInstanceState)
         bindingViewModel()
         initPlayer()
-
-        startService(Intent(this, PlayerService::class.java).apply {
-            action = PlayerActions.START_FOREGROUND.value
-        })
     }
 
     private fun bindingViewModel() {

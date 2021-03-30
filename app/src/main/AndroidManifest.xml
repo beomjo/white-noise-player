@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.beomjo.whitenoise">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -24,7 +25,15 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.player.PlayerActivity" />
 
-        <service android:name=".ui.player.PlayerService" />
+        <service
+            android:name=".ui.player.PlayerService"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
