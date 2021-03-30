@@ -37,7 +37,7 @@ class PlayerServiceConnection @Inject constructor(
     private lateinit var mediaController: MediaControllerCompat
 
     fun subscribe() {
-        mediaBrowser.subscribe("ff", object : MediaBrowserCompat.SubscriptionCallback() {
+        mediaBrowser.subscribe(PARENT_ID, object : MediaBrowserCompat.SubscriptionCallback() {
             override fun onChildrenLoaded(
                 parentId: String, children: List<MediaBrowserCompat.MediaItem>
             ) {
@@ -46,7 +46,7 @@ class PlayerServiceConnection @Inject constructor(
     }
 
     fun unsubscribe() {
-        mediaBrowser.unsubscribe("ff")
+        mediaBrowser.unsubscribe(PARENT_ID)
     }
 
     fun prepareAndPlay(trackDownloadUri: Uri, track: Track) {
@@ -77,6 +77,10 @@ class PlayerServiceConnection @Inject constructor(
         else
             PlaybackStateCompat.REPEAT_MODE_NONE
         mediaController.transportControls.setRepeatMode(repeatMode)
+    }
+
+    companion object {
+        private var PARENT_ID: String = this::class.java.simpleName
     }
 
     private inner class MediaBrowserConnectionCallback(private val context: Context) :
