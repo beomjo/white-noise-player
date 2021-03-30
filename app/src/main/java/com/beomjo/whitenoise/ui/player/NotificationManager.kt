@@ -65,7 +65,6 @@ object NotificationManager {
             context,
             0,
             Intent(context, PlayerActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 putExtra(PlayerActivity.KEY_PLAYER_TRACK, track)
                 putExtra(PlayerActivity.KEY_BOTTOM_PLAYER_CLICK, true)
             },

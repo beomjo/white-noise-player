@@ -23,7 +23,9 @@
         </activity>
         <activity android:name=".ui.auth.LoginActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.player.PlayerActivity" />
+        <activity
+            android:name=".ui.player.PlayerActivity"
+            android:launchMode="singleTop" />
 
         <service
             android:name=".ui.player.PlayerService"
