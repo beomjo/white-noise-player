@@ -37,14 +37,9 @@ class PlayerService : MediaBrowserServiceCompat() {
                 setDataSource(trackDownloadUri)
                 mediaPlayer.setOnPreparedListener {
                     mediaPlayer.start()
-                    mediaSession?.setPlaybackState(
-                        PlaybackStateCompat.Builder()
-                            .setState(
-                                PlaybackStateCompat.STATE_PLAYING,
-                                mediaPlayer.currentPosition.toLong(),
-                                0.0f
-                            )
-                            .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build()
+                    updatePlaybackState(
+                        PlaybackStateCompat.STATE_PLAYING,
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE
                     )
                     startForegroundService(createNotification(PlayerAction.PAUSE, track))
                 }
@@ -74,7 +69,6 @@ class PlayerService : MediaBrowserServiceCompat() {
         }
     }
 
-
     override fun onCreate() {
         super.onCreate()
         mediaSession = MediaSessionCompat(this, baseContext.getString(R.string.app_name)).apply {
@@ -86,39 +80,30 @@ class PlayerService : MediaBrowserServiceCompat() {
 
     private fun onPlay() {
         mediaPlayer.start()
-        mediaSession?.setPlaybackState(
-            PlaybackStateCompat.Builder()
-                .setState(
-                    PlaybackStateCompat.STATE_PLAYING,
-                    mediaPlayer.currentPosition.toLong(),
-                    0.0f
-                )
-                .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build()
+        updatePlaybackState(
+            PlaybackStateCompat.STATE_PLAYING,
+            PlaybackStateCompat.ACTION_PLAY_PAUSE
         )
         track?.let { startForegroundService(createNotification(PlayerAction.PAUSE, it)) }
     }
 
     private fun onPause() {
         mediaPlayer.pause()
-        mediaSession?.setPlaybackState(
-            PlaybackStateCompat.Builder()
-                .setState(
-                    PlaybackStateCompat.STATE_PAUSED,
-                    mediaPlayer.currentPosition.toLong(),
-                    0.0f
-                )
-                .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build()
-        )
+        updatePlaybackState(PlaybackStateCompat.STATE_PAUSED, PlaybackStateCompat.ACTION_PLAY_PAUSE)
         track?.let { startForegroundService(createNotification(PlayerAction.PLAY, it)) }
     }
 
     private fun onStop() {
         mediaPlayer.pause()
         stopForegroundService()
+        updatePlaybackState(PlaybackStateCompat.STATE_STOPPED, PlaybackStateCompat.ACTION_STOP)
+    }
+
+    private fun updatePlaybackState(state: Int, action: Long) {
         mediaSession?.setPlaybackState(
             PlaybackStateCompat.Builder()
-                .setState(PlaybackStateCompat.STATE_STOPPED, 0, 0.0f)
-                .setActions(PlaybackStateCompat.ACTION_STOP).build()
+                .setState(state, mediaPlayer.currentPosition.toLong(), , 0.0f)
+                .setActions(action).build()
         )
     }
 
