@@ -15,7 +15,6 @@ import com.beomjo.whitenoise.model.PlayerAction
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import kotlinx.coroutines.*
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 
@@ -43,6 +42,15 @@ class PlayerService : MediaBrowserServiceCompat() {
                 setDataSource(trackDownloadUri)
                 mediaPlayer.setOnPreparedListener {
                     mediaPlayer.start()
+                    mediaSession?.setPlaybackState(
+                        PlaybackStateCompat.Builder()
+                            .setState(
+                                PlaybackStateCompat.STATE_PLAYING,
+                                mediaPlayer.currentPosition.toLong(),
+                                0.0f
+                            )
+                            .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build()
+                    )
                     startForegroundService(createNotification(PlayerAction.PAUSE, track))
                 }
                 mediaPlayer.prepareAsync()
@@ -75,16 +83,58 @@ class PlayerService : MediaBrowserServiceCompat() {
     override fun onCreate() {
         super.onCreate()
         mediaSession = MediaSessionCompat(this, baseContext.getString(R.string.app_name)).apply {
-            setPlaybackState(
-                PlaybackStateCompat.Builder()
-                    .setActions(PlaybackStateCompat.ACTION_PLAY or PlaybackStateCompat.ACTION_PLAY_PAUSE)
-                    .build()
-            )
+//            setPlaybackState(
+//                PlaybackStateCompat.Builder()
+//                    .setActions(
+//                        PlaybackStateCompat.ACTION_PLAY
+//                                or PlaybackStateCompat.ACTION_PAUSE
+//                                or PlaybackStateCompat.ACTION_PLAY_PAUSE
+//                                or PlaybackStateCompat.ACTION_STOP
+//                    )
+//                    .build()
+//            )
 
             setCallback(callback)
             setSessionToken(sessionToken)
             isActive = true
         }
+    }
+
+    private fun onPlay() {
+        mediaPlayer.start()
+        mediaSession?.setPlaybackState(
+            PlaybackStateCompat.Builder()
+                .setState(
+                    PlaybackStateCompat.STATE_PLAYING,
+                    mediaPlayer.currentPosition.toLong(),
+                    0.0f
+                )
+                .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build()
+        )
+        track?.let { startForegroundService(createNotification(PlayerAction.PAUSE, it)) }
+    }
+
+    private fun onPause() {
+        mediaPlayer.pause()
+        mediaSession?.setPlaybackState(
+            PlaybackStateCompat.Builder()
+                .setState(
+                    PlaybackStateCompat.STATE_PAUSED,
+                    mediaPlayer.currentPosition.toLong(),
+                    0.0f
+                )
+                .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build()
+        )
+        track?.let { startForegroundService(createNotification(PlayerAction.PLAY, it)) }
+    }
+
+    private fun onStop() {
+        stopForegroundService()
+        mediaSession?.setPlaybackState(
+            PlaybackStateCompat.Builder()
+                .setState(PlaybackStateCompat.STATE_STOPPED, 0, 0.0f)
+                .setActions(PlaybackStateCompat.ACTION_STOP).build()
+        )
     }
 
     private fun createNotification(playerAction: PlayerAction, track: Track): Notification {
@@ -108,20 +158,6 @@ class PlayerService : MediaBrowserServiceCompat() {
     private fun stopForegroundService() {
         stopForeground(true)
         stopSelf()
-    }
-
-    private fun onPlay() {
-        mediaPlayer.start()
-        track?.let { startForegroundService(createNotification(PlayerAction.PAUSE, it)) }
-    }
-
-    private fun onPause() {
-        mediaPlayer.pause()
-        track?.let { startForegroundService(createNotification(PlayerAction.PLAY, it)) }
-    }
-
-    private fun onStop() {
-        stopForegroundService()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

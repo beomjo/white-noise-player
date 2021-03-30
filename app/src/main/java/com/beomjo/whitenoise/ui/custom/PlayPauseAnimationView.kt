@@ -36,16 +36,13 @@ class PlayPauseAnimationView : AppCompatImageView {
         pauseToPlay = AnimatedVectorDrawableCompat.create(context, R.drawable.pause_to_play)
     }
 
-    fun setState(state: TrackState) {
-        when (state) {
-            TrackPlaying -> {
-                this.setImageDrawable(playToPauseAnim)
-                playToPauseAnim?.start()
-            }
-            TrackPause -> {
-                this.setImageDrawable(pauseToPlay)
-                pauseToPlay?.start()
-            }
+    fun isPlaying(isPlaying: Boolean) {
+        if (isPlaying) {
+            this.setImageDrawable(playToPauseAnim)
+            playToPauseAnim?.start()
+        } else {
+            this.setImageDrawable(pauseToPlay)
+            pauseToPlay?.start()
         }
     }
 }

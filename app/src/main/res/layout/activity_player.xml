@@ -111,10 +111,10 @@
                 android:layout_height="60dp"
                 android:layout_marginBottom="60dp"
                 android:onClick="@{()->manager.onPlayOrPause()}"
+                app:isPlaying="@{manager.isPlaying}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:setState="@{manager.state}"
                 app:srcCompat="@drawable/play_to_pause" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

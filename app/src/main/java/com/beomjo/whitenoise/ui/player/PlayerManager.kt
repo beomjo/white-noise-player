@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
+import com.beomjo.whitenoise.utilities.ext.isPlay
 import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,10 +19,8 @@ class PlayerManager @Inject constructor(
 
     val playerScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    private val _state = MutableLiveData<TrackState>().apply { value = TrackPause }
-    val state: LiveData<TrackState> get() = _state
-
-    val isPlaying: LiveData<Boolean> = Transformations.map(_state) { it is TrackPlaying }
+    val isPlaying: LiveData<Boolean> =
+        Transformations.map(playerServiceConnection.playbackState) { it.isPlay }
 
     private val _track = MutableLiveData<Track?>()
     val track: LiveData<Track?> get() = _track
@@ -40,7 +39,6 @@ class PlayerManager @Inject constructor(
 
     fun setTrack(track: Track) {
         _track.value = track
-        _state.value = TrackPlaying
         loadTrack(track)
     }
 
@@ -56,12 +54,10 @@ class PlayerManager @Inject constructor(
     }
 
     fun onPlayOrPause() {
-        if (_state.value is TrackPlaying) {
+        if (isPlaying.value == true) {
             playerServiceConnection.pause()
-            _state.value = TrackPause
         } else {
             playerServiceConnection.play()
-            _state.value = TrackPlaying
         }
     }
 
