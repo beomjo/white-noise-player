@@ -66,8 +66,8 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
 
     companion object {
         private const val TRANSITION_NAME = "PLAYER_TRANSITION"
-        private const val KEY_PLAYER_TRACK = "KEY_PLAYER_TRACK"
-        private const val KEY_BOTTOM_PLAYER_CLICK = "KEY_BOTTOM_PLAYER_CLICK"
+        const val KEY_PLAYER_TRACK = "KEY_PLAYER_TRACK"
+        const val KEY_BOTTOM_PLAYER_CLICK = "KEY_BOTTOM_PLAYER_CLICK"
 
         fun startActivity(
             context: Context?,
