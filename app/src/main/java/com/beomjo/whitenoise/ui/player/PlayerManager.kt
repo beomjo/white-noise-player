@@ -1,20 +1,12 @@
 package com.beomjo.whitenoise.ui.player
 
-import android.support.v4.media.MediaBrowserCompat
-import android.support.v4.media.MediaMetadataCompat
-import android.support.v4.media.session.PlaybackStateCompat
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
-import com.beomjo.compilation.util.LogUtil
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -42,9 +34,8 @@ class PlayerManager @Inject constructor(
     private val _moveToPlayerActivity = MutableLiveData<Track>()
     val moveToPlayerActivity: LiveData<Track> get() = _moveToPlayerActivity
 
-    private val playbackStateObserver = Observer<PlaybackStateCompat> {
-        val playbackState = it ?: EMPTY_PLAYBACK_STATE
-        val metadata = playerServiceConnection.nowPlaying.value ?: NOTHING_PLAYING
+    init {
+        playerServiceConnection.subscribe()
     }
 
     fun setTrack(track: Track) {
@@ -54,46 +45,22 @@ class PlayerManager @Inject constructor(
     }
 
     private fun loadTrack(track: Track) {
-        playerServiceConnection.subscribe(
-            track.title,
-            object : MediaBrowserCompat.SubscriptionCallback() {
-                override fun onChildrenLoaded(
-                    parentId: String,
-                    children: List<MediaBrowserCompat.MediaItem>
-                ) {
-                    LogUtil.d("onChildrenLoaded")
-                }
-            })
-//        try {
-//            playerScope.launch {
-//                val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
-//                mediaPlayer.reset()
-//                setDataSource(uri)
-//                mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
-//                mediaPlayer.setOnCompletionListener {
-//                    if (isLoop.value == true) {
-//                        mediaPlayer.start()
-//                    } else {
-//                        _state.value = TrackPause
-//                    }
-//                }
-//                mediaPlayer.prepareAsync()
-//            }
-//        } catch (e: Exception) {
-//
-//        }
-    }
+        try {
+            playerScope.launch {
+                val uri = playerRepository.getTrackDownloadUrl(track.storagePath)
+                playerServiceConnection.prepareAndPlay(uri, track)
+            }
+        } catch (e: Exception) {
 
-//    private suspend fun setDataSource(uri: Uri) = withContext(Dispatchers.IO) {
-//        mediaPlayer.setDataSource(uri.toString())
-//    }
+        }
+    }
 
     fun onPlayOrPause() {
         if (_state.value is TrackPlaying) {
-//            mediaPlayer.pause()
+            playerServiceConnection.pause()
             _state.value = TrackPause
         } else {
-//            mediaPlayer.start()
+            playerServiceConnection.play()
             _state.value = TrackPlaying
         }
     }
@@ -105,11 +72,14 @@ class PlayerManager @Inject constructor(
     }
 
     fun onPerformLoop() {
-        _isLoop.value = !(isLoop.value ?: true)
+        val isLoop = !(isLoop.value ?: true)
+        playerServiceConnection.setLoop(isLoop)
+        _isLoop.value = isLoop
     }
 
     // TODO 어디서 호출해야 할지 정해야함
     fun onCleared() {
+        playerServiceConnection.unsubscribe()
         playerScope.cancel()
     }
 }

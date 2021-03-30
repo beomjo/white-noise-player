@@ -2,9 +2,8 @@ package com.beomjo.whitenoise.ui.player
 
 import android.content.ComponentName
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.ResultReceiver
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
@@ -12,6 +11,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.MutableLiveData
 import com.beomjo.compilation.util.LogUtil
+import com.beomjo.whitenoise.model.Track
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,17 +40,47 @@ class PlayerServiceConnection @Inject constructor(
 
     private lateinit var mediaController: MediaControllerCompat
 
-    fun subscribe(parentId: String, callback: MediaBrowserCompat.SubscriptionCallback) {
+    fun subscribe() {
         LogUtil.d("subscribe")
-        mediaBrowser.subscribe(parentId, callback)
+        mediaBrowser.subscribe("ff", object : MediaBrowserCompat.SubscriptionCallback() {
+            override fun onChildrenLoaded(
+                parentId: String, children: List<MediaBrowserCompat.MediaItem>
+            ) {
+            }
+        })
     }
 
-    fun unsubscribe(parentId: String, callback: MediaBrowserCompat.SubscriptionCallback) {
-        mediaBrowser.unsubscribe(parentId, callback)
+    fun unsubscribe() {
+        mediaBrowser.unsubscribe("ff")
     }
 
-    fun play(){
+    fun prepareAndPlay(trackDownloadUri: Uri, track: Track) {
+        if (mediaBrowser.isConnected) {
+            val extra = Bundle().apply {
+                putParcelable(PlayerService.KEY_PREPARE_TRACK, track)
+            }
+            mediaController.transportControls.prepareFromUri(trackDownloadUri, extra)
+        }
+    }
 
+    fun pause() {
+        if (mediaBrowser.isConnected) {
+            mediaController.transportControls.pause()
+        }
+    }
+
+    fun play() {
+        if (mediaBrowser.isConnected) {
+            mediaController.transportControls.play()
+        }
+    }
+
+    fun setLoop(value: Boolean) {
+        val repeatMode = if (value)
+            PlaybackStateCompat.REPEAT_MODE_ONE
+        else
+            PlaybackStateCompat.REPEAT_MODE_NONE
+        mediaController.transportControls.setRepeatMode(repeatMode)
     }
 
     private inner class MediaBrowserConnectionCallback(private val context: Context) :
@@ -59,7 +89,6 @@ class PlayerServiceConnection @Inject constructor(
             mediaController = MediaControllerCompat(context, mediaBrowser.sessionToken).apply {
                 registerCallback(MediaControllerCallback())
             }
-
             isConnected.postValue(true)
             LogUtil.d("onConnected")
         }

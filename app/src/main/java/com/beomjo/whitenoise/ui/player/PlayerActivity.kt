@@ -4,17 +4,14 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.util.Pair
 import android.view.View
 import android.view.Window
-import android.media.session.MediaSession
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityPlayerBinding
-import com.beomjo.whitenoise.model.PlayerActions
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getComponent

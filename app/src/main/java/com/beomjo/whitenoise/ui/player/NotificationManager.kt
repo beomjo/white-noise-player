@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.media.session.MediaButtonReceiver
 import com.beomjo.whitenoise.R
-import com.beomjo.whitenoise.model.PlayerActions
+import com.beomjo.whitenoise.model.Track
 import android.app.NotificationManager as SystemNotificationManager
 
 
@@ -23,7 +23,7 @@ object NotificationManager {
 
     private const val CHANNEL_ID: String = "WhiteNoisePlayer-Channel-ID"
 
-    fun createNotification(context: Context): Notification {
+    fun createNotification(context: Context, track: Track): Notification {
         val pendingIntent = PendingIntent.getActivity(
             context,
             0,
@@ -37,7 +37,6 @@ object NotificationManager {
             PendingIntent.getService(
                 context, 0,
                 Intent(context, PlayerService::class.java).apply {
-                    action = PlayerActions.PLAY.value
                 },
                 0,
             )
@@ -46,7 +45,6 @@ object NotificationManager {
             PendingIntent.getService(
                 context, 0,
                 Intent(context, PlayerService::class.java).apply {
-                    action = PlayerActions.PLAY.value
                 },
                 0,
             )
@@ -54,8 +52,8 @@ object NotificationManager {
         val mediaSession = MediaSessionCompat(context, "White Noise Player").apply {
             setMetadata(
                 MediaMetadataCompat.Builder()
-                    .putString(MediaMetadata.METADATA_KEY_TITLE, "hello")
-                    .putString(MediaMetadata.METADATA_KEY_ARTIST, "world")
+                    .putString(MediaMetadata.METADATA_KEY_TITLE, track.title)
+                    .putString(MediaMetadata.METADATA_KEY_ARTIST, track.desc)
                     .build()
             )
         }
@@ -63,7 +61,7 @@ object NotificationManager {
             BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher_background)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
-            .setLargeIcon(icon)
+//            .setLargeIcon(icon)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .addAction(
                 NotificationCompat.Action(
