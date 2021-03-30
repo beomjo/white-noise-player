@@ -3,7 +3,6 @@ package com.beomjo.whitenoise.binding
 import android.os.Handler
 import androidx.annotation.RawRes
 import androidx.databinding.BindingAdapter
-import androidx.transition.Transition
 import com.airbnb.lottie.LottieAnimationView
 
 object LottieBindingAdapter {

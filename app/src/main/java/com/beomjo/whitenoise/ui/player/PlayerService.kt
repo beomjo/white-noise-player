@@ -13,15 +13,10 @@ import androidx.media.MediaBrowserServiceCompat
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.model.PlayerAction
 import com.beomjo.whitenoise.model.Track
-import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import kotlinx.coroutines.*
-import javax.inject.Inject
 
 
 class PlayerService : MediaBrowserServiceCompat() {
-
-    @Inject
-    lateinit var playerRepository: PlayerRepository
 
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
@@ -83,17 +78,6 @@ class PlayerService : MediaBrowserServiceCompat() {
     override fun onCreate() {
         super.onCreate()
         mediaSession = MediaSessionCompat(this, baseContext.getString(R.string.app_name)).apply {
-//            setPlaybackState(
-//                PlaybackStateCompat.Builder()
-//                    .setActions(
-//                        PlaybackStateCompat.ACTION_PLAY
-//                                or PlaybackStateCompat.ACTION_PAUSE
-//                                or PlaybackStateCompat.ACTION_PLAY_PAUSE
-//                                or PlaybackStateCompat.ACTION_STOP
-//                    )
-//                    .build()
-//            )
-
             setCallback(callback)
             setSessionToken(sessionToken)
             isActive = true

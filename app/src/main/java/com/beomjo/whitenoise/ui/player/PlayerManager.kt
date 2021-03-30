@@ -79,7 +79,3 @@ class PlayerManager @Inject constructor(
         playerScope.cancel()
     }
 }
-
-sealed class TrackState
-object TrackPlaying : TrackState()
-object TrackPause : TrackState()

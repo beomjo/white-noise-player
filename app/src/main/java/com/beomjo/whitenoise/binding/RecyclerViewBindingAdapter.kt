@@ -2,10 +2,10 @@ package com.beomjo.whitenoise.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.model.Category
-import com.beomjo.whitenoise.ui.adapters.TrackListAdapter
+import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
+import com.beomjo.whitenoise.ui.adapters.TrackListAdapter
 
 object RecyclerViewBindingAdapter {
     @JvmStatic

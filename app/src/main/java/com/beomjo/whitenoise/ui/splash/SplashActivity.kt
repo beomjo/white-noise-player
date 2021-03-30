@@ -6,7 +6,6 @@ import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivitySplashBinding
 import com.beomjo.whitenoise.ui.auth.LoginActivity
-import com.beomjo.whitenoise.ui.auth.LoginViewModel
 import com.beomjo.whitenoise.ui.main.MainActivity
 import com.beomjo.whitenoise.utilities.ext.getComponent
 

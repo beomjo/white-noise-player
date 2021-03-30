@@ -3,11 +3,11 @@ package com.beomjo.whitenoise.di
 import android.content.Context
 import android.media.MediaPlayer
 import com.beomjo.whitenoise.di.auth.AuthComponent
-import com.beomjo.whitenoise.di.track.TrackListComponent
 import com.beomjo.whitenoise.di.common.CommonComponent
 import com.beomjo.whitenoise.di.main.HomeComponent
 import com.beomjo.whitenoise.di.main.MainComponent
 import com.beomjo.whitenoise.di.player.PlayerComponent
+import com.beomjo.whitenoise.di.track.TrackListComponent
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import dagger.BindsInstance
 import dagger.Component

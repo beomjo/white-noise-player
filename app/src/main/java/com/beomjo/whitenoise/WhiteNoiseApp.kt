@@ -1,7 +1,6 @@
 package com.beomjo.whitenoise
 
 import android.app.Application
-import android.app.NotificationManager
 import com.beomjo.compilation.util.LogUtil
 import com.beomjo.whitenoise.common.WhiteNoseConfig
 import com.beomjo.whitenoise.di.AppComponent

@@ -12,7 +12,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.skydoves.bindables.BindingDialogFragment
-import java.lang.IllegalStateException
 import javax.inject.Inject
 import kotlin.reflect.KClass
 

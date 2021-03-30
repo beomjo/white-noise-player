@@ -6,9 +6,6 @@ import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.beomjo.whitenoise.R
-import com.beomjo.whitenoise.ui.player.TrackPause
-import com.beomjo.whitenoise.ui.player.TrackPlaying
-import com.beomjo.whitenoise.ui.player.TrackState
 
 
 class PlayPauseAnimationView : AppCompatImageView {
