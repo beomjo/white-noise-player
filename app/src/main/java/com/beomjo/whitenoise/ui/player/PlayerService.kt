@@ -129,6 +129,7 @@ class PlayerService : MediaBrowserServiceCompat() {
     }
 
     private fun onStop() {
+        mediaPlayer.pause()
         stopForegroundService()
         mediaSession?.setPlaybackState(
             PlaybackStateCompat.Builder()
