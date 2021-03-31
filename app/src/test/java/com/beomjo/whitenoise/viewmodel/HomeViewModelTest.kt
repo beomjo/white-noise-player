@@ -128,4 +128,21 @@ class HomeViewModelTest : BaseTest() {
         verify { toastObserver.onChanged(eq(Event(errorMsg))) }
         verify { refreshObserver.onChanged(eq(false)) }
     }
+
+    @Test
+    fun `Refresh 하여 재로딩`() {
+        //given
+        justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
+        val refreshObserver = mockk<Observer<Boolean>> {
+            every { onChanged(true) } just Runs
+        }
+        viewModel.isRefreshing.observeForever(refreshObserver)
+
+        //when
+        viewModel.onRefresh()
+
+        //then
+        verify { refreshObserver.onChanged(eq(true)) }
+        verify { viewModel invokeNoArgs "loadHomeCategoryList" }
+    }
 }

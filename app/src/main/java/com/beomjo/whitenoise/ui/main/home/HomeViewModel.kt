@@ -39,5 +39,6 @@ class HomeViewModel @Inject constructor(
 
     fun onRefresh() {
         _isRefreshing.value = true
+        loadHomeCategoryList()
     }
 }
