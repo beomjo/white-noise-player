@@ -14,7 +14,7 @@ import org.mockito.junit.MockitoRule
 abstract class MockitoTest {
     @Before
     fun setup() {
-        MockKAnnotations.init(this)
+        MockKAnnotations.init(this, relaxUnitFun = true)
         onBefore()
     }
 

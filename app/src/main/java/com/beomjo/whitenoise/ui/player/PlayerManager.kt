@@ -19,20 +19,24 @@ class PlayerManager @Inject constructor(
 
     val playerScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    val isPlaying: LiveData<Boolean> =
+    private val _isPlaying: LiveData<Boolean> =
         Transformations.map(playerServiceConnection.playbackState) { it.isPlay }
+    val isPlaying: LiveData<Boolean> get() = _isPlaying
 
     private val _track = MutableLiveData<Track?>()
     val track: LiveData<Track?> get() = _track
 
-    val hasData: LiveData<Boolean> = Transformations.map(_track) { it != null }
+    private val _hasData: LiveData<Boolean> = Transformations.map(_track) { it != null }
+    val hasData: LiveData<Boolean> get() = _hasData
 
-    val isLoop: LiveData<Boolean> = Transformations.map(playerServiceConnection.isLoop) { it }
+    private val _isLoop: LiveData<Boolean> =
+        Transformations.map(playerServiceConnection.isLoop) { it }
+    val isLoop: LiveData<Boolean> get() = _isLoop
 
     private val _moveToPlayerActivity = MutableLiveData<Track>()
     val moveToPlayerActivity: LiveData<Track> get() = _moveToPlayerActivity
 
-    init {
+    fun init() {
         playerServiceConnection.subscribe()
     }
 

@@ -31,13 +31,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         observePlayer()
     }
 
-
     private fun bindingViewModel() {
         binding {
             lifecycleOwner = this@MainActivity
             viewmodel = mainViewModel
             activity = this@MainActivity
-            manager = playerManager
+            manager = playerManager.apply { init() }
         }
     }
 
@@ -52,5 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 )
             }
         }
+    }
+
+    override fun onDestroy() {
+        playerManager.onCleared()
+        super.onDestroy()
     }
 }
