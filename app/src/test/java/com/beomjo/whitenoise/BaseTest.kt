@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.Called
 import io.mockk.InternalPlatformDsl
 import io.mockk.MockKException
-import io.mockk.Runs
 import org.junit.Rule
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
