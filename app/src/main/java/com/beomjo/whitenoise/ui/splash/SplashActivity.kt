@@ -19,7 +19,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingViewModel()
-        viewModel.check()
+        viewModel.init()
     }
 
     override fun inject() {
