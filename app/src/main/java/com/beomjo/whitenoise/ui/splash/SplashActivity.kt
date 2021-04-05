@@ -40,7 +40,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
 
     private fun moveToLoginActivity() {
         finish()
-        startActivity(Intent(this, LoginActivity::class.java))
+        LoginActivity.startActivity(this)
     }
 
     private fun moveToMainActivity() {
