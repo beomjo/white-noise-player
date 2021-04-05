@@ -23,6 +23,9 @@ class HomeViewModel @Inject constructor(
     private val _isRefreshing = MutableLiveData<Boolean>()
     val isRefreshing: LiveData<Boolean> get() = _isRefreshing
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun init() {
         loadUserInfo()
         loadHomeCategoryList()
@@ -33,8 +36,13 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadHomeCategoryList() {
-        launch { _categories.value = homeRepository.getHomeCategoryList() }
-        _isRefreshing.value = false
+        launch {
+            _isLoading.value = true
+            _categories.value = homeRepository.getHomeCategoryList()
+            _isRefreshing.value = false
+            _isLoading.value = false
+        }
+
     }
 
     fun onRefresh() {

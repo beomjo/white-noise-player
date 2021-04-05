@@ -13,6 +13,7 @@ import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,
@@ -34,22 +35,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        return binding {
-            homeVM = homeViewModel.apply { init() }
-            adapter = HomeAdapter(object : HomeAdapter.HomeCategoryItemViewHolder.OnClickListener {
-                override fun onItemClick(view: View, item: Category) {
-                    parentFragmentManager.beginTransaction()
-                        .setReorderingAllowed(true)
-                        .addSharedElement(view, item.id.toString())
-                        .replace(
-                            R.id.fragment_container_layout,
-                            TrackListFragment.newInstance(item)
-                        )
-                        .addToBackStack(null)
-                        .commit()
-                }
-            })
-        }.root
+        return binding { bindingViewModel() }.root
+    }
+
+    private fun FragmentHomeBinding.bindingViewModel() {
+        homeVM = homeViewModel.apply { init() }
+        adapter = HomeAdapter(object : HomeAdapter.HomeCategoryItemViewHolder.OnClickListener {
+            override fun onItemClick(view: View, item: Category) {
+                parentFragmentManager.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .addSharedElement(view, item.id.toString())
+                    .replace(
+                        R.id.fragment_container_layout,
+                        TrackListFragment.newInstance(item)
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,4 +60,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
     }
+
 }
