@@ -1,5 +1,6 @@
 package com.beomjo.whitenoise.ui.main.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun inject() {
         getApplicationComponent().homeComponent().create().inject(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setStatusBarColor(Color.WHITE)
     }
 
     override fun onCreateView(
