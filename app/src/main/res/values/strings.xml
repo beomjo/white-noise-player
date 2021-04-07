@@ -7,4 +7,7 @@
     <string name="term_of_service">Term of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="contract_us">Contract Us</string>
+    <string name="developer_email">qjatjr1108@gmail.com</string>
+    <string name="email_subject">Questions about WhiteNoisePlayer</string>
+    <string name="error_not_fond_email_client">"No email clients installed."</string>
 </resources>

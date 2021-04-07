@@ -55,14 +55,17 @@
 
             <include
                 layout="@layout/item_setting"
+                android:onClick="@{(v)->fragment.onPerformContractUs()}"
                 app:text="@{@string/contract_us}" />
 
             <include
                 layout="@layout/item_setting"
+                android:onClick="@{(v)->fragment.onPerformTermOfService()}"
                 app:text="@{@string/term_of_service}" />
 
             <include
                 layout="@layout/item_setting"
+                android:onClick="@{(v)->fragment.onPerformPrivacyPolicy()}"
                 app:text="@{@string/privacy_policy}" />
 
         </LinearLayout>
