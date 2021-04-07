@@ -61,11 +61,13 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
     }
 
     fun onPerformTermOfService() {
-
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.notion.so/bsjo/Term-of-Service-a37ea19ae9e74d77bea5e1697f059cdc"))
+        startActivity(intent)
     }
 
     fun onPerformPrivacyPolicy() {
-
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.notion.so/bsjo/Privacy-Policy-561c2cebc1ca4413aba831ca4fe85fb3"))
+        startActivity(intent)
     }
 
     fun onBackPressed() {
