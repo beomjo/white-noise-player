@@ -44,20 +44,34 @@
                     android:paddingStart="20dp"
                     android:paddingTop="30dp"
                     android:paddingEnd="20dp"
-                    android:paddingBottom="30dp">
+                    android:paddingBottom="15dp">
 
                     <TextView
                         android:id="@+id/user_nickname"
-                        android:layout_width="300dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="30dp"
                         android:text="@{homeVM.user.getDisplayNickname()}"
                         android:textColor="@color/black"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/setting_button"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="nickname" />
+                        tools:text="falfkjwalkffalfkjwalkffalfkjwalkf" />
+
+                    <ImageView
+                        android:id="@+id/setting_button"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_event_note_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/user_nickname"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
