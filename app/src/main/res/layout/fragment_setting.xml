@@ -9,9 +9,10 @@
             type="com.beomjo.whitenoise.ui.main.setting.SettingFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -31,8 +32,8 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:layout_margin="10dp"
                         android:onClick="@{(v)->fragment.onBackPressed()}"
                         android:src="@drawable/ic_arrow_back_black"
@@ -44,5 +45,26 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_01"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <include
+                layout="@layout/item_setting"
+                app:text="@{@string/contract_us}" />
+
+            <include
+                layout="@layout/item_setting"
+                app:text="@{@string/term_of_service}" />
+
+            <include
+                layout="@layout/item_setting"
+                app:text="@{@string/privacy_policy}" />
+
+        </LinearLayout>
+    </LinearLayout>
 </layout>

@@ -4,4 +4,7 @@
     <string name="user_anonymous">Anonymous</string>
     <string name="no_sound_track">No Sound Track</string>
     <string name="google_sign_in_button">Sign in with Google</string>
+    <string name="term_of_service">Term of Service</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="contract_us">Contract Us</string>
 </resources>
