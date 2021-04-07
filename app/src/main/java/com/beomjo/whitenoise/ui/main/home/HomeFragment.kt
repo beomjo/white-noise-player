@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
+import androidx.fragment.app.commit
+import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
 import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
+import com.beomjo.whitenoise.ui.main.setting.SettingFragment
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -46,17 +49,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     private fun FragmentHomeBinding.bindingViewModel() {
         homeVM = homeViewModel.apply { init() }
+        fragment = this@HomeFragment
         adapter = HomeAdapter(object : HomeAdapter.HomeCategoryItemViewHolder.OnClickListener {
             override fun onItemClick(view: View, item: Category) {
-                parentFragmentManager.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .addSharedElement(view, item.id.toString())
-                    .replace(
+                parentFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    addSharedElement(view, item.id.toString())
+                    replace(
                         R.id.fragment_container_layout,
                         TrackListFragment.newInstance(item)
                     )
-                    .addToBackStack(null)
-                    .commit()
+                    addToBackStack(null)
+                }
             }
         })
     }
@@ -65,6 +69,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
+    }
+
+    fun moveToSettingFragment() {
+        parentFragmentManager.commit {
+            replace(
+                R.id.fragment_container_layout,
+                SettingFragment.newInstance()
+            )
+            addToBackStack(null)
+        }
     }
 
 }

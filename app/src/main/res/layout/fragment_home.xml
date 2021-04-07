@@ -12,6 +12,10 @@
             type="com.beomjo.whitenoise.ui.main.home.HomeViewModel" />
 
         <variable
+            name="fragment"
+            type="com.beomjo.whitenoise.ui.main.home.HomeFragment" />
+
+        <variable
             name="adapter"
             type="com.beomjo.whitenoise.ui.adapters.HomeAdapter" />
     </data>
@@ -67,6 +71,7 @@
                         android:id="@+id/setting_button"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:onClick="@{(v)->fragment.moveToSettingFragment()}"
                         android:src="@drawable/ic_event_note_black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
