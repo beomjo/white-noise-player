@@ -10,16 +10,11 @@ data class Category(
     val name: String = "",
     val iconUrl: String = "",
     val colorPrimary: String = "",
-    val colorSecondary: String = "",
     val backgroundAnimationJson: String = "",
     val path: String = "",
 ) : Parcelable {
 
     fun getPrimaryColor(): Int {
         return colorPrimary.parseColor()
-    }
-
-    fun getSecondaryColor(): Int {
-        return colorSecondary.parseColor()
     }
 }
