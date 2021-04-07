@@ -48,7 +48,7 @@
 
                     <TextView
                         android:id="@+id/user_nickname"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:text="@{homeVM.user.getDisplayNickname()}"
                         android:textColor="@color/black"
