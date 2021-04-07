@@ -94,14 +94,23 @@ class HomeViewModelTest : BaseTest() {
         val refreshObserver = mockk<Observer<Boolean>> {
             every { onChanged(false) } just Runs
         }
+        val loadingObserver = mockk<Observer<Boolean>> {
+            every { onChanged(true) } just Runs
+            every { onChanged(false) } just Runs
+        }
         viewModel.isRefreshing.observeForever(refreshObserver)
+        viewModel.isLoading.observeForever(loadingObserver)
 
         //when
         viewModel invokeNoArgs "loadHomeCategoryList"
 
         //then
-        coVerify { homeRepository.getHomeCategoryList() }
-        verify { refreshObserver.onChanged(eq(false)) }
+        coVerifyOrder {
+            loadingObserver.onChanged(true)
+            homeRepository.getHomeCategoryList()
+            refreshObserver.onChanged(eq(false))
+            loadingObserver.onChanged(false)
+        }
     }
 
     @Test
@@ -114,19 +123,26 @@ class HomeViewModelTest : BaseTest() {
         val refreshObserver = mockk<Observer<Boolean>> {
             every { onChanged(false) } just Runs
         }
+        val loadingObserver = mockk<Observer<Boolean>> {
+            every { onChanged(true) } just Runs
+            every { onChanged(false) } just Runs
+        }
         val toastObserver = mockk<Observer<Event<String>>> {
             every { onChanged(Event(errorMsg)) } just Runs
         }
         viewModel.isRefreshing.observeForever(refreshObserver)
         viewModel.toast.observeForever(toastObserver)
+        viewModel.isLoading.observeForever(loadingObserver)
 
         //when
         viewModel invokeNoArgs "loadHomeCategoryList"
 
         //then
-        coVerifyOrder { homeRepository.getHomeCategoryList() }
-        verify { toastObserver.onChanged(eq(Event(errorMsg))) }
-        verify { refreshObserver.onChanged(eq(false)) }
+        coVerifyOrder {
+            loadingObserver.onChanged(true)
+            homeRepository.getHomeCategoryList()
+            toastObserver.onChanged(eq(Event(errorMsg)))
+        }
     }
 
     @Test

@@ -42,7 +42,6 @@ class HomeViewModel @Inject constructor(
             _isRefreshing.value = false
             _isLoading.value = false
         }
-
     }
 
     fun onRefresh() {
