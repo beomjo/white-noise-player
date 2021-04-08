@@ -1,5 +1,6 @@
 package com.beomjo.whitenoise.utilities.ext
 
+import android.graphics.Color
 import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +19,10 @@ fun AppCompatActivity.applyExitMaterialTransform() {
 
 fun AppCompatActivity.applyMaterialTransform(rootView: View, transitionName: String) {
     rootView.transitionName = transitionName
-
-    setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-    setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+    window.decorView.background?.let {
+        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+    }
     window.sharedElementEnterTransition = getContentTransform(rootView)
     window.sharedElementReturnTransition = getContentTransform(rootView)
 }
