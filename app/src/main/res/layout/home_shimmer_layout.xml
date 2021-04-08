@@ -4,9 +4,9 @@
     android:id="@+id/shimmer_view_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:shimmer_auto_start="true"
     app:shimmer_base_color="@color/gray_03"
     app:shimmer_duration="3000"
-    app:shimmer_auto_start="true"
     app:shimmer_highlight_color="@color/gray_01">
 
     <LinearLayout
@@ -22,13 +22,15 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="180dp"
                 android:layout_marginEnd="9dp"
+                android:layout_weight="1"
+                android:background="@color/gray_03"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
@@ -38,11 +40,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
@@ -61,11 +64,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
@@ -75,11 +79,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
@@ -98,11 +103,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
@@ -112,16 +118,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,11 +143,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
@@ -149,11 +158,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="9dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:background="@color/gray_03" />
             </com.google.android.material.card.MaterialCardView>
