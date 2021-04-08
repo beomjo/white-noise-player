@@ -1,7 +1,6 @@
 package com.beomjo.whitenoise.ui.auth
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher

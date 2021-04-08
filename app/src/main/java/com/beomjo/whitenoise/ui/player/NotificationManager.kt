@@ -38,7 +38,6 @@ object NotificationManager {
         return createNotification(context, track, action)
     }
 
-
     fun createPauseNotification(context: Context, track: Track): Notification {
         val pausePendingInt =
             PendingIntent.getService(

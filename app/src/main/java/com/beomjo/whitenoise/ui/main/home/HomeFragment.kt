@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.commit
-import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
@@ -17,7 +16,6 @@ import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.setting.SettingFragment
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
-import com.facebook.shimmer.ShimmerFrameLayout
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,

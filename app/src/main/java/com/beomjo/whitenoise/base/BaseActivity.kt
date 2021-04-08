@@ -51,7 +51,6 @@ abstract class BaseActivity<T : ViewDataBinding>(
         observeViewModel()
     }
 
-
     abstract fun inject()
 
     private fun createViewModels() {
