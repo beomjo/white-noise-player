@@ -30,21 +30,13 @@ You can hear sounds that can help you study, concentrate, and sleep.
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
   - Repository pattern
   - [Dagger 2](https://dagger.dev/dev-guide) - dependency injection.
-- [Firebase] - FireStore, Storage
+- Firebase - FireStore, Storage
 - [Glide](https://github.com/bumptech/glide) - loading images.
 - [Shimmer-Android](https://github.com/facebook/shimmer-android) - unobtrusive loading indicator, developed from Facebook 
 - [Bindables](https://github.com/skydoves/Bindables) - DataBinding kit for notifying data changes from Model layers to UI layers.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
-- [Media Control](https://developer.android.com/jetpack/androidx/releases/media) - Share media contents and controls with other apps.
+- [Media Control](https://developer.android.com/jetpack/androidx/releases/media) - Share media contents and controls with other apps.  
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 ## Unit Testing
 Unit Tests verify the interactions of viewmodels between repositories.
@@ -59,8 +51,11 @@ WhiteNoisePlayer is based on MVVM architecture and a repository pattern.
 
 
 ## Audio Overview
+The most basic architecture of an audio app is the client/server design.  
+End implementation within `MediaBrowserService` UI and Media Controller run with `MediaBrowser`.
 ![image](https://user-images.githubusercontent.com/39984656/115116340-f60e9a00-9fd3-11eb-8d3e-91a4370a7f4b.png)
 
 
 ## Dagger Graph
+Dagger graph represented by [Scabboard](https://arunkumar9t2.github.io/scabbard/)
 ![image](https://user-images.githubusercontent.com/39984656/115116768-69191000-9fd6-11eb-95e0-bd3d9d4ebe4f.png)
