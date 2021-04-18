@@ -5,6 +5,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
     id 'com.google.firebase.crashlytics'
+    id 'scabbard.gradle'
 }
 
 android {
@@ -45,6 +46,11 @@ android {
     }
     buildFeatures {
         dataBinding true
+    }
+    scabbard {
+        enabled true
+        failOnError true
+        fullBindingGraphValidation true
     }
 }
 
