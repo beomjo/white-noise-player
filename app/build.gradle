@@ -65,8 +65,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3'
     implementation 'com.google.firebase:firebase-crashlytics'
 
-    implementation deps.dagger2.android
-    kapt deps.dagger2.compiler
+    implementation deps.hilt.android
+    kapt deps.hilt.compiler
 
     implementation "com.github.skydoves:bindables:1.0.5"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
