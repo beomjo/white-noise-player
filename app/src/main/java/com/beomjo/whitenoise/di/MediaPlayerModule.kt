@@ -7,7 +7,10 @@ import com.beomjo.whitenoise.ui.player.PlayerService
 import com.beomjo.whitenoise.ui.player.PlayerServiceConnection
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
+@InstallIn(SingletonComponent::class)
 @Module
 object MediaPlayerModule {
 
