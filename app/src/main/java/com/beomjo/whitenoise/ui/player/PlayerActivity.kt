@@ -15,8 +15,10 @@ import com.beomjo.whitenoise.databinding.ActivityPlayerBinding
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import com.beomjo.whitenoise.utilities.ext.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     R.layout.activity_player
 ) {

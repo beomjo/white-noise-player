@@ -16,7 +16,9 @@ import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.setting.SettingFragment
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
 import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,
     HomeViewModel::class,

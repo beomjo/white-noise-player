@@ -8,7 +8,9 @@ import com.beomjo.whitenoise.databinding.ActivitySplashBinding
 import com.beomjo.whitenoise.ui.auth.LoginActivity
 import com.beomjo.whitenoise.ui.main.MainActivity
 import com.beomjo.whitenoise.utilities.ext.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
     R.layout.activity_splash,
     SplashViewModel::class,

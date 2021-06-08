@@ -11,9 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
+@AndroidEntryPoint
 abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
     private vararg var viewModels: KClass<out BaseViewModel>,
