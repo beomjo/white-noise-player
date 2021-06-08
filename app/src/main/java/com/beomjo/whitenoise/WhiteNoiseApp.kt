@@ -5,7 +5,9 @@ import com.beomjo.compilation.util.LogUtil
 import com.beomjo.whitenoise.common.WhiteNoseConfig
 import com.beomjo.whitenoise.di.AppComponent
 import com.beomjo.whitenoise.di.DaggerAppComponent
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 open class WhiteNoiseApp : Application() {
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.factory().create(applicationContext)
