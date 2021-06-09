@@ -13,7 +13,6 @@ import com.beomjo.whitenoise.utilities.ext.getComponent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 
-@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(
     R.layout.activity_login,
     LoginViewModel::class

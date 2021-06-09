@@ -10,7 +10,6 @@ import com.beomjo.whitenoise.databinding.FragmentProgressDialogBinding
 import com.beomjo.whitenoise.utilities.ext.getComponent
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class ProgressDialogFragment : BaseDialogFragment<FragmentProgressDialogBinding>(
     R.layout.fragment_progress_dialog,
     ProgressDialogViewModel::class

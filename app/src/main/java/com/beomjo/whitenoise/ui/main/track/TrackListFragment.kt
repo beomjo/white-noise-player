@@ -21,7 +21,6 @@ import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
     R.layout.fragment_track_list,
     TrackListViewModel::class
