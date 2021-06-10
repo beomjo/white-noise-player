@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingFragment
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -57,14 +58,17 @@ abstract class BaseFragment<T : ViewDataBinding>(
         savedInstanceState: Bundle?
     ): View {
         return super.onCreateView(inflater, container, savedInstanceState).apply {
-            inject()
+            val entryPoint =
+                EntryPointAccessors.fromApplication(
+                    this.context.applicationContext,
+                    BaseActivity.BaseEntryPoints::class.java
+                )
+            viewModelFactory = entryPoint.getViewModelFactory()
             createViewModels()
             bindingLifeCycleOwner()
             observeViewModel()
         }
     }
-
-    abstract fun inject()
 
     private fun createViewModels() {
         for (vm in viewModels) {

@@ -11,6 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -18,6 +22,12 @@ abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
     private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
+
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface BaseEntryPoints {
+        fun getViewModelFactory(): ViewModelFactory
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -44,14 +54,16 @@ abstract class BaseActivity<T : ViewDataBinding>(
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
+        val entryPoint = EntryPointAccessors.fromApplication(
+            applicationContext,
+            BaseEntryPoints::class.java
+        )
+        viewModelFactory = entryPoint.getViewModelFactory()
         super.onCreate(savedInstanceState)
-        inject()
         createViewModels()
         bindingLifeCycleOwner()
         observeViewModel()
     }
-
-    abstract fun inject()
 
     private fun createViewModels() {
         for (vm in viewModels) {

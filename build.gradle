@@ -12,6 +12,7 @@ buildscript {
         classpath deps.classpath.kotlin
         classpath 'com.google.gms:google-services:4.3.5'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${versions.hilt.core}"
         classpath "gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:0.4.0"
     }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.skydoves.bindables.BindingDialogFragment
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -38,14 +39,17 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
         savedInstanceState: Bundle?
     ): View {
         return super.onCreateView(inflater, container, savedInstanceState).apply {
-            inject()
+            val entryPoint =
+                EntryPointAccessors.fromApplication(
+                    this.context.applicationContext,
+                    BaseActivity.BaseEntryPoints::class.java
+                )
+            viewModelFactory = entryPoint.getViewModelFactory()
             createViewModels()
             bindingLifeCycleOwner()
             bindingToast()
         }
     }
-
-    abstract fun inject()
 
     private fun createViewModels() {
         for (vm in viewModels) {

@@ -9,9 +9,7 @@ import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import com.beomjo.whitenoise.utilities.ext.isPlay
 import kotlinx.coroutines.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class PlayerManager @Inject constructor(
     private val playerRepository: PlayerRepository,
     private val playerServiceConnection: PlayerServiceConnection

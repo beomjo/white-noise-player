@@ -9,9 +9,10 @@ import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
 import com.beomjo.whitenoise.ui.main.MainActivity
-import com.beomjo.whitenoise.utilities.ext.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(
     R.layout.activity_login,
     LoginViewModel::class
@@ -28,10 +29,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingViewModel()
-    }
-
-    override fun inject() {
-        application.getComponent().authComponent().create().inject(this@LoginActivity)
     }
 
     private fun bindingViewModel() {

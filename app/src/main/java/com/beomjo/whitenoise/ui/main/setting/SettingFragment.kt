@@ -13,14 +13,14 @@ import com.beomjo.whitenoise.BuildConfig
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentSettingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingFragment : BaseFragment<FragmentSettingBinding>(
     R.layout.fragment_setting
 ) {
     override val viewModelProvideOwner: ViewModelStoreOwner
         get() = activity as ViewModelStoreOwner
-
-    override fun inject() {}
 
     override fun onCreateView(
         inflater: LayoutInflater,

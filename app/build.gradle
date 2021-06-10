@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'com.google.firebase.crashlytics'
     id 'scabbard.gradle'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -65,17 +66,17 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3'
     implementation 'com.google.firebase:firebase-crashlytics'
 
-    implementation deps.dagger2.android
-    kapt deps.dagger2.compiler
+    implementation deps.hilt.android
+    kapt deps.hilt.compiler
 
     implementation "com.github.skydoves:bindables:1.0.5"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    implementation 'androidx.media:media:1.2.1'
+    implementation 'androidx.media:media:1.3.1'
 
     testImplementation deps.test.arch.core
     testImplementation deps.test.androidx_test_core
     testImplementation deps.test.coroutine_test
     testImplementation deps.test.mockk
-    testImplementation "org.jetbrains.kotlin:kotlin-reflect:1.4.31"
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:1.5.10"
 }

@@ -7,9 +7,10 @@ import com.beomjo.whitenoise.databinding.ActivityMainBinding
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyExitMaterialTransform
-import com.beomjo.whitenoise.utilities.ext.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main,
     MainViewModel::class
@@ -19,10 +20,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     lateinit var playerManager: PlayerManager
 
     private val mainViewModel: MainViewModel by getViewModel()
-
-    override fun inject() {
-        application.getComponent().mainComponent().create().inject(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         applyExitMaterialTransform()
