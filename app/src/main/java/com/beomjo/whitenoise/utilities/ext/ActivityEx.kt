@@ -1,6 +1,5 @@
 package com.beomjo.whitenoise.utilities.ext
 
-import android.graphics.Color
 import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity

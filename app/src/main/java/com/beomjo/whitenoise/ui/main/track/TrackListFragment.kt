@@ -11,18 +11,13 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentTrackListBinding
-import com.beomjo.whitenoise.di.track.TrackListComponent
 import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.ui.adapters.TrackListAdapter
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
 @AndroidEntryPoint

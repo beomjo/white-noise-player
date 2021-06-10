@@ -8,13 +8,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
-import com.beomjo.whitenoise.di.auth.AuthComponent
 import com.beomjo.whitenoise.ui.main.MainActivity
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.FlowPreview
 
 @AndroidEntryPoint

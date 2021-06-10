@@ -12,16 +12,10 @@ import android.view.Window
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityPlayerBinding
-import com.beomjo.whitenoise.di.player.PlayerComponent
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class PlayerActivity : BaseActivity<ActivityPlayerBinding>(

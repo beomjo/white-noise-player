@@ -4,17 +4,11 @@ import android.os.Bundle
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityMainBinding
-import com.beomjo.whitenoise.di.main.MainComponent
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyExitMaterialTransform
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(

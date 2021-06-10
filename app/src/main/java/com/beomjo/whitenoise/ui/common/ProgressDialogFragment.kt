@@ -7,12 +7,7 @@ import android.view.ViewGroup
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseDialogFragment
 import com.beomjo.whitenoise.databinding.FragmentProgressDialogBinding
-import com.beomjo.whitenoise.di.common.CommonComponent
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 
 @AndroidEntryPoint
 class ProgressDialogFragment : BaseDialogFragment<FragmentProgressDialogBinding>(

@@ -13,7 +13,6 @@ import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
