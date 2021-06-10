@@ -8,6 +8,7 @@ import com.beomjo.whitenoise.ui.player.PlayerServiceConnection
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
@@ -20,7 +21,7 @@ object MediaPlayerModule {
     }
 
     @Provides
-    fun providePlayerServiceConnection(context: Context): PlayerServiceConnection {
+    fun providePlayerServiceConnection(@ApplicationContext context: Context): PlayerServiceConnection {
         return PlayerServiceConnection(context, ComponentName(context, PlayerService::class.java))
     }
 }

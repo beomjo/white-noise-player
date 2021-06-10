@@ -2,6 +2,8 @@ package com.beomjo.whitenoise.di.track
 
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
 import dagger.Subcomponent
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Subcomponent
 interface TrackListComponent {
@@ -10,6 +12,4 @@ interface TrackListComponent {
     interface Factory {
         fun create(): TrackListComponent
     }
-
-    fun inject(fragment: TrackListFragment)
 }

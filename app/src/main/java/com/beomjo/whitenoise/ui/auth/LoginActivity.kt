@@ -8,15 +8,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
+import com.beomjo.whitenoise.di.auth.AuthComponent
 import com.beomjo.whitenoise.ui.main.MainActivity
-import com.beomjo.whitenoise.utilities.ext.getComponent
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.FlowPreview
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(
     R.layout.activity_login,
     LoginViewModel::class
 ) {
+
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface LoginEntryPoints {
+        fun authComponent(): AuthComponent.Factory
+    }
 
     private val viewModel: LoginViewModel by getViewModel()
 
@@ -32,7 +41,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
     }
 
     override fun inject() {
-        application.getComponent().authComponent().create().inject(this@LoginActivity)
+        val entryPoint =
+            EntryPointAccessors.fromApplication(application, LoginEntryPoints::class.java)
+        entryPoint.authComponent().create()
     }
 
     private fun bindingViewModel() {

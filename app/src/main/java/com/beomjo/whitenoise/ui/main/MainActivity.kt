@@ -4,17 +4,26 @@ import android.os.Bundle
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityMainBinding
+import com.beomjo.whitenoise.di.main.MainComponent
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyExitMaterialTransform
-import com.beomjo.whitenoise.utilities.ext.getComponent
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main,
     MainViewModel::class
 ) {
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface MainEntryPoints {
+        fun mainComponent(): MainComponent.Factory
+    }
+
 
     @Inject
     lateinit var playerManager: PlayerManager
@@ -22,7 +31,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     private val mainViewModel: MainViewModel by getViewModel()
 
     override fun inject() {
-        application.getComponent().mainComponent().create().inject(this)
+        val entryPoint =
+            EntryPointAccessors.fromApplication(applicationContext, MainEntryPoints::class.java)
+        entryPoint.mainComponent().create()
+        val playerEntryPoint =
+            EntryPointAccessors.fromApplication(
+                applicationContext,
+                PlayerActivity.PlayerEntryPoints::class.java
+            )
+        playerManager = playerEntryPoint.playerManager()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

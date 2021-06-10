@@ -11,17 +11,25 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentHomeBinding
+import com.beomjo.whitenoise.di.main.HomeComponent
 import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.setting.SettingFragment
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
-import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,
     HomeViewModel::class,
 ) {
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface HomeEntryPoints {
+        fun homeComponent(): HomeComponent.Factory
+    }
 
     private val homeViewModel: HomeViewModel by getViewModel()
 
@@ -29,7 +37,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         get() = activity as ViewModelStoreOwner
 
     override fun inject() {
-        getApplicationComponent().homeComponent().create().inject(this)
+        val entryPoint = EntryPointAccessors.fromApplication(
+            this.context?.applicationContext,
+            HomeEntryPoints::class.java
+        )
+        entryPoint.homeComponent().create()
     }
 
     override fun onStart() {

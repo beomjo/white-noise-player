@@ -2,6 +2,8 @@ package com.beomjo.whitenoise.di.player
 
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import dagger.Subcomponent
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Subcomponent
 interface PlayerComponent {
@@ -10,6 +12,4 @@ interface PlayerComponent {
     interface Factory {
         fun create(): PlayerComponent
     }
-
-    fun inject(playerActivity: PlayerActivity)
 }

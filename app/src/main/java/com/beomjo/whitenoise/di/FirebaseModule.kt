@@ -11,6 +11,7 @@ import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
@@ -23,7 +24,7 @@ object FirebaseModule {
     }
 
     @Provides
-    fun provideGoogleSignInOption(context: Context): GoogleSignInOptions {
+    fun provideGoogleSignInOption(@ApplicationContext context: Context): GoogleSignInOptions {
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.getString(R.string.default_web_client_id))
             .requestEmail()
@@ -31,7 +32,7 @@ object FirebaseModule {
     }
 
     @Provides
-    fun provideGoogleSignInClient(context: Context, gso: GoogleSignInOptions): GoogleSignInClient {
+    fun provideGoogleSignInClient(@ApplicationContext context: Context, gso: GoogleSignInOptions): GoogleSignInClient {
         return GoogleSignIn.getClient(context, gso)
     }
 
