@@ -14,8 +14,6 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
-@Module
 class PlayerManager @Inject constructor(
     private val playerRepository: PlayerRepository,
     private val playerServiceConnection: PlayerServiceConnection
