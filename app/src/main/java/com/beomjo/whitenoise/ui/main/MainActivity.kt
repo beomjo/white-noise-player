@@ -10,37 +10,21 @@ import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyExitMaterialTransform
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(
     R.layout.activity_main,
     MainViewModel::class
 ) {
-    @InstallIn(SingletonComponent::class)
-    @EntryPoint
-    interface MainEntryPoints {
-        fun mainComponent(): MainComponent.Factory
-    }
-
 
     @Inject
     lateinit var playerManager: PlayerManager
 
     private val mainViewModel: MainViewModel by getViewModel()
-
-    override fun inject() {
-        val entryPoint =
-            EntryPointAccessors.fromApplication(applicationContext, MainEntryPoints::class.java)
-        entryPoint.mainComponent().create()
-        val playerEntryPoint =
-            EntryPointAccessors.fromApplication(
-                applicationContext,
-                PlayerActivity.PlayerEntryPoints::class.java
-            )
-        playerManager = playerEntryPoint.playerManager()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         applyExitMaterialTransform()

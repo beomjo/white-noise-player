@@ -55,17 +55,16 @@ abstract class BaseActivity<T : ViewDataBinding>(
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
-        val entryPoint =
-            EntryPointAccessors.fromApplication(applicationContext, BaseEntryPoints::class.java)
+        val entryPoint = EntryPointAccessors.fromApplication(
+            applicationContext,
+            BaseEntryPoints::class.java
+        )
         viewModelFactory = entryPoint.getViewModelFactory()
         super.onCreate(savedInstanceState)
-        inject()
         createViewModels()
         bindingLifeCycleOwner()
         observeViewModel()
     }
-
-    abstract fun inject()
 
     private fun createViewModels() {
         for (vm in viewModels) {

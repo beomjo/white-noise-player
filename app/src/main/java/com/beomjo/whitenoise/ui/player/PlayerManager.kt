@@ -7,11 +7,15 @@ import androidx.lifecycle.Transformations
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import com.beomjo.whitenoise.utilities.ext.isPlay
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
+@InstallIn(SingletonComponent::class)
+@Module
 class PlayerManager @Inject constructor(
     private val playerRepository: PlayerRepository,
     private val playerServiceConnection: PlayerServiceConnection

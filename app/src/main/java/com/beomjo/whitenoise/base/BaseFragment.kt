@@ -64,14 +64,11 @@ abstract class BaseFragment<T : ViewDataBinding>(
                     BaseActivity.BaseEntryPoints::class.java
                 )
             viewModelFactory = entryPoint.getViewModelFactory()
-            inject()
             createViewModels()
             bindingLifeCycleOwner()
             observeViewModel()
         }
     }
-
-    abstract fun inject()
 
     private fun createViewModels() {
         for (vm in viewModels) {

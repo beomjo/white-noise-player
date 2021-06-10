@@ -7,8 +7,10 @@ import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivitySplashBinding
 import com.beomjo.whitenoise.ui.auth.LoginActivity
 import com.beomjo.whitenoise.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
     R.layout.activity_splash,
     SplashViewModel::class,
@@ -20,15 +22,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
         super.onCreate(savedInstanceState)
         bindingViewModel()
         viewModel.init()
-    }
-
-    override fun inject() {
-        val entryPoint =
-            EntryPointAccessors.fromApplication(
-                application,
-                LoginActivity.LoginEntryPoints::class.java
-            )
-        entryPoint.authComponent().create()
     }
 
     private fun bindingViewModel() {

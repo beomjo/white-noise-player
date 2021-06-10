@@ -17,20 +17,15 @@ import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     R.layout.activity_player
 ) {
-    @InstallIn(SingletonComponent::class)
-    @EntryPoint
-    interface PlayerEntryPoints {
-        fun playerComponent(): PlayerComponent.Factory
-
-        fun playerManager(): PlayerManager
-    }
 
     @Inject
     lateinit var playerManager: PlayerManager
@@ -38,12 +33,6 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     private val track: Track by lazy { intent.getParcelableExtra(KEY_PLAYER_TRACK)!! }
     private val isEnterFromBottomPlayer: Boolean
             by lazy { intent.getBooleanExtra(KEY_BOTTOM_PLAYER_CLICK, false) }
-
-    override fun inject() {
-        val entryPoint =
-            EntryPointAccessors.fromApplication(applicationContext, PlayerEntryPoints::class.java)
-        entryPoint.playerComponent().create()
-    }
 
     override fun onStart() {
         super.onStart()

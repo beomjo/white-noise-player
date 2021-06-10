@@ -20,20 +20,16 @@ import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
     R.layout.fragment_track_list,
     TrackListViewModel::class
 ) {
-
-    @InstallIn(SingletonComponent::class)
-    @EntryPoint
-    interface TrackListEntryPoints {
-        fun trackListComponent(): TrackListComponent.Factory
-    }
 
     @Inject
     lateinit var playerManager: PlayerManager
@@ -43,14 +39,6 @@ class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
     private val trackListViewModel: TrackListViewModel by getViewModel()
 
     private val category: Category by lazy { arguments?.getParcelable(KEY_HOME_CATEGORY)!! }
-
-    override fun inject() {
-        val entryPoint = EntryPointAccessors.fromApplication(
-            this.context?.applicationContext,
-            TrackListEntryPoints::class.java
-        )
-        entryPoint.trackListComponent().create()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
