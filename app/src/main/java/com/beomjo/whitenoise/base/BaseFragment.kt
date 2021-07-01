@@ -8,20 +8,16 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingFragment
-import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
 ) : BindingFragment<T>(contentLayoutId), LifecycleOwner {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
     protected var progressDialog: ProgressDialogFragment? = null
 
@@ -29,8 +25,8 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            ViewModelProvider(viewModelProvideOwner, viewModelFactory)
-                .get(T::class.javaObjectType)
+            ViewModelProvider(viewModelProvideOwner)
+                .get(T::class.java)
                 .apply { observeViewModel(this) }
         }
     }

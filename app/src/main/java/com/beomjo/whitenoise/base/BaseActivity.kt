@@ -1,6 +1,5 @@
 package com.beomjo.whitenoise.base
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
@@ -8,28 +7,31 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Inject
 
 abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
     protected var progressDialog: ProgressDialogFragment? = null
 
     inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            ViewModelProvider(this, viewModelFactory)
-                .get(T::class.javaObjectType)
+            ViewModelProvider(this)
+                .get(T::class.java)
                 .apply { observeViewModel(this) }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bindingLifeCycleOwner()
+    }
+
+    private fun bindingLifeCycleOwner() {
+        binding {
+            lifecycleOwner = this@BaseActivity
         }
     }
 
@@ -39,18 +41,6 @@ abstract class BaseActivity<T : ViewDataBinding>(
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = color
-        }
-    }
-
-    @SuppressLint("MissingSuperCall")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bindingLifeCycleOwner()
-    }
-
-    private fun bindingLifeCycleOwner() {
-        binding {
-            lifecycleOwner = this@BaseActivity
         }
     }
 

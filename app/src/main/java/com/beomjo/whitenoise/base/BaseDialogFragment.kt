@@ -11,23 +11,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.skydoves.bindables.BindingDialogFragment
-import javax.inject.Inject
 
 abstract class BaseDialogFragment<B : ViewDataBinding>(
     @LayoutRes private val contentLayoutId: Int,
 ) : BindingDialogFragment<B>(contentLayoutId), LifecycleOwner {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
     abstract val viewModelProvideOwner: ViewModelStoreOwner
 
     inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            ViewModelProvider(viewModelProvideOwner, viewModelFactory)
-                .get(T::class.javaObjectType)
+            ViewModelProvider(viewModelProvideOwner)
+                .get(T::class.java)
                 .apply { observeViewModel(this) }
         }
     }
