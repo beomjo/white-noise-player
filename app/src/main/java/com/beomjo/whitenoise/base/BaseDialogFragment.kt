@@ -12,11 +12,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.factory.ViewModelFactory
-import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingDialogFragment
-import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 abstract class BaseDialogFragment<B : ViewDataBinding>(
     @LayoutRes private val contentLayoutId: Int,
@@ -41,12 +38,6 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
         savedInstanceState: Bundle?,
     ): View {
         return super.onCreateView(inflater, container, savedInstanceState).apply {
-            val entryPoint =
-                EntryPointAccessors.fromApplication(
-                    this.context.applicationContext,
-                    BaseActivity.BaseEntryPoints::class.java
-                )
-            viewModelFactory = entryPoint.getViewModelFactory()
             bindingLifeCycleOwner()
         }
     }
