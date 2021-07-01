@@ -23,7 +23,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
     R.layout.fragment_track_list,
-    TrackListViewModel::class
 ) {
 
     @Inject

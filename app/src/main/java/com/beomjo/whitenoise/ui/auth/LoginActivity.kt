@@ -15,7 +15,6 @@ import kotlinx.coroutines.FlowPreview
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(
     R.layout.activity_login,
-    LoginViewModel::class
 ) {
 
     private val viewModel: LoginViewModel by getViewModel()

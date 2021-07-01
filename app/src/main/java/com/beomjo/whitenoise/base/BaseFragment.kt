@@ -20,22 +20,20 @@ import kotlin.reflect.KClass
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
-    private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingFragment<T>(contentLayoutId), LifecycleOwner {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
-
     protected var progressDialog: ProgressDialogFragment? = null
 
     abstract val viewModelProvideOwner: ViewModelStoreOwner
 
-    protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
+    inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            viewModelImpl.find { it is T }?.let { it as T }
-                ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
+            ViewModelProvider(viewModelProvideOwner, viewModelFactory)
+                .get(T::class.javaObjectType)
+                .apply { observeViewModel(this) }
         }
     }
 
@@ -55,7 +53,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return super.onCreateView(inflater, container, savedInstanceState).apply {
             val entryPoint =
@@ -64,20 +62,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
                     BaseActivity.BaseEntryPoints::class.java
                 )
             viewModelFactory = entryPoint.getViewModelFactory()
-            createViewModels()
             bindingLifeCycleOwner()
-            observeViewModel()
-        }
-    }
-
-    private fun createViewModels() {
-        for (vm in viewModels) {
-            viewModelImpl.add(
-                ViewModelProvider(
-                    viewModelProvideOwner,
-                    viewModelFactory
-                ).get(vm.javaObjectType)
-            )
         }
     }
 
@@ -87,11 +72,9 @@ abstract class BaseFragment<T : ViewDataBinding>(
         }
     }
 
-    private fun observeViewModel() {
-        for (vm in viewModelImpl) {
-            observeToast(vm)
-            observeProgress(vm)
-        }
+    fun observeViewModel(viewModel: BaseViewModel) {
+        observeToast(viewModel)
+        observeProgress(viewModel)
     }
 
     private fun observeToast(vm: BaseViewModel) {

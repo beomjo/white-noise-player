@@ -20,7 +20,6 @@ import kotlin.reflect.KClass
 
 abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
-    private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
 
     @InstallIn(SingletonComponent::class)
@@ -32,14 +31,13 @@ abstract class BaseActivity<T : ViewDataBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
-
     protected var progressDialog: ProgressDialogFragment? = null
 
-    protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
+    inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            viewModelImpl.find { it is T }?.let { it as T }
-                ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
+            ViewModelProvider(this, viewModelFactory)
+                .get(T::class.javaObjectType)
+                .apply { observeViewModel(this) }
         }
     }
 
@@ -60,15 +58,7 @@ abstract class BaseActivity<T : ViewDataBinding>(
         )
         viewModelFactory = entryPoint.getViewModelFactory()
         super.onCreate(savedInstanceState)
-        createViewModels()
         bindingLifeCycleOwner()
-        observeViewModel()
-    }
-
-    private fun createViewModels() {
-        for (vm in viewModels) {
-            viewModelImpl.add(ViewModelProvider(this, viewModelFactory).get(vm.javaObjectType))
-        }
     }
 
     private fun bindingLifeCycleOwner() {
@@ -77,11 +67,9 @@ abstract class BaseActivity<T : ViewDataBinding>(
         }
     }
 
-    private fun observeViewModel() {
-        for (vm in viewModelImpl) {
-            observeToast(vm)
-            observeProgress(vm)
-        }
+    fun observeViewModel(viewModel: BaseViewModel) {
+        observeToast(viewModel)
+        observeProgress(viewModel)
     }
 
     private fun observeToast(vm: BaseViewModel) {

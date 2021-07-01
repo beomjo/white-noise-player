@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelStoreOwner
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseDialogFragment
 import com.beomjo.whitenoise.databinding.FragmentProgressDialogBinding
@@ -12,8 +13,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProgressDialogFragment : BaseDialogFragment<FragmentProgressDialogBinding>(
     R.layout.fragment_progress_dialog,
-    ProgressDialogViewModel::class
 ) {
+
+    override val viewModelProvideOwner: ViewModelStoreOwner
+        get() = this
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,4 +32,5 @@ class ProgressDialogFragment : BaseDialogFragment<FragmentProgressDialogBinding>
         @JvmStatic
         fun newInstance() = ProgressDialogFragment()
     }
+
 }
