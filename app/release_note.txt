@@ -1,0 +1,24 @@
+# Features
+ *
+
+
+
+
+# Changes
+ *
+
+
+
+# Bug Fixes
+ * [#31] 트랙 재생, 멈춤시 진동, 알림 오는현상 수정
+   * 알림채널 우선순위 LOW로 변경
+
+
+
+# Add
+ *
+
+
+
+# Deprecations
+  *
