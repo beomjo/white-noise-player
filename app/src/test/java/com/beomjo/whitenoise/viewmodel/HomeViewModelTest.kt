@@ -91,14 +91,10 @@ class HomeViewModelTest : BaseTest() {
         val homeCategory = mockk<Category>()
         val homeCategories = listOf(homeCategory)
         coEvery { homeRepository.getHomeCategoryList() } returns homeCategories
-        val refreshObserver = mockk<Observer<Boolean>> {
-            every { onChanged(false) } just Runs
-        }
         val loadingObserver = mockk<Observer<Boolean>> {
             every { onChanged(true) } just Runs
             every { onChanged(false) } just Runs
         }
-        viewModel.isRefreshing.observeForever(refreshObserver)
         viewModel.isLoading.observeForever(loadingObserver)
 
         //when
@@ -108,7 +104,6 @@ class HomeViewModelTest : BaseTest() {
         coVerifyOrder {
             loadingObserver.onChanged(true)
             homeRepository.getHomeCategoryList()
-            refreshObserver.onChanged(eq(false))
             loadingObserver.onChanged(false)
         }
     }
@@ -120,9 +115,6 @@ class HomeViewModelTest : BaseTest() {
         val errorMsg = "Fail"
         every { exception.message } returns errorMsg
         coEvery { homeRepository.getHomeCategoryList() } throws exception
-        val refreshObserver = mockk<Observer<Boolean>> {
-            every { onChanged(false) } just Runs
-        }
         val loadingObserver = mockk<Observer<Boolean>> {
             every { onChanged(true) } just Runs
             every { onChanged(false) } just Runs
@@ -130,7 +122,6 @@ class HomeViewModelTest : BaseTest() {
         val toastObserver = mockk<Observer<Event<String>>> {
             every { onChanged(Event(errorMsg)) } just Runs
         }
-        viewModel.isRefreshing.observeForever(refreshObserver)
         viewModel.toast.observeForever(toastObserver)
         viewModel.isLoading.observeForever(loadingObserver)
 
@@ -149,16 +140,11 @@ class HomeViewModelTest : BaseTest() {
     fun `Refresh 하여 재로딩`() {
         //given
         justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
-        val refreshObserver = mockk<Observer<Boolean>> {
-            every { onChanged(true) } just Runs
-        }
-        viewModel.isRefreshing.observeForever(refreshObserver)
 
         //when
         viewModel.onRefresh()
 
         //then
-        verify { refreshObserver.onChanged(eq(true)) }
         verify { viewModel invokeNoArgs "loadHomeCategoryList" }
     }
 }
