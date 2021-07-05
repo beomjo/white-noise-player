@@ -67,10 +67,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     fun moveToSettingFragment() {
         parentFragmentManager.commit {
-            replace(
+            add(
                 R.id.fragment_container_layout,
                 SettingFragment.newInstance()
             )
+            hide(this@HomeFragment)
             addToBackStack(null)
         }
     }
