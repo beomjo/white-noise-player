@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
@@ -15,7 +16,6 @@ import kotlinx.coroutines.FlowPreview
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(
     R.layout.activity_login,
-    LoginViewModel::class
 ) {
 
     private val viewModel: LoginViewModel by getViewModel()

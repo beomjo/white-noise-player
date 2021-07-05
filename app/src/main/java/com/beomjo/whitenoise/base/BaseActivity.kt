@@ -1,6 +1,5 @@
 package com.beomjo.whitenoise.base
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
@@ -8,38 +7,31 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingActivity
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Inject
-import kotlin.reflect.KClass
 
 abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
-    private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingActivity<T>(contentLayoutId), LifecycleOwner {
-
-    @InstallIn(SingletonComponent::class)
-    @EntryPoint
-    interface BaseEntryPoints {
-        fun getViewModelFactory(): ViewModelFactory
-    }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
 
     protected var progressDialog: ProgressDialogFragment? = null
 
-    protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
+    inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            viewModelImpl.find { it is T }?.let { it as T }
-                ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
+            ViewModelProvider(this)
+                .get(T::class.java)
+                .apply { observeViewModel(this) }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bindingLifeCycleOwner()
+    }
+
+    private fun bindingLifeCycleOwner() {
+        binding {
+            lifecycleOwner = this@BaseActivity
         }
     }
 
@@ -52,36 +44,9 @@ abstract class BaseActivity<T : ViewDataBinding>(
         }
     }
 
-    @SuppressLint("MissingSuperCall")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val entryPoint = EntryPointAccessors.fromApplication(
-            applicationContext,
-            BaseEntryPoints::class.java
-        )
-        viewModelFactory = entryPoint.getViewModelFactory()
-        super.onCreate(savedInstanceState)
-        createViewModels()
-        bindingLifeCycleOwner()
-        observeViewModel()
-    }
-
-    private fun createViewModels() {
-        for (vm in viewModels) {
-            viewModelImpl.add(ViewModelProvider(this, viewModelFactory).get(vm.javaObjectType))
-        }
-    }
-
-    private fun bindingLifeCycleOwner() {
-        binding {
-            lifecycleOwner = this@BaseActivity
-        }
-    }
-
-    private fun observeViewModel() {
-        for (vm in viewModelImpl) {
-            observeToast(vm)
-            observeProgress(vm)
-        }
+    fun observeViewModel(viewModel: BaseViewModel) {
+        observeToast(viewModel)
+        observeProgress(viewModel)
     }
 
     private fun observeToast(vm: BaseViewModel) {

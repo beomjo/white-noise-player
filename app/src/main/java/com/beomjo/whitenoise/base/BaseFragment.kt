@@ -8,34 +8,26 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.beomjo.whitenoise.factory.ViewModelFactory
 import com.beomjo.whitenoise.ui.common.ProgressDialogFragment
 import com.skydoves.bindables.BindingFragment
-import dagger.hilt.android.EntryPointAccessors
-import javax.inject.Inject
-import kotlin.reflect.KClass
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes contentLayoutId: Int,
-    private vararg var viewModels: KClass<out BaseViewModel>,
 ) : BindingFragment<T>(contentLayoutId), LifecycleOwner {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    val viewModelImpl: MutableList<BaseViewModel> = mutableListOf()
 
     protected var progressDialog: ProgressDialogFragment? = null
 
     abstract val viewModelProvideOwner: ViewModelStoreOwner
 
-    protected inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
+    inline fun <reified T : BaseViewModel> getViewModel(): Lazy<T> {
         return lazy {
-            viewModelImpl.find { it is T }?.let { it as T }
-                ?: kotlin.run { throw IllegalStateException("Can't find [${T::class.java.simpleName}] type ViewModel") }
+            ViewModelProvider(viewModelProvideOwner)
+                .get(T::class.java)
+                .apply { observeViewModel(this) }
         }
     }
 
@@ -55,29 +47,10 @@ abstract class BaseFragment<T : ViewDataBinding>(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return super.onCreateView(inflater, container, savedInstanceState).apply {
-            val entryPoint =
-                EntryPointAccessors.fromApplication(
-                    this.context.applicationContext,
-                    BaseActivity.BaseEntryPoints::class.java
-                )
-            viewModelFactory = entryPoint.getViewModelFactory()
-            createViewModels()
             bindingLifeCycleOwner()
-            observeViewModel()
-        }
-    }
-
-    private fun createViewModels() {
-        for (vm in viewModels) {
-            viewModelImpl.add(
-                ViewModelProvider(
-                    viewModelProvideOwner,
-                    viewModelFactory
-                ).get(vm.javaObjectType)
-            )
         }
     }
 
@@ -87,11 +60,9 @@ abstract class BaseFragment<T : ViewDataBinding>(
         }
     }
 
-    private fun observeViewModel() {
-        for (vm in viewModelImpl) {
-            observeToast(vm)
-            observeProgress(vm)
-        }
+    fun observeViewModel(viewModel: BaseViewModel) {
+        observeToast(viewModel)
+        observeProgress(viewModel)
     }
 
     private fun observeToast(vm: BaseViewModel) {

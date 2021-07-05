@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
     R.layout.activity_splash,
-    SplashViewModel::class,
 ) {
 
     private val viewModel: SplashViewModel by getViewModel()
