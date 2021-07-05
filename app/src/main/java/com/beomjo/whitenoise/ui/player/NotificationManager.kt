@@ -114,7 +114,7 @@ object NotificationManager {
     fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val appName = context.getString(R.string.app_name)
-            val importance = android.app.NotificationManager.IMPORTANCE_DEFAULT
+            val importance = android.app.NotificationManager.IMPORTANCE_LOW
             val channel = NotificationChannel(CHANNEL_ID, appName, importance)
             val notificationManager =
                 context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as SystemNotificationManager
