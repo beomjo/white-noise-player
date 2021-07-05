@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding { bindingViewModel() }.root
@@ -48,10 +48,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 parentFragmentManager.commit {
                     setReorderingAllowed(true)
                     addSharedElement(view, item.id.toString())
-                    replace(
+                    add(
                         R.id.fragment_container_layout,
                         TrackListFragment.newInstance(item)
                     )
+                    hide(this@HomeFragment)
                     addToBackStack(null)
                 }
             }

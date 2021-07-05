@@ -95,6 +95,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{homeVM.isLoading ? View.VISIBLE : View.GONE}">
+
+                    <include
+                        android:id="@+id/shimmer_layout"
+                        layout="@layout/home_shimmer_layout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="gone" />
+                </ScrollView>
+
 
                 <com.beomjo.whitenoise.ui.view.GridRecyclerView
                     android:id="@+id/recyclerview"
@@ -110,20 +124,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:spanCount="2"
                     tools:listitem="@layout/item_category" />
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <include
-                        android:id="@+id/shimmer_layout"
-                        layout="@layout/home_shimmer_layout"
-                        android:visibility="@{homeVM.isLoading ? View.VISIBLE : View.GONE}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:visibility="gone" />
-                </ScrollView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
