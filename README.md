@@ -29,7 +29,6 @@ You can hear sounds that can help you study, concentrate, and sleep.
 - Architecture
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
   - Repository pattern
-  - [Dagger 2](https://dagger.dev/dev-guide) - dependency injection.  
   - [Dagger Hilt](https://dagger.dev/hilt/) - dependency injection.  
 - Firebase - FireStore, Storage
 - [Glide](https://github.com/bumptech/glide) - loading images.
