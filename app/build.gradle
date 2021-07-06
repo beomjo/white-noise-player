@@ -9,6 +9,35 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+class Version {
+    static final String FILE_NAME = 'version.properties'
+    int code
+    String name
+}
+
+def loadConfigFile(String fileName) {
+    String projPath = getProjectDir().getPath() + "/config"
+    Properties prop = new Properties()
+    FileInputStream fis
+    try {
+        fis = new FileInputStream(projPath + "/" + fileName)
+        prop.load(fis)
+    } catch (IOException e) {
+        System.out.println(e.toString())
+    }
+    return prop
+}
+
+def getVersionProperty() {
+    Properties prop = loadConfigFile(Version.FILE_NAME)
+
+    Version version = new Version()
+    version.code = prop.getProperty("version.code", "1").toInteger()
+    version.name = prop.getProperty("version.name", "1")
+
+    return version
+}
+
 android {
     signingConfigs {
         upload {
@@ -18,15 +47,18 @@ android {
             storeFile file('../keystore/upload-key.jks')
         }
     }
+
     compileSdkVersion versions.compile_sdk_version
     buildToolsVersion versions.build_tool_version
+
+    Version version = getVersionProperty()
 
     defaultConfig {
         applicationId "com.beomjo.whitenoise"
         minSdkVersion versions.min_sdk_version
         targetSdkVersion versions.target_sdk_version
-        versionCode 1
-        versionName "1.0.1"
+        versionCode version.code
+        versionName version.name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
