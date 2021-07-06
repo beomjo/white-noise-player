@@ -37,7 +37,7 @@ class HomeViewModelTest : BaseTest() {
         justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
 
         //when
-        viewModel.init()
+//        viewModel.init()
 
         //then
         verify { viewModel invokeNoArgs "loadUserInfo" }
