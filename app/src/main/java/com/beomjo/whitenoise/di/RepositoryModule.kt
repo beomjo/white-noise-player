@@ -10,7 +10,10 @@ import com.beomjo.whitenoise.repositories.track.TrackListRepository
 import com.beomjo.whitenoise.repositories.track.TrackListRepositoryImpl
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class RepositoryModule {
 

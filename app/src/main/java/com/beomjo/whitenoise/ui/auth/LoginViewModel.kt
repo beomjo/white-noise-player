@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.beomjo.compilation.util.Event
 import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapConcat
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+@HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : BaseViewModel() {

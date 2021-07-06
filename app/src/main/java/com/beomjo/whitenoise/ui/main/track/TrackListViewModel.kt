@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import com.beomjo.whitenoise.base.BaseViewModel
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.track.TrackListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class TrackListViewModel @Inject constructor(
     private val trackListRepository: TrackListRepository
 ) : BaseViewModel() {
