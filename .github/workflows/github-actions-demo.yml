@@ -26,6 +26,6 @@ jobs:
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
         if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
-          with:
-            name: reports
-            path: app/build/test-results # path to where the xml test results are stored
+        with:
+          name: reports
+          path: app/build/test-results # path to where the xml test results are stored
