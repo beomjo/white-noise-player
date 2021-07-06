@@ -1,0 +1,26 @@
+# Features
+ *
+
+
+
+
+# Changes
+ *
+
+
+
+# Bug Fixes
+ * [#31] 트랙 재생, 멈춤시 진동, 알림 오는현상 수정
+   * 알림채널 우선순위 LOW로 변경
+ * [#32] 홈화면 Pull to Refersh시 shimmer가 뒤쪽에 표시되는 현상 수정
+ * [#26] 디바이스 가로회전 막음처리
+
+
+
+# Add
+ *
+
+
+
+# Deprecations
+  *

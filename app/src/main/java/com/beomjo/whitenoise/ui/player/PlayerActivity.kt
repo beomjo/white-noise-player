@@ -14,9 +14,10 @@ import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityPlayerBinding
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
-import com.beomjo.whitenoise.utilities.ext.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     R.layout.activity_player
 ) {
@@ -27,10 +28,6 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
     private val track: Track by lazy { intent.getParcelableExtra(KEY_PLAYER_TRACK)!! }
     private val isEnterFromBottomPlayer: Boolean
             by lazy { intent.getBooleanExtra(KEY_BOTTOM_PLAYER_CLICK, false) }
-
-    override fun inject() {
-        application.getComponent().playerComponent().create().inject(this)
-    }
 
     override fun onStart() {
         super.onStart()

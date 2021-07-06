@@ -15,21 +15,16 @@ import com.beomjo.whitenoise.model.Category
 import com.beomjo.whitenoise.ui.adapters.HomeAdapter
 import com.beomjo.whitenoise.ui.main.setting.SettingFragment
 import com.beomjo.whitenoise.ui.main.track.TrackListFragment
-import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home,
-    HomeViewModel::class,
 ) {
-
     private val homeViewModel: HomeViewModel by getViewModel()
 
     override val viewModelProvideOwner: ViewModelStoreOwner
         get() = activity as ViewModelStoreOwner
-
-    override fun inject() {
-        getApplicationComponent().homeComponent().create().inject(this)
-    }
 
     override fun onStart() {
         super.onStart()
@@ -39,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding { bindingViewModel() }.root
@@ -53,10 +48,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 parentFragmentManager.commit {
                     setReorderingAllowed(true)
                     addSharedElement(view, item.id.toString())
-                    replace(
+                    add(
                         R.id.fragment_container_layout,
                         TrackListFragment.newInstance(item)
                     )
+                    hide(this@HomeFragment)
                     addToBackStack(null)
                 }
             }
@@ -71,10 +67,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     fun moveToSettingFragment() {
         parentFragmentManager.commit {
-            replace(
+            add(
                 R.id.fragment_container_layout,
                 SettingFragment.newInstance()
             )
+            hide(this@HomeFragment)
             addToBackStack(null)
         }
     }

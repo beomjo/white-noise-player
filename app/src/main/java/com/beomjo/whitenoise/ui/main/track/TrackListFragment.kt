@@ -17,12 +17,12 @@ import com.beomjo.whitenoise.ui.adapters.TrackListAdapter
 import com.beomjo.whitenoise.ui.player.PlayerActivity
 import com.beomjo.whitenoise.ui.player.PlayerManager
 import com.beomjo.whitenoise.utilities.ext.applyMaterialTransform
-import com.beomjo.whitenoise.utilities.ext.getApplicationComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
     R.layout.fragment_track_list,
-    TrackListViewModel::class
 ) {
 
     @Inject
@@ -33,10 +33,6 @@ class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
     private val trackListViewModel: TrackListViewModel by getViewModel()
 
     private val category: Category by lazy { arguments?.getParcelable(KEY_HOME_CATEGORY)!! }
-
-    override fun inject() {
-        getApplicationComponent().trackListComponent().create().inject(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

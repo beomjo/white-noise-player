@@ -7,11 +7,11 @@ import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivitySplashBinding
 import com.beomjo.whitenoise.ui.auth.LoginActivity
 import com.beomjo.whitenoise.ui.main.MainActivity
-import com.beomjo.whitenoise.utilities.ext.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
     R.layout.activity_splash,
-    SplashViewModel::class,
 ) {
 
     private val viewModel: SplashViewModel by getViewModel()
@@ -20,10 +20,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
         super.onCreate(savedInstanceState)
         bindingViewModel()
         viewModel.init()
-    }
-
-    override fun inject() {
-        application.getComponent().authComponent().create().inject(this)
     }
 
     private fun bindingViewModel() {
