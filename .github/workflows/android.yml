@@ -22,7 +22,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Clone Submodule
-        run:  clone https://github.com/beomjo/android-compilation.git
+        run:  git clone https://github.com/beomjo/android-compilation.git
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
       - name: Android Test Report
