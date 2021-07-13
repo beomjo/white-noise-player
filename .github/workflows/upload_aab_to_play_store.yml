@@ -3,12 +3,8 @@ name: Upload AAB to PlayStore
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
       tags:
-        description: 'Test scenario tags'
+        description: 'Tag'
 
 jobs:
   build:
@@ -26,7 +22,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Clone Submodule
-        run:  git clone https://github.com/beomjo/android-compilation.git
+        run: git clone https://github.com/beomjo/android-compilation.git
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
       - name: Android Test Report
@@ -35,3 +31,24 @@ jobs:
         with:
           name: reports
           path: app/build/test-results # path to where the xml test results are stored
+      - name: Build AAB
+          run: |
+            ./gradlew clean --stacktrace
+            ./gradlew bundleRelease --stacktrace
+      - name: Sign AAB
+        uses: Tlaster/android-sign@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE_64 }}
+          output: app/build/outputs/bundle/release/signed
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "30.0.2"
+      - name: Upload AAB to Github Artifacts
+          uses: actions/upload-artifact@v1
+          with:
+            name: app
+            path: app/build/outputs/bundle/release/signed/app-release.aab
+
