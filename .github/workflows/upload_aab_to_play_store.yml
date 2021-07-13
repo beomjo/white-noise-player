@@ -33,8 +33,8 @@ jobs:
           path: app/build/test-results # path to where the xml test results are stored
       - name: Build AAB
           run: |
-            ./gradlew clean --stacktrace
-            ./gradlew bundleRelease --stacktrace
+               ./gradlew clean --stacktrace
+               ./gradlew bundleRelease --stacktrace
       - name: Sign AAB
         uses: Tlaster/android-sign@v1
         with:
