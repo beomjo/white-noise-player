@@ -35,8 +35,8 @@ jobs:
         run: ./gradlew clean
       - name: Build AAB
         run: ./gradlew bundleRelease --stacktrace
-      - name: Sign AAB
-        uses: Tlaster/android-sign@v1
+      - uses: Tlaster/android-sign@v1
+        name: Signing AAB
         with:
           releaseDirectory: app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE_64 }}
