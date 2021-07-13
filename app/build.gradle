@@ -39,15 +39,6 @@ def getVersionProperty() {
 }
 
 android {
-    signingConfigs {
-        upload {
-            storePassword 'ekdidgka12!@'
-            keyAlias 'upload'
-            keyPassword 'ekdidgka12!@'
-            storeFile file('../keystore/upload-key.jks')
-        }
-    }
-
     compileSdkVersion versions.compile_sdk_version
     buildToolsVersion versions.build_tool_version
 
@@ -67,7 +58,6 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.upload
         }
     }
     compileOptions {
