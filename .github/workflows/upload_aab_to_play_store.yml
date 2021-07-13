@@ -31,8 +31,8 @@ jobs:
         with:
           name: reports
           path: app/build/test-results # path to where the xml test results are stored
-      - name: Build AAB
-          run: >
+      - name: See where we are
+          run: |
             ./gradlew clean
             ./gradlew bundleRelease --stacktrace
       - name: Sign AAB
