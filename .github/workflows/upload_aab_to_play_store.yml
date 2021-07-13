@@ -35,8 +35,8 @@ jobs:
         run: ./gradlew clean
       - name: Build AAB
         run: ./gradlew bundleRelease --stacktrace
-      - uses: Tlaster/android-sign@v1
-        name: Signing AAB
+      - name: Signing AAB
+        uses: Tlaster/android-sign@v1
         with:
           releaseDirectory: app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE_64 }}
@@ -47,8 +47,8 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "30.0.2"
       - name: Upload AAB to Github Artifacts
-          uses: actions/upload-artifact@v1
+          uses: actions/upload-artifact@v2
           with:
-            name: app
+            name: white_noise_player
             path: app/build/outputs/bundle/release/signed/app-release.aab
 
