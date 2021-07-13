@@ -47,8 +47,8 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "30.0.2"
       - name: Upload AAB to Github Artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: white_noise_player
-            path: app/build/outputs/bundle/release/signed/app-release.aab
+        uses: actions/upload-artifact@v2
+        with:
+          name: white_noise_player
+          path: app/build/outputs/bundle/release/signed/app-release.aab
 
