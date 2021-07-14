@@ -23,14 +23,14 @@ jobs:
         run: chmod +x gradlew
       - name: Clone Submodule
         run: git clone https://github.com/beomjo/android-compilation.git
-      - name: Unit Test
-        run: ./gradlew testDebugUnitTest
-      - name: Android Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
-        with:
-          name: reports
-          path: app/build/test-results # path to where the xml test results are stored
+#      - name: Unit Test
+#        run: ./gradlew testDebugUnitTest
+#      - name: Android Test Report
+#        uses: asadmansr/android-test-report-action@v1.2.0
+#        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
+#        with:
+#          name: reports
+#          path: app/build/test-results # path to where the xml test results are stored
       - name: Clean Project
         run: ./gradlew clean
       - name: Build AAB
@@ -58,7 +58,7 @@ jobs:
           releaseFile: app/build/outputs/bundle/release/app-release.aab
           track: production
           inAppUpdatePriority: 5
-          userFraction: 1.0
+          userFraction: 0.9
           whatsNewDirectory: distribution/whatsnew
 
 
