@@ -1,0 +1,59 @@
+#!/bin/bash
+
+VERSION_PROPERTIES_FILE="./app/config/version.properties"
+VERSION_PROPERTIES_TEMP_FILE="./app/config/version.properties.temp"
+
+get_version_code() {
+    local target=$1
+    local file=$2
+    sed '/^\#/d' ${file} | grep ${target} | sed -e 's/ //g' |
+        while read LINE
+        do
+            local KEY=`echo $LINE | cut -d "=" -f 1`
+            local VALUE=`echo $LINE | cut -d "=" -f 2`
+            [ ${KEY} == ${target} ] && {
+                local UNKNOWN_NAME=`echo $VALUE | grep '\${.*}' -o | sed 's/\${//' | sed 's/}//'`
+                if [ ${UNKNOWN_NAME} ];then
+                    local UNKNOWN_VALUE=`findStr ${UNKNOWN_NAME} ${file}`
+                    echo ${VALUE} | sed s/\$\{${UNKNOWN_NAME}\}/${UNKNOWN_VALUE}/
+                else
+                    echo ${VALUE}
+                fi
+                return
+            }
+        done
+    return
+}
+
+update_version_code() {
+  version_code=$( get_version_code 'version.code' ${VERSION_PROPERTIES_FILE} )
+    version_code_date=${version_code:0:8}
+    version_code_build_number=${version_code:8:2}
+    version_code_build_number=$((10#${version_code_build_number}))
+    echo "버젼코드 : ${version_code}"
+    echo "오늘날짜 : $(date +'%Y%m%d')"
+    current_date=$(date +'%Y%m%d')
+
+    if [[ ${version_code_date} = ${current_date} ]];
+    then
+        echo "날짜 같음"
+        echo "version_code_build_number : "${version_code_build_number}
+        version_code_build_number=$(printf %01d ${version_code_build_number})
+        echo "version_code_build_number 을 한자리수로 변경 : "${version_code_build_number}
+        version_code_build_number=$((version_code_build_number+1))
+        echo "version_code_build_number에 1 더한 값 : "${version_code_build_number}
+        version_code_build_number=$(printf %02d ${version_code_build_number})
+        echo "version_code_build_number 을 두자리수로 변경 : "${version_code_build_number}
+        version_code=${version_code_date}${version_code_build_number}
+    else
+        echo "날짜 다름"
+        version_code=${current_date}"01"
+    fi
+    echo "수정된 version_code : ${version_code}"
+
+    awk 'BEGIN { FS = "="; OFS = "=" } $1 == "version.code" { print $1, '${version_code}'; next } 1' < ${VERSION_PROPERTIES_FILE} > ${VERSION_PROPERTIES_TEMP_FILE}
+    rm ${VERSION_PROPERTIES_FILE}
+    mv ${VERSION_PROPERTIES_TEMP_FILE} ${VERSION_PROPERTIES_FILE}
+}
+
+update_version_code
