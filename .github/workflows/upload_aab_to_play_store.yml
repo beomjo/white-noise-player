@@ -24,11 +24,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Setting git local config
-        run: sh ./update_git_local_config.sh
+        run: sh ./update_git_local_config
       - name: Clone Submodule
         run: git clone https://github.com/beomjo/android-compilation.git
       - name: Update Version Code
-        run: sh ./update_version_code.sh
+        run: sh ./update_version_code
       - name: Staging git local changes
         run: git add .
       - name: Git commit version changes
