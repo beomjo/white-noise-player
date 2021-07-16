@@ -11,7 +11,7 @@ get_version_code() {
         do
             local KEY=`echo $LINE | cut -d "=" -f 1`
             local VALUE=`echo $LINE | cut -d "=" -f 2`
-            [ ${KEY} == ${target} ] && {
+            [ ${KEY} = ${target} ] && {
                 local UNKNOWN_NAME=`echo $VALUE | grep '\${.*}' -o | sed 's/\${//' | sed 's/}//'`
                 if [ ${UNKNOWN_NAME} ];then
                     local UNKNOWN_VALUE=`findStr ${UNKNOWN_NAME} ${file}`
