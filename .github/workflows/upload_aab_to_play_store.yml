@@ -50,10 +50,12 @@ jobs:
         with:
           name: white_noise_player
           path: app/build/outputs/bundle/release/app-release.aab
+      - name: Create service_account.json FROM secrets.GOOGLE_PLAY_STORE_SERVICE_ACCOUNT_JSON
+        run: echo '${{ secrets.GOOGLE_PLAY_STORE_SERVICE_ACCOUNT_JSON }}' > service_account.json
       - name: Upload AAB to Google Play Store
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ secrets.GOOGLE_PLAY_STORE_SERVICE_ACCOUNT_JSON }}
+          serviceAccountJson: service_account.json
           packageName: com.beomjo.whitenoise
           releaseFiles: app/build/outputs/bundle/release/*.aab
           track: production
