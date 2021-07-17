@@ -70,7 +70,6 @@ jobs:
           releaseFiles: app/build/outputs/bundle/release/*.aab
           track: production
           inAppUpdatePriority: 5
-          whatsNewDirectory: distribution/whatsnew
       - name: Git push
         uses: ad-m/github-push-action@master
         with:
