@@ -28,7 +28,9 @@ jobs:
       - name: Clone Submodule
         run: git clone https://github.com/beomjo/android-compilation.git
       - name: Update Version Code
-        run: sh ./update_version_code
+        run: |
+          chmod +x ./update_version_code
+          sh ./update_version_code.sh
       - name: Staging git local changes
         run: git add .
       - name: Git commit version changes

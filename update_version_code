@@ -27,8 +27,8 @@ get_version_code() {
 
 update_version_code() {
     version_code=$( get_version_code 'version.code' ${VERSION_PROPERTIES_FILE} )
-    version_code_date=$(echo version_code| cut -c 0-8)
-    version_code_build_number=$(echo version_code| cut -c 8-2)
+    version_code_date=${version_code:0:8}
+    version_code_build_number=${version_code:8:2}
     version_code_build_number=$((10#${version_code_build_number}))
     echo "버젼코드 : ${version_code}"
     echo "오늘날짜 : $(date +'%Y%m%d')"
