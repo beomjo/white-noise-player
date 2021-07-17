@@ -68,7 +68,7 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: com.beomjo.whitenoise
           releaseFiles: app/build/outputs/bundle/release/*.aab
-          track: production
+          track: internal
           inAppUpdatePriority: 5
       - name: Git push
         uses: ad-m/github-push-action@master
