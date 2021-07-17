@@ -33,14 +33,14 @@ jobs:
         run: git add .
       - name: Git commit version changes
         run: git commit -m "Update version code"
-      #      - name: Unit Test
-#        run: ./gradlew testDebugUnitTest
-#      - name: Android Test Report
-#        uses: asadmansr/android-test-report-action@v1.2.0
-#        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
-#        with:
-#          name: reports
-#          path: app/build/test-results # path to where the xml test results are stored
+      - name: Unit Test
+        run: ./gradlew testDebugUnitTest
+      - name: Android Test Report
+        uses: asadmansr/android-test-report-action@v1.2.0
+        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
+        with:
+          name: reports
+          path: app/build/test-results # path to where the xml test results are stored
       - name: Clean Project
         run: ./gradlew clean
       - name: Build AAB
