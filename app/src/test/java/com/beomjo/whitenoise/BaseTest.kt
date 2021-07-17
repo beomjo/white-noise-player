@@ -13,6 +13,7 @@ import kotlin.reflect.jvm.javaMethod
 
 abstract class BaseTest : MockitoTest() {
 
+
     @get:Rule
     val coroutineScope = MainCoroutineScopeRule()
 
