@@ -47,8 +47,8 @@ jobs:
           SLACK_USERNAME: Github Notification
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-  klint:
-    name: klint
+  ktlint:
+    name: ktlint
     needs: unit_test
     runs-on: ubuntu-latest
     steps:
@@ -66,12 +66,17 @@ jobs:
       - name: Clone Submodule
         run: git clone https://github.com/beomjo/android-compilation.git
 
-      - name: run ktlint
+      - name: Download ktlint
+      - run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.41.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
+
+      - name: Run ktlint
         run: |
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
-          - uses: yutailang0119/action-ktlint@v1.0.0
-            with:
-              xml_path: build/*.xml
+
+      - uses: yutailang0119/action-ktlint@v1.0.0
+          with:
+            xml_path: build/*.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
@@ -89,7 +94,7 @@ jobs:
 
   build:
     name: Build
-    needs: [unit_test, klint]
+    needs: [unit_test, ktlint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
