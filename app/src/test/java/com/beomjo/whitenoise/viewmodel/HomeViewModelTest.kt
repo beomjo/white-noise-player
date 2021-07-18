@@ -33,7 +33,7 @@ class HomeViewModelTest : BaseTest() {
     @Test
     fun `init() 호출`() {
         //given
-        justRun { viewModel invokeNoArgs "loadUserInfo" }
+        justRun { viewModel invoke  "loadUserInfo" }
         justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
 
         //when
