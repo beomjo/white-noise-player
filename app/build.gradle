@@ -7,6 +7,7 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'scabbard.gradle'
     id 'dagger.hilt.android.plugin'
+    id "org.jlleitschuh.gradle.ktlint" version "10.1.0"
 }
 
 class Version {
@@ -143,4 +144,9 @@ dependencies {
     testImplementation deps.test.coroutine_test
     testImplementation deps.test.mockk
     testImplementation "org.jetbrains.kotlin:kotlin-reflect:1.5.10"
+}
+
+ktlint {
+    android.set(true)
+    outputColorName.set("RED")
 }
