@@ -37,7 +37,7 @@ jobs:
 
 
   build:
-    name: Build AAB
+    name: Build
     needs: unit_test
     runs-on: ubuntu-latest
     steps:
