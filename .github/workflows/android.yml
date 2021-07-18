@@ -47,10 +47,36 @@ jobs:
           SLACK_USERNAME: Github Notification
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
+  klint:
+    name: klint
+    needs: unit_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Clone Submodule
+        run: git clone https://github.com/beomjo/android-compilation.git
+
+      - name: run ktlint
+        run: |
+          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+          - uses: yutailang0119/action-ktlint@v1.0.0
+            with:
+              xml_path: build/*.xml
+
 
   build:
     name: Build
-    needs: unit_test
+    needs: [unit_test, klint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
