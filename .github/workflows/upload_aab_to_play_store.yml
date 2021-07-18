@@ -11,6 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Workflow Start Notification to Slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: github-notification
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://user-images.githubusercontent.com/39984656/126071498-60496f8c-4971-4bb1-9609-2cab573c1079.png
+          SLACK_MESSAGE: '[${{ github.workflow }}] Started :rocket:'
+          SLACK_TITLE: Message
+          SLACK_USERNAME: Github Notification
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
       - uses: actions/checkout@v2
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
@@ -90,5 +101,41 @@ jobs:
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
           branch: ${{ github.ref }}
+
+      - name: Workflow Success Notification to Slack
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ success() }}
+        env:
+          SLACK_CHANNEL: github-notification
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://user-images.githubusercontent.com/39984656/126071498-60496f8c-4971-4bb1-9609-2cab573c1079.png
+          SLACK_MESSAGE: '[${{ github.workflow }}] Success!! :raised_hands:'
+          SLACK_TITLE: Message
+          SLACK_USERNAME: Github Notification
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Workflow Cancelled Notification to Slack
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ cancelled() }}
+        env:
+          SLACK_CHANNEL: github-notification
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://user-images.githubusercontent.com/39984656/126071498-60496f8c-4971-4bb1-9609-2cab573c1079.png
+          SLACK_MESSAGE: '[${{ github.workflow }}] Cancelled!! :astonished:'
+          SLACK_TITLE: Message
+          SLACK_USERNAME: Github Notification
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Workflow Failed Notification to Slack
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ failure() }}
+        env:
+          SLACK_CHANNEL: github-notification
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://user-images.githubusercontent.com/39984656/126071498-60496f8c-4971-4bb1-9609-2cab573c1079.png
+          SLACK_MESSAGE: '[${{ github.workflow }}] Failed!! :rage:'
+          SLACK_TITLE: Message
+          SLACK_USERNAME: Github Notification
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
 
