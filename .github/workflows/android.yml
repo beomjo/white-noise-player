@@ -9,12 +9,11 @@ on:
 jobs:
   unit_test:
     name: UnitTest
-    needs: pre_env_setting
     runs-on: ubuntu-latest
     steps:
       - name: Pre Setting
         uses: user/composite@v1
-        
+
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
 
