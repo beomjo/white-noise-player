@@ -75,8 +75,8 @@ jobs:
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
 
       - uses: yutailang0119/action-ktlint@v1.0.0
-          with:
-            xml_path: build/*.xml
+        with:
+          xml_path: build/*.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
