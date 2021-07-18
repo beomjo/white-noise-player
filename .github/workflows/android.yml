@@ -34,8 +34,11 @@ jobs:
         with:
           name: reports
           path: app/build/test-results # path to where the xml test results are stored
+
+
   build:
     name: Build AAB
+    needs: unit_test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
