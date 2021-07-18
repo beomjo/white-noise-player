@@ -24,7 +24,7 @@ jobs:
         run: git clone https://github.com/beomjo/android-compilation.git
   unit_test:
     name: UnitTest
-    needs: PreEnvSetting
+    needs: pre_env_setting
     runs-on: ubuntu-latest
     steps:
       - name: Unit Test
