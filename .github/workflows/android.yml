@@ -7,7 +7,8 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  PreEnvSetting:
+  pre_env_setting:
+    name: PreEnvSetting
     runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
@@ -21,15 +22,16 @@ jobs:
           run: chmod +x gradlew
         - name: Clone Submodule
           run: git clone https://github.com/beomjo/android-compilation.git
-  UnitTest:
-    runs-on: ubuntu-latest
+  unit_test:
+    name: UnitTest
     needs: PreEnvSetting
-      - name: Unit Test
-        run: ./gradlew testDebugUnitTest
-      - name: Android Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
-        with:
-          name: reports
-          path: app/build/test-results # path to where the xml test results are stored
-
+    runs-on: ubuntu-latest
+      steps:
+        - name: Unit Test
+          run: ./gradlew testDebugUnitTest
+        - name: Android Test Report
+          uses: asadmansr/android-test-report-action@v1.2.0
+          if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
+          with:
+            name: reports
+            path: app/build/test-results # path to where the xml test results are stored
