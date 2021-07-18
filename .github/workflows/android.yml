@@ -33,7 +33,14 @@ jobs:
         if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
         with:
           name: reports
-          path: app/build/test-results # path to where the xml test results are stored
+          path: app/build/test-results
+
+      - name: Upload Unit Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Unit Test Results
+          path: app/build/test-results/*.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
