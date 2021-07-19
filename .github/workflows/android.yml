@@ -47,6 +47,7 @@ jobs:
           SLACK_USERNAME: Github Notification
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
+
   ktlint:
     name: ktlint
     needs: unit_test
@@ -66,7 +67,7 @@ jobs:
       - name: Clone Submodule
         run: git clone https://github.com/beomjo/android-compilation.git
 
-      - name: run ktlint
+      - name: Run ktlint
         run: ./gradlew ktlintCheck
 
       - name: Workflow Failed Notification to Slack
@@ -80,7 +81,6 @@ jobs:
           SLACK_TITLE: Message
           SLACK_USERNAME: Github Notification
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
 
 
   build:

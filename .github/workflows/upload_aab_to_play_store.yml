@@ -51,6 +51,9 @@ jobs:
       - name: Git commit version changes
         run: git commit -m "Update version code"
 
+      - name: Clean Project
+        run: ./gradlew clean --stacktrace
+
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
 
@@ -61,8 +64,8 @@ jobs:
           name: reports
           path: app/build/test-results # path to where the xml test results are stored
 
-      - name: Clean Project
-        run: ./gradlew clean --stacktrace
+      - name: Run ktlint
+          run: ./gradlew ktlintCheck
 
       - name: Build AAB
         run: ./gradlew bundleRelease --stacktrace
