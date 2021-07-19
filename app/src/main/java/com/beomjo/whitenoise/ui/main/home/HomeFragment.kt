@@ -75,5 +75,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             addToBackStack(null)
         }
     }
-
 }

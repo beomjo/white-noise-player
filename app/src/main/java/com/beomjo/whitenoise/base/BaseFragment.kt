@@ -8,7 +8,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -41,7 +40,6 @@ abstract class BaseFragment<T : ViewDataBinding>(
             window.statusBarColor = color
             return previousColor
         } ?: kotlin.run { previousColor }
-
     }
 
     override fun onCreateView(
@@ -87,4 +85,3 @@ abstract class BaseFragment<T : ViewDataBinding>(
         }
     }
 }
-

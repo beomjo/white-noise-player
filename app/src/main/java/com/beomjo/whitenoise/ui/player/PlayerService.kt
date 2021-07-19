@@ -15,7 +15,6 @@ import com.beomjo.whitenoise.model.PlayerAction
 import com.beomjo.whitenoise.model.Track
 import kotlinx.coroutines.*
 
-
 class PlayerService : MediaBrowserServiceCompat() {
 
     private val serviceJob = SupervisorJob()

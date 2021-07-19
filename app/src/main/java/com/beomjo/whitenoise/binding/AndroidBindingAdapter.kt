@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.gms.common.SignInButton
 
-
 object AndroidBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:onClick")

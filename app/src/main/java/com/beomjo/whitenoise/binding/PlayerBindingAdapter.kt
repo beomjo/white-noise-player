@@ -15,7 +15,7 @@ object PlayerBindingAdapter {
         @ColorInt color: Int,
         hasData: Boolean
     ) {
-        if (hasData ) {
+        if (hasData) {
             view.setBackgroundColor(color)
         } else {
             view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.gray_02))

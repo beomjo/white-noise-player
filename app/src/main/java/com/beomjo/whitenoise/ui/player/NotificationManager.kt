@@ -2,6 +2,7 @@ package com.beomjo.whitenoise.ui.player
 
 import android.app.Notification
 import android.app.NotificationChannel
+import android.app.NotificationManager as SystemNotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -14,8 +15,6 @@ import androidx.core.app.NotificationCompat
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.model.PlayerAction
 import com.beomjo.whitenoise.model.Track
-import android.app.NotificationManager as SystemNotificationManager
-
 
 object NotificationManager {
 

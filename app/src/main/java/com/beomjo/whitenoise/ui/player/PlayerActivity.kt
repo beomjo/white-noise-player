@@ -27,7 +27,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(
 
     private val track: Track by lazy { intent.getParcelableExtra(KEY_PLAYER_TRACK)!! }
     private val isEnterFromBottomPlayer: Boolean
-            by lazy { intent.getBooleanExtra(KEY_BOTTOM_PLAYER_CLICK, false) }
+        by lazy { intent.getBooleanExtra(KEY_BOTTOM_PLAYER_CLICK, false) }
 
     override fun onStart() {
         super.onStart()

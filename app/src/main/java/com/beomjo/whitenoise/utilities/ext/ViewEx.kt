@@ -28,7 +28,9 @@ fun <T : View> T.setOnClickAnimation(function: (view: T) -> Unit): T {
                                 scaleY(1f)
                                 duration = toggleDuration.toLong()
                                 setListener(object : AnimatorListenerAdapter() {
-                                    override fun onAnimationEnd(animation: android.animation.Animator) {
+                                    override fun onAnimationEnd(
+                                        animation: android.animation.Animator
+                                    ) {
                                         super.onAnimationEnd(animation)
                                         isClickable = true
                                         function.invoke(this@apply)
@@ -39,7 +41,6 @@ fun <T : View> T.setOnClickAnimation(function: (view: T) -> Unit): T {
                     })
                 }
             }
-
         } catch (e: Exception) {
             isClickable = true
             function.invoke(this)

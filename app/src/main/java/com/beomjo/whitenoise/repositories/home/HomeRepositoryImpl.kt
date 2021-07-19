@@ -3,15 +3,14 @@ package com.beomjo.whitenoise.repositories.home
 import com.beomjo.whitenoise.model.Category
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-
+import kotlinx.coroutines.tasks.await
 
 class HomeRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : HomeRepository {
     override suspend fun getHomeCategoryList(): List<Category> {
-        return  firestore.collection("home")
+        return firestore.collection("home")
             .document("category")
             .collection("categoryIds")
             .get()

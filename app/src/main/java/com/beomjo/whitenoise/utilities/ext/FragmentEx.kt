@@ -35,4 +35,3 @@ private fun getContentTransform(): MaterialContainerTransform {
         scrimColor = Color.TRANSPARENT
     }
 }
-

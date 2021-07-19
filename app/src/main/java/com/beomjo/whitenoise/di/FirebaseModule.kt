@@ -32,7 +32,10 @@ object FirebaseModule {
     }
 
     @Provides
-    fun provideGoogleSignInClient(@ApplicationContext context: Context, gso: GoogleSignInOptions): GoogleSignInClient {
+    fun provideGoogleSignInClient(
+        @ApplicationContext context: Context,
+        gso: GoogleSignInOptions
+    ): GoogleSignInClient {
         return GoogleSignIn.getClient(context, gso)
     }
 

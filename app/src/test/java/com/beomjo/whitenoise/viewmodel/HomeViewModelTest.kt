@@ -9,7 +9,6 @@ import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.home.HomeRepository
 import com.beomjo.whitenoise.ui.main.home.HomeViewModel
 import com.google.firebase.FirebaseException
-import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import org.junit.Test
 
@@ -32,21 +31,21 @@ class HomeViewModelTest : BaseTest() {
 
     @Test
     fun `init() 호출`() {
-        //given
+        // given
         justRun { viewModel invokeNoArgs "loadUserInfo" }
         justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
 
-        //when
+        // when
         viewModel.init()
 
-        //then
+        // then
         verify { viewModel invokeNoArgs "loadUserInfo" }
         verify { viewModel invokeNoArgs "loadHomeCategoryList" }
     }
 
     @Test
     fun `유저 정보 로드 성공`() {
-        //given
+        // given
         val mockUser = mockk<User>()
         every { authRepository.getUserInfo() } returns mockUser
         val userObserver = mockk<Observer<User>> {
@@ -54,17 +53,17 @@ class HomeViewModelTest : BaseTest() {
         }
         viewModel.user.observeForever(userObserver)
 
-        //when
+        // when
         viewModel invokeNoArgs "loadUserInfo"
 
-        //then
+        // then
         verify { authRepository.getUserInfo() }
         verify { userObserver.onChanged(eq(mockUser)) }
     }
 
     @Test
     fun `유저 정보 로드 실패`() {
-        //given
+        // given
         val exception = mockk<FirebaseException>()
         val errorMsg = "Fail"
         every { exception.message } returns errorMsg
@@ -76,10 +75,10 @@ class HomeViewModelTest : BaseTest() {
         viewModel.user.observeForever(userObserver)
         viewModel.toast.observeForever(toastObserver)
 
-        //when
+        // when
         viewModel invokeNoArgs "loadUserInfo"
 
-        //then
+        // then
         verify { authRepository.getUserInfo() }
         verify { userObserver wasNot Called }
         verify { toastObserver.onChanged(eq(Event(errorMsg))) }
@@ -87,7 +86,7 @@ class HomeViewModelTest : BaseTest() {
 
     @Test
     fun `홈 카테고리 데이터 로드 성공`() {
-        //given
+        // given
         val homeCategory = mockk<Category>()
         val homeCategories = listOf(homeCategory)
         coEvery { homeRepository.getHomeCategoryList() } returns homeCategories
@@ -97,10 +96,10 @@ class HomeViewModelTest : BaseTest() {
         }
         viewModel.isLoading.observeForever(loadingObserver)
 
-        //when
+        // when
         viewModel invokeNoArgs "loadHomeCategoryList"
 
-        //then
+        // then
         coVerifyOrder {
             loadingObserver.onChanged(true)
             homeRepository.getHomeCategoryList()
@@ -110,7 +109,7 @@ class HomeViewModelTest : BaseTest() {
 
     @Test
     fun `홈 카테고리 데이터 로드 실패`() {
-        //given
+        // given
         val exception = mockk<FirebaseException>()
         val errorMsg = "Fail"
         every { exception.message } returns errorMsg
@@ -125,10 +124,10 @@ class HomeViewModelTest : BaseTest() {
         viewModel.toast.observeForever(toastObserver)
         viewModel.isLoading.observeForever(loadingObserver)
 
-        //when
+        // when
         viewModel invokeNoArgs "loadHomeCategoryList"
 
-        //then
+        // then
         coVerifyOrder {
             loadingObserver.onChanged(true)
             homeRepository.getHomeCategoryList()
@@ -138,13 +137,13 @@ class HomeViewModelTest : BaseTest() {
 
     @Test
     fun `Refresh 하여 재로딩`() {
-        //given
+        // given
         justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
 
-        //when
+        // when
         viewModel.onRefresh()
 
-        //then
+        // then
         verify { viewModel invokeNoArgs "loadHomeCategoryList" }
     }
 }

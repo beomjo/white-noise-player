@@ -70,5 +70,4 @@ abstract class BaseActivity<T : ViewDataBinding>(
             }
         }
     }
-
 }

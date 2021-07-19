@@ -22,7 +22,7 @@ class TrackListViewModelTest : BaseTest() {
 
     @Test
     fun `카테고리 아이템 목록 불러오기 성공`() {
-        //given
+        // given
         val documentPath = "pathpath"
         val mockCategory = mockk<Track>()
         val categories = listOf(mockCategory, mockCategory)
@@ -32,10 +32,10 @@ class TrackListViewModelTest : BaseTest() {
         }
         viewModel.tracks.observeForever(categoriesObserver)
 
-        //when
+        // when
         viewModel.loadTrackList(documentPath)
 
-        //then
+        // then
         coVerify { categoriesObserver.onChanged(eq(categories)) }
     }
 }

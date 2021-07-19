@@ -32,5 +32,4 @@ class ProgressDialogFragment : BaseDialogFragment<FragmentProgressDialogBinding>
         @JvmStatic
         fun newInstance() = ProgressDialogFragment()
     }
-
 }

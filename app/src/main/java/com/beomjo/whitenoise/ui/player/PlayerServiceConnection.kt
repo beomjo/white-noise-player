@@ -37,12 +37,16 @@ class PlayerServiceConnection @Inject constructor(
     private lateinit var mediaController: MediaControllerCompat
 
     fun subscribe() {
-        mediaBrowser.subscribe(PARENT_ID, object : MediaBrowserCompat.SubscriptionCallback() {
-            override fun onChildrenLoaded(
-                parentId: String, children: List<MediaBrowserCompat.MediaItem>
-            ) {
+        mediaBrowser.subscribe(
+            PARENT_ID,
+            object : MediaBrowserCompat.SubscriptionCallback() {
+                override fun onChildrenLoaded(
+                    parentId: String,
+                    children: List<MediaBrowserCompat.MediaItem>
+                ) {
+                }
             }
-        })
+        )
     }
 
     fun unsubscribe() {

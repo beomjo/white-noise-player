@@ -31,28 +31,28 @@ class SplashViewModelTest : BaseTest() {
 
     @Test
     fun `로그인여부 체크, 로그인되지않음`() = runBlockingTest {
-        //given
+        // given
         every { authRepository.isLoggedIn() } returns false
 
-        //when
+        // when
         viewModel.check()
         advanceTimeBy(SPLASH_DELAY_TIME_MILLIS)
 
-        //then
+        // then
         verify { authRepository.isLoggedIn() }
         assertEquals(viewModel.loginState.getOrAwaitValue(), LoginBefore)
     }
 
     @Test
     fun `로그인여부 체크, 로그인됨`() = runBlockingTest {
-        //given
+        // given
         every { authRepository.isLoggedIn() } returns true
 
-        //when
+        // when
         viewModel.check()
         advanceTimeBy(SPLASH_DELAY_TIME_MILLIS)
 
-        //then
+        // then
         verify { authRepository.isLoggedIn() }
         assertEquals(viewModel.loginState.getOrAwaitValue(), LoginSuccess)
     }

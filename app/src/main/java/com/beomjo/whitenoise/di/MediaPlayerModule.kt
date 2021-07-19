@@ -33,7 +33,9 @@ object MediaPlayerModule {
     }
 
     @Provides
-    fun providePlayerServiceConnection(@ApplicationContext context: Context): PlayerServiceConnection {
+    fun providePlayerServiceConnection(
+        @ApplicationContext context: Context
+    ): PlayerServiceConnection {
         return PlayerServiceConnection(context, ComponentName(context, PlayerService::class.java))
     }
 }

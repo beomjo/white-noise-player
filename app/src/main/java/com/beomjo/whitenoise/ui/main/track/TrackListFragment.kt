@@ -52,11 +52,11 @@ class TrackListFragment : BaseFragment<FragmentTrackListBinding>(
         return binding {
             fragment = this@TrackListFragment
             adapter = TrackListAdapter(object :
-                TrackListAdapter.TrackItemViewHolder.OnClickListener {
-                override fun onItemClick(view: View, item: Track) {
-                    moveToPlayerActivity(item)
-                }
-            })
+                    TrackListAdapter.TrackItemViewHolder.OnClickListener {
+                    override fun onItemClick(view: View, item: Track) {
+                        moveToPlayerActivity(item)
+                    }
+                })
             homeCategory = category
             viewmodel = trackListViewModel.apply { loadTrackList(category.path) }
         }.root

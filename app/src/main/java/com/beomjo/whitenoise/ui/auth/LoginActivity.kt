@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseActivity
 import com.beomjo.whitenoise.databinding.ActivityLoginBinding
@@ -48,7 +47,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(
     companion object {
         fun startActivity(activity: Activity) {
             activity.startActivity(Intent(activity, LoginActivity::class.java))
-            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
     }
 }

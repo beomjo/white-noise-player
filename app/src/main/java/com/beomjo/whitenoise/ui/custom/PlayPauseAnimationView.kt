@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.beomjo.whitenoise.R
 
-
 class PlayPauseAnimationView : AppCompatImageView {
     private var playToPauseAnim: AnimatedVectorDrawableCompat? = null
     private var pauseToPlay: AnimatedVectorDrawableCompat? = null

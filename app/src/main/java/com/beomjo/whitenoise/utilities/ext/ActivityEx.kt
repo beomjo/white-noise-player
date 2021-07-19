@@ -9,7 +9,6 @@ import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
-
 fun AppCompatActivity.applyExitMaterialTransform() {
     window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
     setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
