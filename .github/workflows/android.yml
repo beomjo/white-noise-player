@@ -35,12 +35,6 @@ jobs:
           name: reports
           path: app/build/test-results
 
-      - name: Upload Test Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: UnitTestReport
-          path: app/build/test-results/*.xml
-
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
         if: ${{ failure() }}
@@ -79,6 +73,7 @@ jobs:
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
       - name: Upload ktlint Report
         uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
         with:
           name: ktlint Report
           path: build/ktlint-report.xml
