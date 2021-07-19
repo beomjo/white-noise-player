@@ -148,5 +148,11 @@ dependencies {
 
 ktlint {
     android.set(true)
+    outputToConsole.set(true)
     outputColorName.set("RED")
+    reporters {
+        reporter "checkstyle"
+        reporter "plain"
+    }
+    additionalEditorconfigFile.set(file(".editorconfig"))
 }
