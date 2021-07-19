@@ -50,6 +50,7 @@ class PlayerManager @Inject constructor(
                 playerServiceConnection.prepareAndPlay(uri, track)
             }
         } catch (e: Exception) {
+            // Do Nothing
         }
     }
 

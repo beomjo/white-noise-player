@@ -11,22 +11,22 @@ object ColorMixer {
         val ap = ap2 + ap1 * (1 - ap2)
         val amount1 = ap1 * (1 - ap2) / ap
         val amount2 = amount1 / ap
-        val a = (ap * 255.0).toInt() and 0xff
-        val r = (
+        val alpha = (ap * 255.0).toInt() and 0xff
+        val red = (
             (backgroundColor shr redChannel.toInt() and 0xff).toFloat() * amount1 +
                 (foregroundColor shr redChannel.toInt() and 0xff).toFloat() * amount2
             ).toInt() and 0xff
-        val g = (
+        val green = (
             (backgroundColor shr greenChannel.toInt() and 0xff).toFloat() * amount1 +
                 (foregroundColor shr greenChannel.toInt() and 0xff).toFloat() * amount2
             ).toInt() and 0xff
-        val b = (
+        val blue = (
             (backgroundColor and 0xff).toFloat() * amount1 +
                 (foregroundColor and 0xff).toFloat() * amount2
             ).toInt() and 0xff
-        return a shl alphaChannel.toInt() or
-            (r shl redChannel.toInt()) or
-            (g shl greenChannel.toInt()) or
-            (b shl blueChannel.toInt())
+        return alpha shl alphaChannel.toInt() or
+            (red shl redChannel.toInt()) or
+            (green shl greenChannel.toInt()) or
+            (blue shl blueChannel.toInt())
     }
 }

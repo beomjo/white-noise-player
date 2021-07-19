@@ -21,7 +21,9 @@ abstract class MockitoTest {
 
     protected abstract fun onBefore()
 
-    protected fun onAfter() {}
+    protected fun onAfter() {
+        // Do Nothing
+    }
 
     protected val context: Context
         get() = ApplicationProvider.getApplicationContext()

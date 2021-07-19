@@ -44,6 +44,7 @@ class PlayerServiceConnection @Inject constructor(
                     parentId: String,
                     children: List<MediaBrowserCompat.MediaItem>
                 ) {
+                    // Do Nothing
                 }
             }
         )
