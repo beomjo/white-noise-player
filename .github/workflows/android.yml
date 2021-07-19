@@ -68,12 +68,6 @@ jobs:
 
       - name: run ktlint
         run: ./gradlew ktlintCheck
-      - name: Upload ktlint Report
-        uses: actions/upload-artifact@v2
-        if: ${{ failure() }}
-        with:
-          name: ktlint Report
-          path: app/build/reports/ktlin/*.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
