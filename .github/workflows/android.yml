@@ -66,17 +66,14 @@ jobs:
       - name: Clone Submodule
         run: git clone https://github.com/beomjo/android-compilation.git
 
-      - run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.41.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
       - name: run ktlint
-        run: |
-          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+        run: ./gradlew ktlintCheck
       - name: Upload ktlint Report
         uses: actions/upload-artifact@v2
         if: ${{ failure() }}
         with:
           name: ktlint Report
-          path: build/ktlint-report.xml
+          path: app/build/reports/ktlin/*.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
