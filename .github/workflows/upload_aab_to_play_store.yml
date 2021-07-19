@@ -65,10 +65,10 @@ jobs:
           path: app/build/test-results # path to where the xml test results are stored
 
       - name: Run ktlint
-          run: ./gradlew ktlintCheck
+        run: ./gradlew ktlintCheck
 
-      - name: Run ktlint
-          run: ./gradlew detekt
+      - name: Run detekt
+        run: ./gradlew detekt
 
       - name: Build AAB
         run: ./gradlew bundleRelease --stacktrace
