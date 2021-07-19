@@ -30,10 +30,16 @@ jobs:
 
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
+        if: ${{ always() }}
         with:
           name: reports
-          path: app/build/test-results # path to where the xml test results are stored
+          path: app/build/test-results
+
+      - name: Upload Test Report
+          uses: actions/upload-artifact@v2
+          with:
+            name: UnitTestReport
+            path: app/build/test-results/*.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
@@ -71,10 +77,11 @@ jobs:
       - name: run ktlint
         run: |
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
-      - uses: yutailang0119/action-ktlint@v1.0.0
-        if: ${{ failure() }}
-        with:
-          xml_path: build/*.xml
+      - name: Upload ktlint Report
+          uses: actions/upload-artifact@v2
+          with:
+            name: ktlint Report
+            path: build/ktlint-report.xml
 
       - name: Workflow Failed Notification to Slack
         uses: rtCamp/action-slack-notify@v2
