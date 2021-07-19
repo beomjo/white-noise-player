@@ -58,7 +58,13 @@ class AuthRepositoryImpl @Inject constructor(
             firebaseAuth.signInWithCredential(credential)
                 .addOnSuccessListener { result ->
                     result.user?.let { _ -> offer(result) }
-                        ?: close(cause = FirebaseAccountNotFoundException(context.getString(R.string.error_firebase_auth_fail)))
+                        ?: close(
+                            cause = FirebaseAccountNotFoundException(
+                                context.getString(
+                                    R.string.error_firebase_auth_fail
+                                )
+                            )
+                        )
                 }
                 .addOnFailureListener(::close)
             awaitClose()

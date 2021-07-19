@@ -24,6 +24,9 @@ object ColorMixer {
             (backgroundColor and 0xff).toFloat() * amount1 +
                 (foregroundColor and 0xff).toFloat() * amount2
             ).toInt() and 0xff
-        return a shl alphaChannel.toInt() or (r shl redChannel.toInt()) or (g shl greenChannel.toInt()) or (b shl blueChannel.toInt())
+        return a shl alphaChannel.toInt() or
+            (r shl redChannel.toInt()) or
+            (g shl greenChannel.toInt()) or
+            (b shl blueChannel.toInt())
     }
 }
