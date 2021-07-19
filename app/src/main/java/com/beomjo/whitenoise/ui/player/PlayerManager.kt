@@ -7,8 +7,8 @@ import androidx.lifecycle.Transformations
 import com.beomjo.whitenoise.model.Track
 import com.beomjo.whitenoise.repositories.player.PlayerRepository
 import com.beomjo.whitenoise.utilities.ext.isPlay
-import javax.inject.Inject
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 class PlayerManager @Inject constructor(
     private val playerRepository: PlayerRepository,

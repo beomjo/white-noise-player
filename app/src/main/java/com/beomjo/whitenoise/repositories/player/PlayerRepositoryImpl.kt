@@ -2,8 +2,8 @@ package com.beomjo.whitenoise.repositories.player
 
 import android.net.Uri
 import com.google.firebase.storage.FirebaseStorage
-import javax.inject.Inject
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
 class PlayerRepositoryImpl @Inject constructor(
     private val storage: FirebaseStorage

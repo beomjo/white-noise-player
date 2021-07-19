@@ -3,8 +3,8 @@ package com.beomjo.whitenoise.repositories.track
 import com.beomjo.whitenoise.model.Track
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import javax.inject.Inject
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
 class TrackListRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore

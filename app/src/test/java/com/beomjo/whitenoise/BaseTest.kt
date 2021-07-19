@@ -4,12 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.Called
 import io.mockk.InternalPlatformDsl
 import io.mockk.MockKException
+import org.junit.Rule
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.KTypeParameter
 import kotlin.reflect.full.functions
 import kotlin.reflect.jvm.javaMethod
-import org.junit.Rule
 
 abstract class BaseTest : MockitoTest() {
 
