@@ -8,6 +8,7 @@ plugins {
     id 'scabbard.gradle'
     id 'dagger.hilt.android.plugin'
     id 'org.jlleitschuh.gradle.ktlint'
+    id 'io.gitlab.arturbosch.detekt' version '1.18.0-RC2'
 }
 
 class Version {
@@ -155,4 +156,17 @@ ktlint {
         reporter "plain"
     }
     additionalEditorconfigFile.set(file(".editorconfig"))
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config = files("$projectDir/config/detekt.yml")
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        txt.enabled = true
+        sarif.enabled = true 
+    }
 }
