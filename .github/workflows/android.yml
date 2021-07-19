@@ -72,6 +72,7 @@ jobs:
         run: |
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
       - uses: yutailang0119/action-ktlint@v1.0.0
+        if: ${{ failure() }}
         with:
           xml_path: build/*.xml
 
