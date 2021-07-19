@@ -9,6 +9,7 @@ import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.repositories.home.HomeRepository
 import com.beomjo.whitenoise.ui.main.home.HomeViewModel
 import com.google.firebase.FirebaseException
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import org.junit.Test
 
