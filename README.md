@@ -51,7 +51,7 @@ You can hear sounds that can help you study, concentrate, and sleep.
 
 ## Unit Testing
 Unit Tests verify the interactions of viewmodels between repositories.
-- [MockK](https://mockk.io/) - mocking library for Kotlin  
+- [MockK](https://mockk.io/) - mocking library for Kotlin
 ![image](https://user-images.githubusercontent.com/39984656/115115204-0d4a8900-9fce-11eb-9366-40dceb438785.png)
 
 
