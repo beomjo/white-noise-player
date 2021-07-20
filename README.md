@@ -44,10 +44,14 @@ You can hear sounds that can help you study, concentrate, and sleep.
 - [Media Control](https://developer.android.com/jetpack/androidx/releases/media) - Share media contents and controls with other apps.  
 
 
+## MAD Score
+![summary](https://user-images.githubusercontent.com/39984656/126381975-dd1996b5-396a-46c3-8b31-e2242dbbe3a0.png)
+![kotlin](https://user-images.githubusercontent.com/39984656/126381980-2f26e9aa-e017-4f81-b66f-267cf258f05e.png)
+
+
 ## Unit Testing
 Unit Tests verify the interactions of viewmodels between repositories.
 - [MockK](https://mockk.io/) - mocking library for Kotlin  
-
 ![image](https://user-images.githubusercontent.com/39984656/115115204-0d4a8900-9fce-11eb-9366-40dceb438785.png)
 
 
