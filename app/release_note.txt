@@ -10,6 +10,7 @@
 
 
 # Bug Fixes
+ * [#24] 설정페이지 버전정보 표시
  * [#45] 앱 진입시 Refresh ProgressBar 표시하지 않도록 변경
 
 
