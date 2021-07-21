@@ -21,7 +21,6 @@ import androidx.annotation.RawRes
 import androidx.databinding.BindingAdapter
 import com.airbnb.lottie.LottieAnimationView
 
-
 @BindingAdapter("loadJson")
 fun LottieAnimationView.bindLottieAnimationFromJson(
     jsonString: String?,
@@ -56,4 +55,3 @@ fun LottieAnimationView.bindLotteAnimationState(
         }
     }
 }
-
