@@ -10,7 +10,7 @@
 
 
 # Bug Fixes
- *
+ * [#45] 앱 진입시 Refresh ProgressBar 표시하지 않도록 변경
 
 
 
