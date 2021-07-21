@@ -20,7 +20,7 @@
 
     <data>
         <variable
-            name="text"
+            name="title"
             type="String" />
     </data>
 
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@{text}"
+                android:text="@{title}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:paddingStart="15dp"

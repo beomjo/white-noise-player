@@ -38,6 +38,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
     override val viewModelProvideOwner: ViewModelStoreOwner
         get() = activity as ViewModelStoreOwner
 
+    val versionName: String
+        get() = BuildConfig.VERSION_NAME
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,7 +50,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
         return binding { fragment = this@SettingFragment }.root
     }
 
-    fun onPerformContractUs() {
+    fun onPerformContractUsClick() {
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
@@ -76,7 +79,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
         }
     }
 
-    fun onPerformTermOfService() {
+    fun onPerformTermOfServiceClick() {
         val intent =
             Intent(
                 Intent.ACTION_VIEW,
@@ -85,12 +88,16 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
         startActivity(intent)
     }
 
-    fun onPerformPrivacyPolicy() {
+    fun onPerformPrivacyPolicyClick() {
         val intent = Intent(
             Intent.ACTION_VIEW,
             Uri.parse("https://www.notion.so/bsjo/Privacy-Policy-561c2cebc1ca4413aba831ca4fe85fb3")
         )
         startActivity(intent)
+    }
+
+    fun onPerformVersionNameClick() {
+        Toast.makeText(context, BuildConfig.VERSION_CODE.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun onBackPressed() {
