@@ -1,8 +1,8 @@
 name: Android CI
 
 on:
-  push:
-    branches: [ main, develop ]
+  #  push:
+  #    branches: [ main, develop ]
   pull_request:
     branches: [ main, develop ]
 
@@ -85,7 +85,7 @@ jobs:
 
   detekt:
     name: detekt
-    needs: [unit_test, ktlint]
+    needs: [ unit_test, ktlint ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -119,7 +119,7 @@ jobs:
 
   build:
     name: Build
-    needs: [unit_test, ktlint, detekt]
+    needs: [ unit_test, ktlint, detekt ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
