@@ -16,7 +16,7 @@
 
 package com.beomjo.whitenoise.viewmodel
 
-import com.beomjo.compilation.util.getOrAwaitValue
+import com.beomjo.compilation.extentions.getOrAwaitValue
 import com.beomjo.whitenoise.BaseTest
 import com.beomjo.whitenoise.repositories.auth.AuthRepository
 import com.beomjo.whitenoise.ui.splash.LoginBefore

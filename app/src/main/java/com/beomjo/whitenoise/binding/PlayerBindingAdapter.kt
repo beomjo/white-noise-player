@@ -22,19 +22,14 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.beomjo.whitenoise.R
 
-object PlayerBindingAdapter {
-
-    @JvmStatic
-    @BindingAdapter(value = ["background", "hasData"])
-    fun bindBackgroundWithDefaultColor(
-        view: View,
-        @ColorInt color: Int,
-        hasData: Boolean
-    ) {
-        if (hasData) {
-            view.setBackgroundColor(color)
-        } else {
-            view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.gray_02))
-        }
+@BindingAdapter(value = ["background", "hasData"])
+fun View.bindBackgroundWithDefaultColor(
+    @ColorInt color: Int,
+    hasData: Boolean
+) {
+    if (hasData) {
+        this.setBackgroundColor(color)
+    } else {
+        this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.gray_02))
     }
 }

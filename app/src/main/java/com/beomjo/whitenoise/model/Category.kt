@@ -17,7 +17,7 @@
 package com.beomjo.whitenoise.model
 
 import android.os.Parcelable
-import com.beomjo.whitenoise.utilities.ext.parseColor
+import com.beomjo.compilation.extentions.parseColor
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

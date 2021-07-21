@@ -21,46 +21,37 @@ import androidx.annotation.RawRes
 import androidx.databinding.BindingAdapter
 import com.airbnb.lottie.LottieAnimationView
 
-object LottieBindingAdapter {
-
-    @JvmStatic
-    @BindingAdapter("loadJson")
-    fun bindLottieAnimationFromJson(
-        lottieView: LottieAnimationView,
-        jsonString: String?,
-    ) {
-        jsonString?.let {
-            with(lottieView) {
-                setAnimationFromJson(jsonString, null)
-            }
+@BindingAdapter("loadJson")
+fun LottieAnimationView.bindLottieAnimationFromJson(
+    jsonString: String?,
+) {
+    jsonString?.let {
+        with(this) {
+            setAnimationFromJson(jsonString, null)
         }
     }
+}
 
-    @JvmStatic
-    @BindingAdapter("isPlay")
-    fun bindLotteAnimationState(
-        lottieView: LottieAnimationView,
-        isPlay: Boolean = true,
-    ) {
-        with(lottieView) {
-            if (isPlay) {
-                Handler().postDelayed({ playAnimation() }, 600L)
-            } else {
-                pauseAnimation()
-            }
+@BindingAdapter("loadRes")
+fun LottieAnimationView.bindLottieAnimationFromRes(
+    @RawRes res: Int?,
+) {
+    res?.let {
+        with(this) {
+            setAnimation(res)
         }
     }
+}
 
-    @JvmStatic
-    @BindingAdapter("loadRes")
-    fun bindLottieAnimationFromRes(
-        lottieView: LottieAnimationView,
-        @RawRes res: Int?,
-    ) {
-        res?.let {
-            with(lottieView) {
-                setAnimation(res)
-            }
+@BindingAdapter("isPlay")
+fun LottieAnimationView.bindLotteAnimationState(
+    isPlay: Boolean = true,
+) {
+    with(this) {
+        if (isPlay) {
+            Handler().postDelayed({ playAnimation() }, 600L)
+        } else {
+            pauseAnimation()
         }
     }
 }

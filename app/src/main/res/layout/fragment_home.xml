@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Designed and developed by 2021 beomjo
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -113,7 +112,7 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{homeVM.isLoading ? View.VISIBLE : View.GONE}">
+                    app:isVisible="@{homeVM.isLoading}">
 
                     <include
                         android:id="@+id/shimmer_layout"
@@ -129,9 +128,9 @@
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{homeVM.isLoading ? View.GONE : View.VISIBLE}"
                     app:adapter="@{adapter}"
                     app:adapterCategoryList="@{homeVM.categories}"
+                    app:isGone="@{homeVM.isLoading}"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

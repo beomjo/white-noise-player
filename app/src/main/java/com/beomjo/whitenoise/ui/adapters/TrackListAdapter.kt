@@ -19,6 +19,7 @@ package com.beomjo.whitenoise.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.beomjo.whitenoise.databinding.ItemTrackBinding
 import com.beomjo.whitenoise.model.Track
@@ -64,4 +65,9 @@ class TrackListAdapter(
             binding.clickListener = clickListener
         }
     }
+}
+
+@BindingAdapter("adapterTrackList")
+fun RecyclerView.bindAdapterCategoryItemList(tracks: List<Track>?) {
+    tracks?.let { (this.adapter as TrackListAdapter).addItems(it) }
 }
