@@ -23,36 +23,30 @@ import androidx.databinding.BindingAdapter
 import com.beomjo.whitenoise.utilities.ext.setOnClickAnimation
 import com.bumptech.glide.Glide
 
-object ViewBindingAdapter {
-    @JvmStatic
-    @BindingAdapter("loadImage")
-    fun bindLoadImageUrl(view: ImageView, url: String?) {
-        url?.let {
-            Glide.with(view.context)
-                .load(it)
-                .into(view)
-        }
+@BindingAdapter("loadImage")
+fun ImageView.LoadUrl(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(it)
+            .into(this)
     }
+}
 
-    @JvmStatic
-    @BindingAdapter("loadImage")
-    fun bindLoadImageFromUri(view: ImageView, uri: Uri?) {
-        uri?.let {
-            Glide.with(view.context)
-                .load(it.toString())
-                .into(view)
-        }
+@BindingAdapter("loadImage")
+fun ImageView.LoadUri(uri: Uri?) {
+    uri?.let {
+        Glide.with(this.context)
+            .load(it.toString())
+            .into(this)
     }
+}
 
-    @JvmStatic
-    @BindingAdapter("isSelected")
-    fun bindSetSelect(view: View, isSelected: Boolean) {
-        view.isSelected = isSelected
-    }
+@BindingAdapter("isSelected")
+fun View.setSelected(isSelected: Boolean) {
+    this.isSelected = isSelected
+}
 
-    @JvmStatic
-    @BindingAdapter("onClickWithAnimation")
-    fun onClickWithAnimation(view: View, listener: View.OnClickListener) {
-        view.setOnClickAnimation { listener.onClick(view) }
-    }
+@BindingAdapter("onClickWithAnimation")
+fun View.onClickWithAnimation(listener: View.OnClickListener) {
+    this.setOnClickAnimation { listener.onClick(this) }
 }
