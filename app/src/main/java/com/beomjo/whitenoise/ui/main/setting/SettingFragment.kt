@@ -29,6 +29,7 @@ import com.beomjo.whitenoise.BuildConfig
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentSettingBinding
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -94,6 +95,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
             Uri.parse("https://www.notion.so/bsjo/Privacy-Policy-561c2cebc1ca4413aba831ca4fe85fb3")
         )
         startActivity(intent)
+    }
+
+    fun onPerformOpenSourceLicenseClick() {
+        OssLicensesMenuActivity.setActivityTitle(getString(R.string.open_source_licenses_text))
+        startActivity(Intent(context, OssLicensesMenuActivity::class.java))
     }
 
     fun onPerformVersionNameClick() {

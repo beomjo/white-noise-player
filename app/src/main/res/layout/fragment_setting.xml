@@ -83,6 +83,11 @@
                 app:title="@{@string/privacy_policy}" />
 
             <include
+                layout="@layout/layout_setting_arrow_box"
+                android:onClick="@{(v)->fragment.onPerformOpenSourceLicenseClick()}"
+                app:title="@{@string/open_source_licenses_text}" />
+
+            <include
                 layout="@layout/layout_setting_text_box"
                 android:onClick="@{()->fragment.onPerformVersionNameClick()}"
                 app:text="@{fragment.versionName}"
