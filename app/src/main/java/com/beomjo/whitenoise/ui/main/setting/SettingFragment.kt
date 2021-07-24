@@ -29,6 +29,7 @@ import com.beomjo.whitenoise.BuildConfig
 import com.beomjo.whitenoise.R
 import com.beomjo.whitenoise.base.BaseFragment
 import com.beomjo.whitenoise.databinding.FragmentSettingBinding
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +38,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
 ) {
     override val viewModelProvideOwner: ViewModelStoreOwner
         get() = activity as ViewModelStoreOwner
+
+    val versionName: String
+        get() = BuildConfig.VERSION_NAME
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +51,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
         return binding { fragment = this@SettingFragment }.root
     }
 
-    fun onPerformContractUs() {
+    fun onPerformContractUsClick() {
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
@@ -76,7 +80,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
         }
     }
 
-    fun onPerformTermOfService() {
+    fun onPerformTermOfServiceClick() {
         val intent =
             Intent(
                 Intent.ACTION_VIEW,
@@ -85,12 +89,21 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(
         startActivity(intent)
     }
 
-    fun onPerformPrivacyPolicy() {
+    fun onPerformPrivacyPolicyClick() {
         val intent = Intent(
             Intent.ACTION_VIEW,
             Uri.parse("https://www.notion.so/bsjo/Privacy-Policy-561c2cebc1ca4413aba831ca4fe85fb3")
         )
         startActivity(intent)
+    }
+
+    fun onPerformOpenSourceLicenseClick() {
+        OssLicensesMenuActivity.setActivityTitle(getString(R.string.open_source_licenses_text))
+        startActivity(Intent(context, OssLicensesMenuActivity::class.java))
+    }
+
+    fun onPerformVersionNameClick() {
+        Toast.makeText(context, BuildConfig.VERSION_CODE.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun onBackPressed() {

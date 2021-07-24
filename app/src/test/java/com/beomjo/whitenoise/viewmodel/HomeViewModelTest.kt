@@ -65,9 +65,7 @@ class HomeViewModelTest : BaseTest() {
         // given
         val mockUser = mockk<User>()
         every { authRepository.getUserInfo() } returns mockUser
-        val userObserver = mockk<Observer<User>> {
-            every { onChanged(mockUser) } just Runs
-        }
+        val userObserver = mockk<Observer<User>>(relaxed = true)
         viewModel.user.observeForever(userObserver)
 
         // when
@@ -86,9 +84,7 @@ class HomeViewModelTest : BaseTest() {
         every { exception.message } returns errorMsg
         every { authRepository.getUserInfo() } throws exception
         val userObserver = mockk<Observer<User>>()
-        val toastObserver = mockk<Observer<Event<String>>> {
-            every { onChanged(Event(errorMsg)) } just Runs
-        }
+        val toastObserver = mockk<Observer<Event<String>>>(relaxed = true)
         viewModel.user.observeForever(userObserver)
         viewModel.toast.observeForever(toastObserver)
 
@@ -107,11 +103,10 @@ class HomeViewModelTest : BaseTest() {
         val homeCategory = mockk<Category>()
         val homeCategories = listOf(homeCategory)
         coEvery { homeRepository.getHomeCategoryList() } returns homeCategories
-        val loadingObserver = mockk<Observer<Boolean>> {
-            every { onChanged(true) } just Runs
-            every { onChanged(false) } just Runs
-        }
+        val loadingObserver = mockk<Observer<Boolean>>(relaxed = true)
+        val refreshObserver = mockk<Observer<Boolean>>(relaxed = true)
         viewModel.isLoading.observeForever(loadingObserver)
+        viewModel.isRefresh.observeForever(refreshObserver)
 
         // when
         viewModel invokeNoArgs "loadHomeCategoryList"
@@ -121,6 +116,7 @@ class HomeViewModelTest : BaseTest() {
             loadingObserver.onChanged(true)
             homeRepository.getHomeCategoryList()
             loadingObserver.onChanged(false)
+            refreshObserver.onChanged(false)
         }
     }
 
@@ -131,10 +127,7 @@ class HomeViewModelTest : BaseTest() {
         val errorMsg = "Fail"
         every { exception.message } returns errorMsg
         coEvery { homeRepository.getHomeCategoryList() } throws exception
-        val loadingObserver = mockk<Observer<Boolean>> {
-            every { onChanged(true) } just Runs
-            every { onChanged(false) } just Runs
-        }
+        val loadingObserver = mockk<Observer<Boolean>>(relaxed = true)
         val toastObserver = mockk<Observer<Event<String>>> {
             every { onChanged(Event(errorMsg)) } just Runs
         }
@@ -156,11 +149,14 @@ class HomeViewModelTest : BaseTest() {
     fun `Refresh 하여 재로딩`() {
         // given
         justRun { viewModel invokeNoArgs "loadHomeCategoryList" }
+        val refreshObserver = mockk<Observer<Boolean>>(relaxed = true)
+        viewModel.isRefresh.observeForever(refreshObserver)
 
         // when
         viewModel.onRefresh()
 
         // then
+        verify { refreshObserver.onChanged(true) }
         verify { viewModel invokeNoArgs "loadHomeCategoryList" }
     }
 }

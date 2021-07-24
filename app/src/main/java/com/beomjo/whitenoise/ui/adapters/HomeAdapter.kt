@@ -20,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.beomjo.whitenoise.databinding.ItemCategoryBinding
@@ -90,4 +91,9 @@ class HomeAdapter(
             return old[oldItemPosition].id == new[newItemPosition].id
         }
     }
+}
+
+@BindingAdapter("adapterCategoryList")
+fun RecyclerView.bindAdapterHomeItemList(categories: List<Category>?) {
+    categories?.let { (this.adapter as HomeAdapter).addItems(it) }
 }

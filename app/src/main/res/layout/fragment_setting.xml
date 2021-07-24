@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Designed and developed by 2021 beomjo
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,19 +68,30 @@
             android:paddingTop="10dp">
 
             <include
-                layout="@layout/item_setting"
-                android:onClick="@{(v)->fragment.onPerformContractUs()}"
-                app:text="@{@string/contract_us}" />
+                layout="@layout/layout_setting_arrow_box"
+                android:onClick="@{(v)->fragment.onPerformContractUsClick()}"
+                app:title="@{@string/contract_us}" />
 
             <include
-                layout="@layout/item_setting"
-                android:onClick="@{(v)->fragment.onPerformTermOfService()}"
-                app:text="@{@string/term_of_service}" />
+                layout="@layout/layout_setting_arrow_box"
+                android:onClick="@{(v)->fragment.onPerformTermOfServiceClick()}"
+                app:title="@{@string/term_of_service}" />
 
             <include
-                layout="@layout/item_setting"
-                android:onClick="@{(v)->fragment.onPerformPrivacyPolicy()}"
-                app:text="@{@string/privacy_policy}" />
+                layout="@layout/layout_setting_arrow_box"
+                android:onClick="@{(v)->fragment.onPerformPrivacyPolicyClick()}"
+                app:title="@{@string/privacy_policy}" />
+
+            <include
+                layout="@layout/layout_setting_arrow_box"
+                android:onClick="@{(v)->fragment.onPerformOpenSourceLicenseClick()}"
+                app:title="@{@string/open_source_licenses_text}" />
+
+            <include
+                layout="@layout/layout_setting_text_box"
+                android:onClick="@{()->fragment.onPerformVersionNameClick()}"
+                app:text="@{fragment.versionName}"
+                app:title="@{@string/version_name}" />
 
         </LinearLayout>
     </LinearLayout>
