@@ -142,7 +142,7 @@ class PlayerService : MediaBrowserServiceCompat() {
                 this@PlayerService,
                 track
             )
-            PlayerAction.STOP -> throw IllegalStateException()
+            PlayerAction.STOP -> throw IllegalStateException(s = "The action cannot be called. [PlayerAction.STOP]")
         }
     }
 
