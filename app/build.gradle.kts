@@ -1,4 +1,3 @@
-
 plugins {
     android
     `kotlin-android`
@@ -12,6 +11,8 @@ plugins {
     `ktlint-setting`
 }
 
+val version = Project.version
+
 android {
     compileSdkVersion(Version.ANDROID_COMPILE)
     buildToolsVersion = Version.BUILD_TOOL
@@ -21,8 +22,8 @@ android {
         minSdkVersion(Version.ANDROID_MIN)
         targetSdkVersion(Version.ANDROID_TARGET)
         vectorDrawables.useSupportLibrary = true
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = version.code
+        versionName = version.name
 
         testInstrumentationRunner = Dependency.ANDROID_JUNIT_RUNNER
     }
@@ -51,7 +52,6 @@ android {
     buildFeatures {
         dataBinding = true
     }
-
 }
 
 dependencies {
