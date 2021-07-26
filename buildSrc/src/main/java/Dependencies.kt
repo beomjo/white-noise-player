@@ -1,40 +1,40 @@
 object Dependencies {
 
     object Kotlin {
-        const val SDK = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10"
-        const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
-        const val COROUTINE_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
-        const val COROUTINE_PLAY_SERVICE = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3"
-        const val REFLECTION = "org.jetbrains.kotlin:kotlin-reflect:1.5.10"
+        const val SDK = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21"
+        const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1"
+        const val COROUTINE_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
+        const val COROUTINE_PLAY_SERVICE = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.1"
+        const val REFLECTION = "org.jetbrains.kotlin:kotlin-reflect:1.5.21"
     }
 
     object AndroidX {
-        const val MATERIAL = "androidx.compose.material:material:1.0.0-rc01"
-        const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.0-beta02"
-        const val APP_COMPAT = "androidx.appcompat:appcompat:1.3.0"
+        const val MATERIAL = "androidx.compose.material:material:1.0.0-rc02"
+        const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.0-rc01"
+        const val APP_COMPAT = "androidx.appcompat:appcompat:1.3.1"
         const val SWIPE_REFRESH_LAYOUT = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-        const val MEDIA = "androidx.media:media:1.3.1"
+        const val MEDIA = "androidx.media:media:1.4.0"
     }
 
     object KTX {
         const val CORE = "androidx.core:core-ktx:1.7.0-alpha01"
         const val LIFECYCLE_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
         const val LIFECYCLE_LIVEDATA = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-        const val ACTIVITY = "androidx.activity:activity-ktx:1.3.0-beta02"
-        const val FRAGMENT = "androidx.fragment:fragment-ktx:1.3.5"
+        const val ACTIVITY = "androidx.activity:activity-ktx:1.3.0-rc02"
+        const val FRAGMENT = "androidx.fragment:fragment-ktx:1.3.6"
     }
 
     object Google {
         const val MATERIAL = "com.google.android.material:material:1.3.0"
-        const val GSON = "com.google.code.gson:gson:2.8.6"
+        const val GSON = "com.google.code.gson:gson:2.8.7"
         const val OSS_LISENCE = "com.google.android.gms:play-services-oss-licenses:17.0.0"
     }
 
     object Firebase {
-        const val BOM = "com.google.firebase:firebase-bom:26.5.0"
+        const val BOM = "com.google.firebase:firebase-bom:28.3.0"
         const val AUTH = "com.google.firebase:firebase-auth-ktx"
         const val FIRESTORE = "com.google.firebase:firebase-firestore-ktx"
-        const val GMS_PLAY_SERVICE_AUTH = "com.google.android.gms:play-services-auth:19.0.0"
+        const val GMS_PLAY_SERVICE_AUTH = "com.google.android.gms:play-services-auth:19.2.0"
         const val STORAGE = "com.google.firebase:firebase-storage-ktx"
         const val CRASHLYTICS = "com.google.firebase:firebase-crashlytics"
     }
@@ -51,9 +51,9 @@ object Dependencies {
         const val JUNIT = "junit:junit:4.13.2"
         const val ARCH_CORE = "androidx.arch.core:core-testing:2.1.0"
         const val ANDROIDX_TEST_CORE = "androidx.test:core:1.4.0-beta02"
-        const val COROUTINE_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
+        const val COROUTINE_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"
         const val ANDROID_JUNIT_RUNNER = "AndroidJUnitRunner"
-        const val MOCKK = "io.mockk:mockk:1.11.0"
+        const val MOCKK = "io.mockk:mockk:1.12.0"
     }
 
     object AndroidTest {
@@ -77,7 +77,7 @@ object Dependencies {
     }
 
     object Lottie {
-        const val CORE = "com.airbnb.android:lottie:3.6.1"
+        const val CORE = "com.airbnb.android:lottie:3.7.2"
     }
 
     object Hilt {
@@ -88,6 +88,6 @@ object Dependencies {
 
     // Etc
     const val SHIMMER = "com.facebook.shimmer:shimmer:0.5.0"
-    const val BINDABLES = "com.github.skydoves:bindables:1.0.5"
+    const val BINDABLES = "com.github.skydoves:bindables:1.0.8"
 
 }
