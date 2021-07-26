@@ -16,6 +16,7 @@
      * ktlin, detekt 실행 후 UnitTest 실행
    * Android Lint Job 추가
    * 데일리 빌드 Schedule설정
+ * [#56] Setting -> OpenSourceLicense 표시안되는 현상
 
 
 

@@ -9,6 +9,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     `detekt-setting`
     `ktlint-setting`
+    id("com.google.android.gms.oss-licenses-plugin")
 }
 
 val version = Project.Version.value

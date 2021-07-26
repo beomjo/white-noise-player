@@ -18,7 +18,7 @@ object PluginVersion {
     const val DETEKT = "1.17.1"
     const val SCABBARD = "0.4.0"
     const val VERSIONING = "0.39.0"
-
+    const val OSS_LICENSE = "0.10.4"
 }
 
 dependencies {
@@ -31,4 +31,5 @@ dependencies {
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginVersion.DETEKT}")
     implementation("gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:${PluginVersion.SCABBARD}")
     implementation("com.github.ben-manes:gradle-versions-plugin:${PluginVersion.VERSIONING}")
+    implementation("com.google.android.gms:oss-licenses-plugin:${PluginVersion.OSS_LICENSE}")
 }
