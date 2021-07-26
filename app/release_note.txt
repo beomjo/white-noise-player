@@ -17,6 +17,7 @@
    * Android Lint Job 추가
    * 데일리 빌드 Schedule설정
  * [#56] Setting -> OpenSourceLicense 표시안되는 현상
+ * [#58] Google Login Button 수정
 
 
 

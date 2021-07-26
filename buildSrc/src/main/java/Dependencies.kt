@@ -85,9 +85,8 @@ object Dependencies {
         const val APT = "com.google.dagger:hilt-android-compiler:2.37"
     }
 
-
     // Etc
     const val SHIMMER = "com.facebook.shimmer:shimmer:0.5.0"
     const val BINDABLES = "com.github.skydoves:bindables:1.0.8"
-
+    const val GOOGLE_BUTTON ="com.shobhitpuri.custombuttons:google-signin:1.0.0"
 }
