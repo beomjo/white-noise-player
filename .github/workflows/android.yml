@@ -7,6 +7,39 @@ on:
     branches: [ main, develop ]
 
 jobs:
+  android_lint:
+    name: AndroidLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Clone Submodule
+        run: git clone https://github.com/beomjo/android-compilation.git
+
+      - name: Run Android Lint
+        run: ./gradlew lintRelease
+
+      - name: Workflow Failed Notification to Slack
+          uses: rtCamp/action-slack-notify@v2
+          if: ${{ failure() }}
+          env:
+            SLACK_CHANNEL: github-notification
+            SLACK_COLOR: ${{ job.status }}
+            SLACK_ICON: https://user-images.githubusercontent.com/39984656/126071498-60496f8c-4971-4bb1-9609-2cab573c1079.png
+            SLACK_MESSAGE: '[${{ github.workflow }}.${{ github.action }}] Failed!! :rage:'
+            SLACK_TITLE: Message
+            SLACK_USERNAME: Github Notification
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
   ktlint:
     name: ktlint
     needs: unit_test
