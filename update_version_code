@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VERSION_PROPERTIES_FILE="./app/config/version.properties"
-VERSION_PROPERTIES_TEMP_FILE="./app/config/version.properties.temp"
+VERSION_PROPERTIES_FILE="./version.properties"
+VERSION_PROPERTIES_TEMP_FILE="./version.properties.temp"
 
 get_version_code() {
     local target=$1
