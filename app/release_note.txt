@@ -10,9 +10,14 @@
 
 
 # Bug Fixes
- * [#24] 설정페이지 버전정보 표시
- * [#45] 앱 진입시 RefreshProgressBar 표시하지 않도록 변경
- * [#48] 설정화면 오픈소스라이센스 추가
+ * [#52] buildSrc 설정, kotlin dsl로 변경
+ * [#54] Worfkflow 수정
+   * Android CI 실행 순서 변경
+     * ktlin, detekt 실행 후 UnitTest 실행
+   * Android Lint Job 추가
+   * 데일리 빌드 Schedule설정
+ * [#56] Setting -> OpenSourceLicense 표시안되는 현상
+ * [#58] Google Login Button 수정
 
 
 
