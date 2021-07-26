@@ -44,7 +44,6 @@ jobs:
 
   ktlint:
     name: ktlint
-    needs: unit_test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -79,7 +78,6 @@ jobs:
 
   detekt:
     name: detekt
-    needs: [ unit_test, ktlint ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -114,6 +112,7 @@ jobs:
 
   unit_test:
     name: UnitTest
+    needs: [ android_lint, ktlint, detekt ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -155,7 +154,7 @@ jobs:
 
   build:
     name: Build
-    needs: [ unit_test, ktlint, detekt ]
+    needs: [ android_lint, ktlint, detekt, unit_test ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
