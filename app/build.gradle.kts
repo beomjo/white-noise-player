@@ -97,6 +97,7 @@ dependencies {
 
     implementation(Dependencies.BINDABLES)
     implementation(Dependencies.SHIMMER)
+    implementation(Dependencies.GOOGLE_BUTTON)
 
     testImplementation(Dependencies.Test.JUNIT)
     testImplementation(Dependencies.Test.ARCH_CORE)
