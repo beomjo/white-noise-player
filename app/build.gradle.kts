@@ -11,21 +11,21 @@ plugins {
     `ktlint-setting`
 }
 
-val version = Project.version
+val version = Project.Version.value
 
 android {
-    compileSdkVersion(Version.ANDROID_COMPILE)
-    buildToolsVersion = Version.BUILD_TOOL
+    compileSdkVersion(Project.Config.ANDROID_COMPILE)
+    buildToolsVersion = Project.Config.BUILD_TOOL
 
     defaultConfig {
         applicationId = "com.beomjo.whitenoise"
-        minSdkVersion(Version.ANDROID_MIN)
-        targetSdkVersion(Version.ANDROID_TARGET)
+        minSdkVersion(Project.Config.ANDROID_MIN)
+        targetSdkVersion(Project.Config.ANDROID_TARGET)
         vectorDrawables.useSupportLibrary = true
         versionCode = version.code
         versionName = version.name
 
-        testInstrumentationRunner = Dependency.ANDROID_JUNIT_RUNNER
+        testInstrumentationRunner = Dependencies.Test.ANDROID_JUNIT_RUNNER
     }
 
     buildTypes {
@@ -57,49 +57,52 @@ android {
 dependencies {
     implementation(project(":android-compilation"))
 
-    implementation(Dependency.KOTLIN)
-    implementation(Dependency.COROUTINE_CORE)
-    implementation(Dependency.COROUTINE_ANDROID)
+    implementation(Dependencies.Kotlin.SDK)
+    implementation(Dependencies.Kotlin.COROUTINE_CORE)
+    implementation(Dependencies.Kotlin.COROUTINE_ANDROID)
+    implementation(Dependencies.Kotlin.COROUTINE_PLAY_SERVICE)
 
-    implementation(Dependency.KTX_CORE)
-    implementation(Dependency.MATERIAL)
-    implementation(Dependency.CONSTRAINT_LAYOUT)
-    implementation(Dependency.APP_COMPAT)
-    implementation(Dependency.LIFECYCLE_LIVEDATA_KTX)
-    implementation(Dependency.LIFECYCLE_VIEWMODEL_KTX)
-    implementation(Dependency.ACTIVITY_KTX)
-    implementation(Dependency.FRAGMENT_KTX)
-    implementation(Dependency.FRAGMENT_KTX)
-    implementation(Dependency.SWIPE_REFRESH_LAYOUT)
-    implementation(Dependency.GOOGLE_MATERIAL)
-    implementation(Dependency.GSON)
-    implementation(Dependency.LOTTIE)
+    implementation(Dependencies.AndroidX.MATERIAL)
+    implementation(Dependencies.AndroidX.CONSTRAINT_LAYOUT)
+    implementation(Dependencies.AndroidX.APP_COMPAT)
+    implementation(Dependencies.AndroidX.SWIPE_REFRESH_LAYOUT)
+    implementation(Dependencies.AndroidX.MEDIA)
 
-    implementation(Dependency.GLIDE)
-    kapt(Dependency.GLIDE_APT)
+    implementation(Dependencies.KTX.CORE)
+    implementation(Dependencies.KTX.LIFECYCLE_LIVEDATA)
+    implementation(Dependencies.KTX.LIFECYCLE_VIEWMODEL)
+    implementation(Dependencies.KTX.ACTIVITY)
+    implementation(Dependencies.KTX.FRAGMENT)
+    implementation(Dependencies.KTX.FRAGMENT)
 
-    implementation(platform(Dependency.FIREBASE_BOM))
-    implementation(Dependency.FIREBASE_AUTH_KTX)
-    implementation(Dependency.FIREBASE_FIRESTORE_KTX)
-    implementation(Dependency.GMS_PLAY_SERVICE_AUTH)
-    implementation(Dependency.FIREBASE_STORAGE_KTX)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3")
-    implementation(Dependency.FIREBASE_CRASHLYTICS)
+    implementation(platform(Dependencies.Firebase.BOM))
+    implementation(Dependencies.Firebase.AUTH)
+    implementation(Dependencies.Firebase.FIRESTORE)
+    implementation(Dependencies.Firebase.GMS_PLAY_SERVICE_AUTH)
+    implementation(Dependencies.Firebase.STORAGE)
+    implementation(Dependencies.Firebase.CRASHLYTICS)
 
-    implementation(Dependency.HILT)
-    kapt(Dependency.HILT_APT)
+    implementation(Dependencies.Google.MATERIAL)
+    implementation(Dependencies.Google.GSON)
+    implementation(Dependencies.Google.OSS_LISENCE)
 
-    implementation(Dependency.BINDABLES)
-    implementation(Dependency.SHIMMER)
-    implementation(Dependency.MEDIA)
-    implementation(Dependency.OSS_LISENCE)
+    implementation(Dependencies.Glide.CORE)
+    kapt(Dependencies.Glide.APT)
 
-    testImplementation(Dependency.JUNIT)
-    testImplementation(Dependency.ARCH_CORE)
-    testImplementation(Dependency.ANDROIDX_TEST_CORE)
-    testImplementation(Dependency.COROUTINE_TEST)
-    testImplementation(Dependency.MOCKK)
-    testImplementation(Dependency.KOTLIN_REFLECTION)
-    androidTestImplementation(Dependency.TEST_RUNNER)
-    androidTestImplementation(Dependency.ESPRESSO_CORE)
+    implementation(Dependencies.Hilt.CORE)
+    kapt(Dependencies.Hilt.APT)
+
+    implementation(Dependencies.Lottie.CORE)
+
+    implementation(Dependencies.BINDABLES)
+    implementation(Dependencies.SHIMMER)
+
+    testImplementation(Dependencies.Test.JUNIT)
+    testImplementation(Dependencies.Test.ARCH_CORE)
+    testImplementation(Dependencies.Test.ANDROIDX_TEST_CORE)
+    testImplementation(Dependencies.Test.COROUTINE_TEST)
+    testImplementation(Dependencies.Test.MOCKK)
+    testImplementation(Dependencies.Kotlin.REFLECTION)
+    androidTestImplementation(Dependencies.AndroidTest.TEST_RUNNER)
+    androidTestImplementation(Dependencies.AndroidTest.ESPRESSO_CORE)
 }
