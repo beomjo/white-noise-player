@@ -93,10 +93,11 @@ class PlayerServiceConnection @Inject constructor(
     }
 
     fun setLoop(value: Boolean) {
-        val repeatMode = if (value)
+        val repeatMode = if (value) {
             PlaybackStateCompat.REPEAT_MODE_ONE
-        else
+        } else {
             PlaybackStateCompat.REPEAT_MODE_NONE
+        }
         mediaController.transportControls.setRepeatMode(repeatMode)
     }
 

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Designed and developed by 2021 beomjo
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -76,18 +75,20 @@
             app:loadRes="@{R.raw.note}"
             app:lottie_loop="true" />
 
-        <com.google.android.gms.common.SignInButton
-            android:layout_width="250dp"
+        <com.shobhitpuri.custombuttons.GoogleSignInButton
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:elevation="0dp"
+            android:paddingStart="60dp"
+            android:paddingEnd="30dp"
             android:onClick="@{()->vm.onClickGoogleLogin()}"
-            android:texts="@{R.string.google_sign_in_button}"
+            android:text="@{R.string.google_sign_in_button}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo_layout"
-            app:layout_constraintVertical_bias="0.395" />
+            app:layout_constraintVertical_bias="0.17" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
