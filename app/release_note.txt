@@ -11,6 +11,11 @@
 
 # Bug Fixes
  * [#52] buildSrc 설정, kotlin dsl로 변경
+ * [#54] Worfkflow 수정
+   * Android CI 실행 순서 변경
+     * ktlin, detekt 실행 후 UnitTest 실행
+   * Android Lint Job 추가
+   * 데일리 빌드 Schedule설정
 
 
 
