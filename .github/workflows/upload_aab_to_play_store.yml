@@ -54,6 +54,15 @@ jobs:
       - name: Clean Project
         run: ./gradlew clean --stacktrace
 
+      - name: Run Android Lint
+        run: ./gradlew lintRelease
+
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
+
+      - name: Run detekt
+        run: ./gradlew detekt
+
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
 
@@ -63,12 +72,6 @@ jobs:
         with:
           name: reports
           path: app/build/test-results # path to where the xml test results are stored
-
-      - name: Run ktlint
-        run: ./gradlew ktlintCheck
-
-      - name: Run detekt
-        run: ./gradlew detekt
 
       - name: Build AAB
         run: ./gradlew bundleRelease --stacktrace
