@@ -17,6 +17,7 @@ object PluginVersion {
     const val KTLINT = "10.1.0"
     const val DETEKT = "1.17.1"
     const val SCABBARD = "0.4.0"
+    const val VERSIONING = "0.39.0"
 
 }
 
@@ -29,4 +30,5 @@ dependencies {
     implementation("org.jlleitschuh.gradle:ktlint-gradle:${PluginVersion.KTLINT}")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginVersion.DETEKT}")
     implementation("gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:${PluginVersion.SCABBARD}")
+    implementation("com.github.ben-manes:gradle-versions-plugin:${PluginVersion.VERSIONING}")
 }

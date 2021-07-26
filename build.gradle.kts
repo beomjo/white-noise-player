@@ -1,3 +1,7 @@
+plugins {
+    versioning
+}
+
 subprojects {
     repositories {
         google()
