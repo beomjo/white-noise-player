@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main, develop ]
   schedule:
-    - cron: '35 0,7 1-31 * *'
+    - cron: '0 1,7 1-31 * *'
 
 jobs:
   android_lint:
