@@ -1,4 +1,4 @@
-object Dependencies {
+object Dependency {
 
     object Kotlin {
         const val SDK = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21"
