@@ -81,8 +81,8 @@ object Dependency {
     }
 
     object Hilt {
-        const val CORE = "com.google.dagger:hilt-android:2.37"
-        const val APT = "com.google.dagger:hilt-android-compiler:2.37"
+        const val CORE = "com.google.dagger:hilt-android:2.38.1"
+        const val APT = "com.google.dagger:hilt-android-compiler:2.38.1"
     }
 
     // Etc

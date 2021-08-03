@@ -15,13 +15,13 @@ plugins {
 val version = Project.Version.value
 
 android {
-    compileSdkVersion(Project.Config.ANDROID_COMPILE)
+    compileSdk = Project.Config.ANDROID_COMPILE
     buildToolsVersion = Project.Config.BUILD_TOOL
 
     defaultConfig {
         applicationId = "com.beomjo.whitenoise"
-        minSdkVersion(Project.Config.ANDROID_MIN)
-        targetSdkVersion(Project.Config.ANDROID_TARGET)
+        minSdk = Project.Config.ANDROID_MIN
+        targetSdk = Project.Config.ANDROID_TARGET
         vectorDrawables.useSupportLibrary = true
         versionCode = version.code
         versionName = version.name
@@ -31,7 +31,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled(true)
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile(
                     "proguard-android-optimize.txt"
@@ -39,15 +39,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures {
