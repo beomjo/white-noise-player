@@ -9,11 +9,11 @@ repositories {
 }
 
 object PluginVersion {
-    const val GRADLE = "4.2.2"
+    const val GRADLE = "7.0.0"
     const val KOTLIN = "1.5.21"
     const val GOOGLE_SERVICES = "4.3.5"
     const val CRASHLYTICS = "2.7.1"
-    const val HILT = "2.38"
+    const val HILT = "2.38.1"
     const val KTLINT = "10.1.0"
     const val DETEKT = "1.17.1"
     const val SCABBARD = "0.4.0"
