@@ -26,7 +26,7 @@ android {
         versionCode = version.code
         versionName = version.name
 
-        testInstrumentationRunner = Dependencies.Test.ANDROID_JUNIT_RUNNER
+        testInstrumentationRunner = Dependency.Test.ANDROID_JUNIT_RUNNER
     }
 
     buildTypes {
@@ -58,53 +58,52 @@ android {
 dependencies {
     implementation(project(":android-compilation"))
 
-    implementation(Dependencies.Kotlin.SDK)
-    implementation(Dependencies.Kotlin.COROUTINE_CORE)
-    implementation(Dependencies.Kotlin.COROUTINE_ANDROID)
-    implementation(Dependencies.Kotlin.COROUTINE_PLAY_SERVICE)
+    implementation(Dependency.Kotlin.SDK)
+    implementation(Dependency.Kotlin.COROUTINE_CORE)
+    implementation(Dependency.Kotlin.COROUTINE_ANDROID)
+    implementation(Dependency.Kotlin.COROUTINE_PLAY_SERVICE)
 
-    implementation(Dependencies.AndroidX.MATERIAL)
-    implementation(Dependencies.AndroidX.CONSTRAINT_LAYOUT)
-    implementation(Dependencies.AndroidX.APP_COMPAT)
-    implementation(Dependencies.AndroidX.SWIPE_REFRESH_LAYOUT)
-    implementation(Dependencies.AndroidX.MEDIA)
+    implementation(Dependency.AndroidX.MATERIAL)
+    implementation(Dependency.AndroidX.CONSTRAINT_LAYOUT)
+    implementation(Dependency.AndroidX.APP_COMPAT)
+    implementation(Dependency.AndroidX.SWIPE_REFRESH_LAYOUT)
+    implementation(Dependency.AndroidX.MEDIA)
 
-    implementation(Dependencies.KTX.CORE)
-    implementation(Dependencies.KTX.LIFECYCLE_LIVEDATA)
-    implementation(Dependencies.KTX.LIFECYCLE_VIEWMODEL)
-    implementation(Dependencies.KTX.ACTIVITY)
-    implementation(Dependencies.KTX.FRAGMENT)
-    implementation(Dependencies.KTX.FRAGMENT)
+    implementation(Dependency.KTX.CORE)
+    implementation(Dependency.KTX.LIFECYCLE_LIVEDATA)
+    implementation(Dependency.KTX.LIFECYCLE_VIEWMODEL)
+    implementation(Dependency.KTX.ACTIVITY)
+    implementation(Dependency.KTX.FRAGMENT)
 
-    implementation(platform(Dependencies.Firebase.BOM))
-    implementation(Dependencies.Firebase.AUTH)
-    implementation(Dependencies.Firebase.FIRESTORE)
-    implementation(Dependencies.Firebase.GMS_PLAY_SERVICE_AUTH)
-    implementation(Dependencies.Firebase.STORAGE)
-    implementation(Dependencies.Firebase.CRASHLYTICS)
+    implementation(platform(Dependency.Firebase.BOM))
+    implementation(Dependency.Firebase.AUTH)
+    implementation(Dependency.Firebase.FIRESTORE)
+    implementation(Dependency.Firebase.GMS_PLAY_SERVICE_AUTH)
+    implementation(Dependency.Firebase.STORAGE)
+    implementation(Dependency.Firebase.CRASHLYTICS)
 
-    implementation(Dependencies.Google.MATERIAL)
-    implementation(Dependencies.Google.GSON)
-    implementation(Dependencies.Google.OSS_LISENCE)
+    implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.Google.GSON)
+    implementation(Dependency.Google.OSS_LISENCE)
 
-    implementation(Dependencies.Glide.CORE)
-    kapt(Dependencies.Glide.APT)
+    implementation(Dependency.Glide.CORE)
+    kapt(Dependency.Glide.APT)
 
-    implementation(Dependencies.Hilt.CORE)
-    kapt(Dependencies.Hilt.APT)
+    implementation(Dependency.Hilt.CORE)
+    kapt(Dependency.Hilt.APT)
 
-    implementation(Dependencies.Lottie.CORE)
+    implementation(Dependency.Lottie.CORE)
 
-    implementation(Dependencies.BINDABLES)
-    implementation(Dependencies.SHIMMER)
-    implementation(Dependencies.GOOGLE_BUTTON)
+    implementation(Dependency.BINDABLES)
+    implementation(Dependency.SHIMMER)
+    implementation(Dependency.GOOGLE_BUTTON)
 
-    testImplementation(Dependencies.Test.JUNIT)
-    testImplementation(Dependencies.Test.ARCH_CORE)
-    testImplementation(Dependencies.Test.ANDROIDX_TEST_CORE)
-    testImplementation(Dependencies.Test.COROUTINE_TEST)
-    testImplementation(Dependencies.Test.MOCKK)
-    testImplementation(Dependencies.Kotlin.REFLECTION)
-    androidTestImplementation(Dependencies.AndroidTest.TEST_RUNNER)
-    androidTestImplementation(Dependencies.AndroidTest.ESPRESSO_CORE)
+    testImplementation(Dependency.Test.JUNIT)
+    testImplementation(Dependency.Test.ARCH_CORE)
+    testImplementation(Dependency.Test.ANDROIDX_TEST_CORE)
+    testImplementation(Dependency.Test.COROUTINE_TEST)
+    testImplementation(Dependency.Test.MOCKK)
+    testImplementation(Dependency.Kotlin.REFLECTION)
+    androidTestImplementation(Dependency.AndroidTest.TEST_RUNNER)
+    androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)
 }
