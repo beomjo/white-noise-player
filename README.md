@@ -38,6 +38,8 @@ You can hear sounds that can help you study, concentrate, and sleep.
   - [Dagger Hilt](https://dagger.dev/hilt/) - dependency injection.  
 - Firebase - FireStore, Storage
 - [Glide](https://github.com/bumptech/glide) - loading images.
+- [Lottie](https://airbnb.io/lottie/#/) - Load json animation
+- [Shared Element Transition](https://github.com/beomjo/android-study/blob/main/summary/shared_element_transition/overview.md) - Provides a visual connection between different states through motion and transitions between Shared Elements
 - [Shimmer-Android](https://github.com/facebook/shimmer-android) - unobtrusive loading indicator, developed from Facebook 
 - [Bindables](https://github.com/skydoves/Bindables) - DataBinding kit for notifying data changes from Model layers to UI layers.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
